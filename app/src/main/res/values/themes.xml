@@ -16,19 +16,26 @@
 
     <style name="Filter.Button" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="android:textSize">35sp</item>
-        <item name="backgroundTint">@color/skyblue</item>
+        <item name="backgroundTint">@color/orange</item>
     </style>
 
-    <style name="Filter.InputText" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="android:textSize">35sp</item>
-        <item name="backgroundTint">@color/black</item>
+    <style name="Searchbar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:textSize">20sp</item>
+        <item name="hintEnabled">true</item>
+        <item name="queryHint">@string/search_hint</item>
+        <item name="defaultQueryHint">@string/search_hint</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/darker_blue</item>
+        <item name="android:textColorHint"> #757575 </item>
     </style>
 
     <style name="Activity.Background" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="android:background">@color/midnight_blue</item>
+        <item name="android:background">@color/darker_blue</item>
     </style>
 
     <style name="Fragment.Background" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="android:background">@color/skyblue</item>
+        <item name="android:background">@color/midnight_blue</item>
     </style>
 </resources>

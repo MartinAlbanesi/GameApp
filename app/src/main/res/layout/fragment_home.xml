@@ -2,48 +2,36 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Fragment.Background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.home.HomeFragment"
-    style="@style/Fragment.Background">
+    tools:context=".ui.fragments.home.HomeFragment">
 
 
-    <EditText
-        android:id="@+id/et_filterInput"
-        android:layout_width="wrap_content"
+    <SearchView
+        android:id="@+id/sv_searchbar"
+        style="@style/Searchbar"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Nombre"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/btn_filter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline3"
-        app:layout_constraintVertical_bias="0.496" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerGames"
+        android:id="@+id/rv_gameList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <Button
-        android:id="@+id/btn_filter"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="🔎"
-        style="@style/Filter.Button"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/et_filterInput"
-        app:layout_constraintTop_toBottomOf="@id/guideline3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -61,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="140dp" />
+        app:layout_constraintGuide_begin="109dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -69,6 +57,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="45dp" />
+
+    <TableRow
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_gameList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </TableRow>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
