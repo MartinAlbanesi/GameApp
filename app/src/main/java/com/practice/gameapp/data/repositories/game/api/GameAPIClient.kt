@@ -2,14 +2,14 @@ package com.practice.gameapp.data.repositories.game.api
 
 import com.practice.gameapp.data.repositories.game.api.models.APIGameModel
 
-class GameAPIClient(gameAPIProvider: GameAPIProvider) :GameClient {
-    private val GameAPI:GameAPI = gameAPIProvider.getAPI()
+class GameAPIClient(gameAPIProvider: GameAPIProvider) : GameClient {
+    private val gameAPI: GameAPI = gameAPIProvider.getAPI()
 
     override suspend fun fetchGame(): List<APIGameModel> {
-        val gameAPIResponse = GameAPI.getGames()
-        if(!gameAPIResponse.isSuccessful){
-            throw Exception("manejo de error")
+        val gameAPIResponse = gameAPI.getGames()
+        if (!gameAPIResponse.isSuccessful) {
+            //Exception handling
         }
-        return gameAPIResponse.body()?: emptyList()
+        return gameAPIResponse.body() ?: emptyList()
     }
 }

@@ -34,7 +34,7 @@ android {
     }
 }
 
-def koin_version= "3.2.1"
+def koin_version = "3.2.1"
 
 dependencies {
 
