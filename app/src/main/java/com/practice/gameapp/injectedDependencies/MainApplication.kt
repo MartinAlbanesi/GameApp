@@ -10,7 +10,7 @@ class MainApplication : Application() {
         super.onCreate()
         startKoin {
             androidLogger()
-            androidContext(this@MainApplication)
+            androidContext(this@MainApplication.applicationContext)
             modules(remoteRepositoryModule)
         }
     }

@@ -5,9 +5,13 @@ import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.domain.models.toGame
 
 class GameAPIRepository(private val gameClient: GameClient) : GameRepository {
+
     override suspend fun getGames(): List<GameModel> {
         return gameClient.fetchGame().map { it.toGame() }
+    }
 
+    override suspend fun getRandomGame(): GameModel {
+        return gameClient.fetchGame().random().toGame()
     }
 }
 
