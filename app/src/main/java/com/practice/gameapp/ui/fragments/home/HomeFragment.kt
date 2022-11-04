@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,8 +38,12 @@ class HomeFragment : Fragment() {
         gameAdapter.notifyDataSetChanged()
     }
 
-    private val gameOfTheDayObserver = Observer<Uri> { newUri ->
-        Picasso.get().load(newUri).into(binding.ivGameOfTheDay)
+    private val recommendedGameImageObserver = Observer<Uri> { newUri ->
+        Picasso.get().load(newUri).into(binding.ivRecommendedGameImage)
+    }
+
+    private val recommendedGameTitleObserver = Observer<String> { newTitle ->
+        binding.tvGameTitle.text = newTitle
     }
 
     override fun onCreateView(
@@ -59,7 +62,8 @@ class HomeFragment : Fragment() {
             homeViewModel.fillGamesList()
         }
 
-        homeViewModel.beerImageUrl.observe(viewLifecycleOwner,gameOfTheDayObserver)
+        homeViewModel.beerImageUrl.observe(viewLifecycleOwner,recommendedGameImageObserver)
+        homeViewModel.gameTitle.observe(viewLifecycleOwner,recommendedGameTitleObserver)
 
         buildRecyclerView()
 
