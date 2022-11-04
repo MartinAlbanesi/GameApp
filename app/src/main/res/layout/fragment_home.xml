@@ -30,29 +30,16 @@
                     android:id="@+id/sv_searchbar"
                     style="@style/Searchbar"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_height="48dp"
                     android:minHeight="48dp"
+                    android:background="@drawable/search_view_bg"
+                    app:iconifiedByDefault="false"
+                    android:queryHint="Search..."
                     app:layout_constraintBottom_toTopOf="@id/guideline2"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_search"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/guideline3" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_gameList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/grey"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll_recommendation" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline2"
@@ -69,12 +56,12 @@
                     app:layout_constraintGuide_begin="20dp" />
 
                 <TextView
-                    android:id="@+id/tv_recommendedGameTitle"
+                    android:id="@+id/tv_recommendedGameText"
                     style="@style/Fragment.TextTitle"
-                    android:layout_width="200dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/title_gameOfTheDay"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/title_gameRecomendation"
                     app:layout_constraintBottom_toTopOf="@id/ll_recommendation"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.047"
@@ -86,39 +73,62 @@
                     style="@style/HomeFragment.GameOfTheDay.Background"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="5dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toTopOf="@id/rv_gameList"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_recommendedGameTitle">
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommendedGameText">
 
                     <ImageView
                         android:id="@+id/iv_recommendedGameImage"
                         android:layout_width="match_parent"
                         android:layout_height="200sp"
                         android:scaleType="fitXY"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_gameTitle"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_recommendedGameTitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:src="@tools:sample/avatars" />
 
                     <TextView
-                        android:id="@+id/tv_gameTitle"
+                        android:id="@+id/tv_recommendedGameTitle"
                         style="@style/Fragment.GameOfTheDay.Title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_gameName"
+                        android:text="@string/title_recommendedGameName"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/iv_recommendedGameImage" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_gameList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/blue"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_recommendation" />
+
+                <Button
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/btn_selector_bg"
+                    android:padding="8dp"
+                    android:text="Go"
+                    app:layout_constraintBottom_toTopOf="@id/guideline2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/sv_searchbar"
+                    app:layout_constraintTop_toBottomOf="@id/guideline3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

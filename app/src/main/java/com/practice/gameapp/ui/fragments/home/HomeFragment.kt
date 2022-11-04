@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
@@ -43,7 +45,7 @@ class HomeFragment : Fragment() {
     }
 
     private val recommendedObserver = Observer<GameModel> { newGame ->
-        binding.tvGameTitle.text = newGame.title
+        binding.tvRecommendedGameTitle.text = newGame.title
         Picasso.get().load(newGame.thumbnail).fit().centerInside().into(binding.ivRecommendedGameImage)
     }
 
@@ -67,12 +69,49 @@ class HomeFragment : Fragment() {
             homeViewModel.fillRandomGame()
         }
 
+
+        binding.ivRecommendedGameImage.setOnClickListener {
+            lifecycleScope.launch {
+                homeViewModel.fillRandomGame()
+            }
+        }
         //Observers
         homeViewModel.allGamesList.observe(viewLifecycleOwner, gameListObserver)
         homeViewModel.randomGame.observe(viewLifecycleOwner, recommendedObserver)
 
         //Building the recycler view
         buildRecyclerView()
+
+
+        //Listeners
+        /*
+        binding.svSearchbar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // on below line we are checking
+                // if query exist or not.
+                if (homeViewModel.allGamesList.value.contains(query)) {
+                    // if query exist within list we
+                    // are filtering our list adapter.
+                    listAdapter.filter.filter(query)
+                } else {
+                    // if query is not present we are displaying
+                    // a toast message as no  data found..
+                    Toast.makeText(this@MainActivity, "No Language found..", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // if query text is change in that case we
+                // are filtering our adapter with
+                // new text on below line.
+                listAdapter.filter.filter(newText)
+                return false
+            }
+        })
+         */
 
 
         return binding.root

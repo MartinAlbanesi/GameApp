@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val gameRepository: GameRepository) : ViewModel() {
 
     var randomGame: MutableLiveData<GameModel> =
-        MutableLiveData(GameModel(0, "fillRandom", "fillRandom"))
-    var allGamesList = MutableLiveData(listOf(GameModel(0, "fill", "fill")))
+        MutableLiveData(GameModel("fillRandom", "fillRandom", "fillRandom","fill","fill"))
+    var allGamesList = MutableLiveData(listOf(GameModel("fill", "fill", "fill","fill","fill")))
 
     ////Fills the MutableLiveData value with the game list from repository
     suspend fun fillGamesList() {
