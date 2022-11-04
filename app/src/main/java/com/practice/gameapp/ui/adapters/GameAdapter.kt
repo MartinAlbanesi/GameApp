@@ -26,7 +26,7 @@ class GameAdapter(list: MutableLiveData<List<GameModel>>) :
         val list = gameList.value!!
         holder.id.text = list[position].id.toString()
         holder.title.text = list[position].title
-        Picasso.get().load(list[position].thumbnail).into(holder.thumbnail)
+        Picasso.get().load(list[position].thumbnail).fit().centerInside().into(holder.thumbnail)
     }
 
     override fun getItemCount(): Int {

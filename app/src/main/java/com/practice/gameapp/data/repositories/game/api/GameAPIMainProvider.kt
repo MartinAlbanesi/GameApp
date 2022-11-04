@@ -5,6 +5,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class GameAPIMainProvider : GameAPIProvider {
+
+    //Retrofit build
     override fun getAPI(): GameAPI {
         val serviceGetGamesByAPI = Retrofit.Builder()
             .baseUrl("https://www.freetogame.com/api/")

@@ -5,7 +5,8 @@ import com.practice.gameapp.data.repositories.game.api.models.APIGameModel
 class GameAPIClient(gameAPIProvider: GameAPIProvider) : GameClient {
     private val gameAPI: GameAPI = gameAPIProvider.getAPI()
 
-    override suspend fun fetchGame(): List<APIGameModel> {
+    //Fetches all the games from Response and returns a list
+    override suspend fun fetchGames(): List<APIGameModel> {
         val gameAPIResponse = gameAPI.getGames()
         if (!gameAPIResponse.isSuccessful) {
             //Exception handling

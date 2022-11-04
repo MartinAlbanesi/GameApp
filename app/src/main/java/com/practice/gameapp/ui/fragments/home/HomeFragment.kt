@@ -1,6 +1,6 @@
 package com.practice.gameapp.ui.fragments.home
 
-import android.net.Uri
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,30 +21,32 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : Fragment() {
 
-
     //RecyclerView and Adapter
     private lateinit var recycler: RecyclerView
     private lateinit var gameAdapter: GameAdapter
+
     //ViewModel
     private val homeViewModel: HomeViewModel by sharedViewModel()
+
     //ViewBinding
     private var _binding: FragmentHomeBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    //Observers
+
+    //Observers definitions
+    @SuppressLint("NotifyDataSetChanged")
     private val gameListObserver = Observer<List<GameModel>> {
         gameAdapter.notifyDataSetChanged()
     }
 
-    private val recommendedGameImageObserver = Observer<Uri> { newUri ->
-        Picasso.get().load(newUri).into(binding.ivRecommendedGameImage)
+    private val recommendedObserver = Observer<GameModel> { newGame ->
+        binding.tvGameTitle.text = newGame.title
+        Picasso.get().load(newGame.thumbnail).fit().centerInside().into(binding.ivRecommendedGameImage)
     }
 
-    private val recommendedGameTitleObserver = Observer<String> { newTitle ->
-        binding.tvGameTitle.text = newTitle
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,15 +58,20 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this)[HomeViewModel::class.java]
          */
 
+        //ViewBinding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        //Coroutines for bringing data from viewModel
         lifecycleScope.launch {
             homeViewModel.fillGamesList()
+            homeViewModel.fillRandomGame()
         }
 
-        homeViewModel.beerImageUrl.observe(viewLifecycleOwner,recommendedGameImageObserver)
-        homeViewModel.gameTitle.observe(viewLifecycleOwner,recommendedGameTitleObserver)
+        //Observers
+        homeViewModel.allGamesList.observe(viewLifecycleOwner, gameListObserver)
+        homeViewModel.randomGame.observe(viewLifecycleOwner, recommendedObserver)
 
+        //Building the recycler view
         buildRecyclerView()
 
 
