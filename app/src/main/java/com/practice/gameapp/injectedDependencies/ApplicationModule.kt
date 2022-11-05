@@ -1,25 +1,53 @@
 package com.practice.gameapp.injectedDependencies
 
+import com.google.gson.Gson
 import com.practice.gameapp.data.repositories.GameAPIRepository
 import com.practice.gameapp.data.repositories.GameRepository
-import com.practice.gameapp.data.repositories.game.api.GameAPIClient
-import com.practice.gameapp.data.repositories.game.api.GameAPIMainProvider
-import com.practice.gameapp.data.repositories.game.api.GameAPIProvider
-import com.practice.gameapp.data.repositories.game.api.GameClient
-import com.practice.gameapp.ui.fragments.home.HomeFragment
-import com.practice.gameapp.ui.viewmodels.HomeViewModel
-import com.practice.gameapp.ui.viewmodels.MainViewModel
-import org.koin.androidx.fragment.dsl.fragment
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import com.practice.gameapp.data.repositories.game.api.*
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
-val remoteRepositoryModule = module {
-    single <GameAPIProvider> { GameAPIMainProvider() }
-    single <GameClient> { GameAPIClient(get()) }
-    single <GameRepository> { GameAPIRepository(get()) }
-    fragment { HomeFragment() }
+@Module
+@InstallIn(SingletonComponent::class)
+class ApplicationModule {
 
-    //ViewModel
-    viewModel { HomeViewModel(get()) }
-    viewModel { MainViewModel() }
+    @Provides
+    @Singleton
+    fun provideApi(): GameAPI{
+        return Retrofit.Builder()
+            .baseUrl("https://www.freetogame.com/api/")
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .build()
+            .create(GameAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGameRepository(gameClient: GameAPIClient):GameRepository{
+        return GameAPIRepository(gameClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGameClient(gameAPI: GameAPI) : GameClient{
+        return GameAPIClient(gameAPI)
+    }
+
+
+
+
+
+//    single <GameAPIProvider> { GameAPIMainProvider() }
+//    single <GameClient> { GameAPIClient(get()) }
+//    single <GameRepository> { GameAPIRepository(get()) }
+//    fragment { HomeFragment() }
+//
+//    //ViewModel
+//    viewModel { HomeViewModel(get()) }
+//    viewModel { MainViewModel() }
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,18 +18,22 @@ import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import javax.inject.Inject
 
-
-class HomeFragment : Fragment() {
+@AndroidEntryPoint
+class HomeFragment@Inject constructor(
+    //private val homeViewModel: HomeViewModel
+) : Fragment() {
 
     //RecyclerView and Adapter
     private lateinit var recycler: RecyclerView
     private lateinit var gameAdapter: GameAdapter
 
     //ViewModel
-    private val homeViewModel: HomeViewModel by sharedViewModel()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     //ViewBinding
     private var _binding: FragmentHomeBinding? = null

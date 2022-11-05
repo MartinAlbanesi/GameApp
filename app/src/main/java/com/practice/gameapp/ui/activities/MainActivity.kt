@@ -1,6 +1,7 @@
 package com.practice.gameapp.ui.activities
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,14 +13,14 @@ import com.practice.gameapp.R
 import com.practice.gameapp.databinding.ActivityMainBinding
 import com.practice.gameapp.ui.viewmodels.DashboardViewModel
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
-import com.practice.gameapp.ui.viewmodels.NotificationsViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val homeViewModel: HomeViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

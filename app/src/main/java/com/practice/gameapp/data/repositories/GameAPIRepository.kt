@@ -1,12 +1,19 @@
 package com.practice.gameapp.data.repositories
 
+import com.practice.gameapp.data.repositories.game.api.GameAPIClient
 import com.practice.gameapp.data.repositories.game.api.GameClient
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.domain.models.toGame
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GameAPIRepository(private val gameClient: GameClient) : GameRepository {
+@Singleton
+class GameAPIRepository @Inject constructor(
+    //private val gameClient: GameClient
+    private val gameClient: GameAPIClient
+) : GameRepository {
 
     //Flow
     private val games: Flow<List<GameModel>> = flow {
