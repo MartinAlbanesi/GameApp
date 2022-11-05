@@ -54,7 +54,7 @@
 
                     <TextView
                         android:id="@+id/tv_platform"
-                        style="@style/Fragment.TextTitle"
+                        style="@style/RecyclerItem.Details1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginTop="3dp"
@@ -69,7 +69,7 @@
 
                     <TextView
                         android:id="@+id/tv_genre"
-                        style="@style/Fragment.TextTitle"
+                        style="@style/RecyclerItem.Details1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginBottom="3dp"
@@ -102,10 +102,12 @@
 
                     <TextView
                         android:id="@+id/tv_description"
+                        style="@style/RecyclerItem.Details3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginBottom="3dp"
                         android:background="@color/grey"
+                        android:textColor="@color/light_grey"
                         android:text="TextView"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -114,10 +116,12 @@
 
                     <TextView
                         android:id="@+id/tv_title"
+                        style="@style/RecyclerItem.Details2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
                         android:background="@color/grey"
+                        android:textColor="@color/light_grey"
                         android:text="TextView"
                         android:textSize="20dp"
                         android:gravity="center"
