@@ -1,7 +1,6 @@
 package com.practice.gameapp.data.repositories
 
-import com.practice.gameapp.data.repositories.game.api.GameAPIClient
-import com.practice.gameapp.data.repositories.game.api.GameClient
+import com.practice.gameapp.data.repositories.network.game.GameAPIClient
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.domain.models.toGame
 import kotlinx.coroutines.flow.Flow

@@ -1,6 +1,6 @@
-package com.practice.gameapp.data.repositories.game.api
+package com.practice.gameapp.data.repositories.network.game
 
-import com.practice.gameapp.data.repositories.game.api.models.APIGameModel
+import com.practice.gameapp.data.repositories.models.APIGameModel
 import javax.inject.Inject
 
 class GameAPIClient @Inject constructor(

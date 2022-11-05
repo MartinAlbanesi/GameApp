@@ -3,7 +3,9 @@ package com.practice.gameapp.injectedDependencies
 import com.google.gson.Gson
 import com.practice.gameapp.data.repositories.GameAPIRepository
 import com.practice.gameapp.data.repositories.GameRepository
-import com.practice.gameapp.data.repositories.game.api.*
+import com.practice.gameapp.data.repositories.network.game.GameAPI
+import com.practice.gameapp.data.repositories.network.game.GameAPIClient
+import com.practice.gameapp.data.repositories.network.game.GameClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +20,7 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideApi(): GameAPI{
+    fun provideApi(): GameAPI {
         return Retrofit.Builder()
             .baseUrl("https://www.freetogame.com/api/")
             .addConverterFactory(GsonConverterFactory.create(Gson()))
@@ -34,7 +36,7 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideGameClient(gameAPI: GameAPI) : GameClient{
+    fun provideGameClient(gameAPI: GameAPI) : GameClient {
         return GameAPIClient(gameAPI)
     }
 
