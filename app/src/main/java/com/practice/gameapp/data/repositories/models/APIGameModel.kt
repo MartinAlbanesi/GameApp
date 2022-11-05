@@ -1,4 +1,4 @@
-package com.practice.gameapp.data.repositories.game.api.models
+package com.practice.gameapp.data.repositories.models
 
 import com.google.gson.annotations.SerializedName
 
