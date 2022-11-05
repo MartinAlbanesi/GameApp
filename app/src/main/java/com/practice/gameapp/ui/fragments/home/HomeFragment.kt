@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.practice.gameapp.data.repositories.database.ScoreViewModel
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
