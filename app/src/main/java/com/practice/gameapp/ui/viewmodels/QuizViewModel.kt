@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor()
+class QuizViewModel @Inject constructor()
     : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
