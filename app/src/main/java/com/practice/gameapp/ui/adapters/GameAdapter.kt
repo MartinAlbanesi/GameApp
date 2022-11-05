@@ -25,9 +25,11 @@ class GameAdapter @Inject constructor(list: MutableLiveData<List<GameModel>>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = gameList.value!!
-        holder.id.text = list[position].id.toString()
         holder.title.text = list[position].title
-        Picasso.get().load(list[position].thumbnail).into(holder.thumbnail)
+        holder.platform.text = list[position].platform
+        holder.genre.text = list[position].genre
+        holder.shortDescription.text = list[position].short_description
+        Picasso.get().load(list[position].thumbnail).fit().centerInside().into(holder.thumbnail)
     }
 
     override fun getItemCount(): Int {
@@ -35,14 +37,18 @@ class GameAdapter @Inject constructor(list: MutableLiveData<List<GameModel>>) :
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var id: TextView
         var title: TextView
+        var platform: TextView
+        var genre: TextView
+        var shortDescription: TextView
         var thumbnail: ImageView
 
         init {
-            id = itemView.findViewById(R.id.tv_nombre)
-            title = itemView.findViewById(R.id.tv_descripcion)
-            thumbnail = itemView.findViewById(R.id.iv_imagen)
+            title = itemView.findViewById(R.id.tv_title)
+            platform = itemView.findViewById(R.id.tv_platform)
+            genre = itemView.findViewById(R.id.tv_genre)
+            shortDescription = itemView.findViewById(R.id.tv_description)
+            thumbnail = itemView.findViewById(R.id.iv_image)
         }
     }
 }

@@ -4,11 +4,13 @@ import com.practice.gameapp.data.repositories.game.api.models.APIGameModel
 import javax.inject.Inject
 
 class GameAPIClient @Inject constructor(
-    private val gameAPI: GameAPI/*: GameAPIProvider*/
+    //gameAPIProvider: GameAPIProvider
+    private val gameAPI: GameAPI
 ) : GameClient {
     //private val gameAPI: GameAPI = gameAPIProvider.getAPI()
 
-    override suspend fun fetchGame(): List<APIGameModel> {
+    //Fetches all the games from Response and returns a list
+    override suspend fun fetchGames(): List<APIGameModel> {
         val gameAPIResponse = gameAPI.getGames()
         if (!gameAPIResponse.isSuccessful) {
             //Exception handling
