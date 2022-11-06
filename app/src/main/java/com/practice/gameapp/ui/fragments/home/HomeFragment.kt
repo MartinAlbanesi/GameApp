@@ -118,9 +118,8 @@ class HomeFragment@Inject constructor(
             }
         })
          */
-
-
         return binding.root
+
     }
 
     private fun buildRecyclerView() {
