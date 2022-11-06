@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GameApp</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Quiz</string>
     <string name="title_notifications">Notifications</string>
     <string name="iv_gameImageDescription">Recommended game image for showcase</string>
     <string name="search_hint">Search...</string>
@@ -9,4 +9,9 @@
     <string name="title_recommendedGameName">Game Name</string>
     <string name="row_genre">Genre</string>
     <string name="row_platform">Platform</string>
+
+    <string name="title_quiz">QUIZ GAME</string>
+    <string name="btn_start">START</string>
+    <string name="btn_difficulty">DIFFICULTY</string>
+    <string name="btn_scoreboard">SCOREBOARD</string>
 </resources>

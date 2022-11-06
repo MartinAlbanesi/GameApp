@@ -13,13 +13,21 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.practice.gameapp.ui.fragments.dashboard.DashboardFragment"
+        android:name="com.practice.gameapp.ui.fragments.quiz.QuizMenuFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_quiz_menu" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_quizGameFragment3"
+            app:destination="@id/quizGameFragment3" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.practice.gameapp.ui.fragments.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/quizGameFragment3"
+        android:name="com.practice.gameapp.ui.fragments.quiz.QuizGameFragment"
+        android:label="QuizGameFragment" />
 </navigation>
