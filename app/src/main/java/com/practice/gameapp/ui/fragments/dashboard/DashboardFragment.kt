@@ -35,7 +35,7 @@ class DashboardFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
-            DashBoardScreen(scoreViewModel)
+            DashBoardScreen()
         }
     }
 }
