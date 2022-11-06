@@ -12,11 +12,11 @@ import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 interface ScoreDao {
 
     @Query("select * from score_table where game = :game order by score desc")
-    suspend fun getAllScores(game : String):LiveData<List<ScoreEntity>>
+    fun getAllScores(game : String):LiveData<List<ScoreEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setScore(score : ScoreEntity)
+    fun setScore(score : ScoreEntity)
 
     @Delete
-    suspend fun deleteScore(score : ScoreEntity)
+    fun deleteScore(score : ScoreEntity)
 }

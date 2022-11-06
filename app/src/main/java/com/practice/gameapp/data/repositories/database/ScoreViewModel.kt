@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ScoreViewModel @Inject constructor(
-    private val scoreRepository: ScoreRepository
+    //private val scoreRepository: ScoreRepository
 ) : ViewModel() {
 
 
