@@ -40,7 +40,7 @@ class QuizMenuFragment : Fragment() {
         //Listeners
         binding.btnStart.setOnClickListener {
             Navigation.findNavController(requireView())
-                .navigate(R.id.action_navigation_dashboard_to_quizGameFragment3)
+                .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)
         }
 
 
