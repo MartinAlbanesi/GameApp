@@ -30,18 +30,15 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideGameRepository(gameClient: GameAPIClient):GameRepository{
+    fun provideGameRepository(gameClient: GameAPIClient): GameRepository {
         return GameAPIRepository(gameClient)
     }
 
     @Provides
     @Singleton
-    fun provideGameClient(gameAPI: GameAPI) : GameClient {
+    fun provideGameClient(gameAPI: GameAPI): GameClient {
         return GameAPIClient(gameAPI)
     }
-
-
-
 
 
 //    single <GameAPIProvider> { GameAPIMainProvider() }
