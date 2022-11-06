@@ -2,7 +2,6 @@ package com.practice.gameapp.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -10,15 +9,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.practice.gameapp.R
 import com.practice.gameapp.databinding.ActivityMainBinding
-import com.practice.gameapp.ui.viewmodels.DashboardViewModel
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
-import com.practice.gameapp.ui.viewmodels.NotificationsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private val homeViewModel: HomeViewModel by viewModel()
 
 
@@ -39,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_menugameversus
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

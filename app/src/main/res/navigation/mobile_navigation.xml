@@ -9,17 +9,34 @@
         android:id="@+id/navigation_home"
         android:name="com.practice.gameapp.ui.fragments.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_menugameversus"
+            app:destination="@id/navigation_menugameversus" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.practice.gameapp.ui.fragments.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_versus"/>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.practice.gameapp.ui.fragments.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_menugameversus"
+        android:name="com.practice.gameapp.ui.fragments.versusGame.MenuGameVersus"
+        android:label="@string/title_gameMenuGame"
+        tools:layout="@layout/fragment_menugameversus">
+        <action
+            android:id="@+id/action_navigation_menugameversus_to_versusFragment"
+            app:destination="@id/versusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/versusFragment"
+        android:name="com.practice.gameapp.ui.fragments.versusGame.VersusFragment"
+        android:label="fragment_versus"
+        tools:layout="@layout/fragment_versus" >
+        <action
+            android:id="@+id/action_versusFragment_to_navigation_menugameversus"
+            app:destination="@id/navigation_menugameversus" />
+    </fragment>
 </navigation>
