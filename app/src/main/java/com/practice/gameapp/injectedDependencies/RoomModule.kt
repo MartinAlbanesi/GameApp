@@ -26,16 +26,18 @@ object RoomModule {
             context,
             ScoreDataBase::class.java,
             SCORE_DATABASE_NAME
-        ).build()
+        )
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides
-    fun provideScoreRepository(scoreDao: ScoreDao):ScoreRepository{
+    fun provideScoreRepository(scoreDao: ScoreDao): ScoreRepository {
         return ScoreRepositoryImpl(scoreDao)
     }
 
     @Singleton
     @Provides
-    fun provideScoreDao(db : ScoreDataBase) = db.getScoreDao()
+    fun provideScoreDao(db: ScoreDataBase) = db.getScoreDao()
 
 }

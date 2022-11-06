@@ -10,14 +10,14 @@ data class ScoreEntity(
     val id : Int = 0,
 
     @ColumnInfo(name = "name")
-    val name : String,
+    val name : String?,
 
     @ColumnInfo(name = "score")
-    val score : Int,
+    val score : Int?,
 
     @ColumnInfo(name = "date")
-    val date: String,
+    val date: String?,
 
     @ColumnInfo(name = "game")
-    val game: String
+    val game: String?
 )

@@ -14,11 +14,14 @@ interface ScoreDao {
     @Query("select * from score_table where game = :game order by score desc")
     fun getAllScores(game : String):LiveData<List<ScoreEntity>>
 
+    @Query("select * from score_table")
+    fun getAllScores2():LiveData<List<ScoreEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun setScore(score : ScoreEntity)
+    suspend fun setScore(score : ScoreEntity)
 
     @Delete
-    fun deleteScore(score : ScoreEntity)
+    suspend fun deleteScore(score : ScoreEntity)
 
 
 

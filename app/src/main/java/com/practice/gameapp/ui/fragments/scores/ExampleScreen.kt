@@ -1,22 +1,30 @@
-package com.practice.gameapp.ui.fragments.dashboard
+package com.practice.gameapp.ui.fragments.scores
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import com.practice.gameapp.ui.viewmodels.DashboardViewModel
+import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
-@Preview
 @Composable
-fun DashBoardScreen(dashboardViewModel: DashboardViewModel) {
+fun DashBoardScreen(scoreViewModel: ScoreViewModel) {
 
-    val scores by dashboardViewModel.scores.observeAsState()
+    val scores by scoreViewModel.scores.observeAsState(initial = listOf(ScoreEntity(0, "", 1, "", "vs")))
 
-    Text(text = "Algo", color = Color.White, modifier = Modifier.fillMaxSize())
+    Column() {
+        Button(onClick = {
+            scoreViewModel.setScore(ScoreEntity(0, "", 1, "", "vs"))
+        }) {
+            Text(text = "Set")
+        }
+        scores?.forEach{
+            Text(text = "${it.id}", color = Color.White)
+        }
+    }
+
+
 }

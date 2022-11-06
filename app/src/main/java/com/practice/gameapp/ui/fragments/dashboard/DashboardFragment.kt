@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.practice.gameapp.ui.viewmodels.DashboardViewModel
+import androidx.fragment.app.activityViewModels
+import com.practice.gameapp.ui.fragments.scores.DashBoardScreen
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment @Inject constructor(
-    private val dashboardViewModel: DashboardViewModel
+
 ) : Fragment() {
+
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
 
     private lateinit var composeView: ComposeView
 
@@ -34,7 +35,7 @@ class DashboardFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
-            DashBoardScreen(dashboardViewModel)
+            DashBoardScreen(scoreViewModel)
         }
     }
 }
