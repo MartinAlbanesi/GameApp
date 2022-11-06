@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="273dp" />
+        app:layout_constraintGuide_begin="334dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
@@ -93,21 +93,21 @@
         app:layout_constraintGuide_end="6dp" />
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_question"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
         android:text="Question"
-        android:textSize="20sp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_questionImage"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+        app:layout_constraintTop_toTopOf="@+id/guideline12"
+        app:layout_constraintVertical_bias="0.411" />
 
     <TextView
         android:id="@+id/tv_timer"
@@ -133,5 +133,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="152dp" />
+
+    <ImageView
+        android:id="@+id/iv_questionImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toBottomOf="@id/tv_question"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
