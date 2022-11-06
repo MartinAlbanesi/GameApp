@@ -27,6 +27,11 @@ class ApplicationModule {
             .build()
             .create(GameAPI::class.java)
     }
+    @Provides
+    @Singleton
+    fun provideGameClient(gameAPI: GameAPI) : GameClient {
+        return GameAPIClient(gameAPI)
+    }
 
     @Provides
     @Singleton
@@ -34,11 +39,6 @@ class ApplicationModule {
         return GameAPIRepository(gameClient)
     }
 
-    @Provides
-    @Singleton
-    fun provideGameClient(gameAPI: GameAPI) : GameClient {
-        return GameAPIClient(gameAPI)
-    }
 
 
 

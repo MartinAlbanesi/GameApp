@@ -10,4 +10,6 @@ interface ScoreRepository {
     suspend fun setScore(score : ScoreEntity)
 
     suspend fun deleteScore(score : ScoreEntity)
+
+
 }

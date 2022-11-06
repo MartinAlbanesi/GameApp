@@ -19,4 +19,8 @@ interface ScoreDao {
 
     @Delete
     fun deleteScore(score : ScoreEntity)
+
+
+
+
 }

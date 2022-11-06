@@ -26,7 +26,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment@Inject constructor(
-    //private val homeViewModel: HomeViewModel
 ) : Fragment() {
 
     //RecyclerView and Adapter
