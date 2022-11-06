@@ -2,7 +2,10 @@ package com.practice.gameapp.injectedDependencies
 
 import android.content.Context
 import androidx.room.Room
-import com.practice.gameapp.data.repositories.database.ScoreDataBase
+import com.practice.gameapp.data.repositories.database.GameAppDataBase
+import com.practice.gameapp.data.repositories.database.dao.GameDao
+import com.practice.gameapp.data.repositories.database.repository.GameDBRepository
+import com.practice.gameapp.data.repositories.database.repository.GameDBRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,12 +24,21 @@ object RoomModule {
     fun provideRoom(@ApplicationContext context: Context) =
         Room.databaseBuilder(
             context,
-            ScoreDataBase::class.java,
+            GameAppDataBase::class.java,
             SCORE_DATABASE_NAME
         ).build()
 
     @Singleton
     @Provides
-    fun provideScoreDao(db : ScoreDataBase) = db.getScoreDao()
+    fun provideScoreDao(db : GameAppDataBase) = db.getScoreDao()
 
+    @Singleton
+    @Provides
+    fun provideGameDao(db :GameAppDataBase) = db.getGameDao()
+
+     @Singleton
+     @Provides
+    fun provideGameDBRepository(gameDao: GameDao):GameDBRepository{
+        return GameDBRepositoryImpl(gameDao)
+    }
 }
