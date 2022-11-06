@@ -1,6 +1,5 @@
 package com.practice.gameapp.data.repositories
 
-import com.practice.gameapp.data.repositories.database.dao.ScoreDao
 import com.practice.gameapp.domain.models.GameModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
-import com.practice.gameapp.data.repositories.database.ScoreViewModel
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
@@ -21,11 +18,10 @@ import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment@Inject constructor(
+class HomeFragment @Inject constructor(
     //private val homeViewModel: HomeViewModel
 ) : Fragment() {
 
@@ -52,7 +48,8 @@ class HomeFragment@Inject constructor(
 
     private val recommendedObserver = Observer<GameModel> { newGame ->
         binding.tvRecommendedGameTitle.text = newGame.title
-        Picasso.get().load(newGame.thumbnail).fit().centerInside().into(binding.ivRecommendedGameImage)
+        Picasso.get().load(newGame.thumbnail).fit().centerInside()
+            .into(binding.ivRecommendedGameImage)
     }
 
 

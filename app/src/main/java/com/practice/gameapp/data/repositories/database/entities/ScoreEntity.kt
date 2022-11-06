@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "score_table")
 data class ScoreEntity(
     @PrimaryKey(autoGenerate = true)
-    val id : Int = 0,
+    val id: Int = 0,
 
     @ColumnInfo(name = "name")
-    val name : String,
+    val name: String,
 
     @ColumnInfo(name = "score")
-    val score : Int,
+    val score: Int,
 
     @ColumnInfo(name = "date")
     val date: String,

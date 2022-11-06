@@ -27,6 +27,6 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideScoreDao(db : ScoreDataBase) = db.getScoreDao()
+    fun provideScoreDao(db: ScoreDataBase) = db.getScoreDao()
 
 }

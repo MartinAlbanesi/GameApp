@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentQuizGameBinding
-import com.practice.gameapp.databinding.FragmentQuizMenuBinding
 import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class QuizGameFragment: Fragment() {
+class QuizGameFragment : Fragment() {
     //ViewModel
     private val quizGameViewModel: QuizViewModel by activityViewModels()
 
