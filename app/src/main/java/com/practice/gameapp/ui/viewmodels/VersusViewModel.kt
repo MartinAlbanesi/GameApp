@@ -18,7 +18,7 @@ class VersusViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    var game: LiveData<List<GameEntity>> = gameDBRepository.getAllGames2()
+    var game: LiveData<List<GameEntity>> = gameDBRepository.getAllGames()
         //MutableLiveData(listOf(GameEntity(0, "fill", "fill", "fill", "fill", "fill")))
 
     init {

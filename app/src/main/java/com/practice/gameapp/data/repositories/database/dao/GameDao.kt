@@ -11,8 +11,8 @@ import com.practice.gameapp.data.repositories.database.entities.GameEntity
 @Dao
 interface GameDao {
 
-    @Query("SELECT * FROM games_table where :game = 'vs' LIMIT :limit ")
-    fun getGames(game: String,limit:Int):LiveData<List<GameEntity>>
+    @Query("SELECT * FROM games_table LIMIT :limit ")
+    fun getGames(limit:Int):LiveData<List<GameEntity>>
 
     @Query("select * from games_table")
     fun getAllGames():LiveData<List<GameEntity>>
