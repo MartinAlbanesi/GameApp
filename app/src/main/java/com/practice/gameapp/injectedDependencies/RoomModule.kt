@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.practice.gameapp.data.repositories.database.GameAppDataBase
 import com.practice.gameapp.data.repositories.database.dao.GameDao
+import com.practice.gameapp.data.repositories.database.dao.ScoreDao
 import com.practice.gameapp.data.repositories.database.repository.GameDBRepository
 import com.practice.gameapp.data.repositories.database.repository.GameDBRepositoryImpl
+import com.practice.gameapp.data.repositories.database.repository.ScoreRepository
+import com.practice.gameapp.data.repositories.database.repository.ScoreRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +20,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RoomModule {
 
-    private const val SCORE_DATABASE_NAME = "score_database"
+    private const val GAME_APP_DATABASE_NAME = "game_app_database"
 
     @Singleton
     @Provides
@@ -25,20 +28,26 @@ object RoomModule {
         Room.databaseBuilder(
             context,
             GameAppDataBase::class.java,
-            SCORE_DATABASE_NAME
+            GAME_APP_DATABASE_NAME
         ).build()
 
     @Singleton
     @Provides
-    fun provideScoreDao(db : GameAppDataBase) = db.getScoreDao()
+    fun provideScoreDao(db: GameAppDataBase) = db.getScoreDao()
 
     @Singleton
     @Provides
-    fun provideGameDao(db :GameAppDataBase) = db.getGameDao()
+    fun provideScoreRepository(scoreDao: ScoreDao): ScoreRepository {
+        return ScoreRepositoryImpl(scoreDao)
+    }
 
-     @Singleton
-     @Provides
-    fun provideGameDBRepository(gameDao: GameDao):GameDBRepository{
+    @Singleton
+    @Provides
+    fun provideGameDao(db: GameAppDataBase) = db.getGameDao()
+
+    @Singleton
+    @Provides
+    fun provideGameDBRepository(gameDao: GameDao): GameDBRepository {
         return GameDBRepositoryImpl(gameDao)
     }
 }
