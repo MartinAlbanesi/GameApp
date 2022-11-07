@@ -17,18 +17,14 @@ class ScoreViewModel @Inject constructor(
     private val scoreRepository: ScoreRepository
 ) : ViewModel() {
 
-    private val _scores = MutableLiveData<List<ScoreEntity>>(scoreRepository.getAllScores2().value)
-    val scores: LiveData<List<ScoreEntity>> = _scores
+    private val _scores : LiveData<List<ScoreEntity>> = scoreRepository.getAllScores()
+    val scores : LiveData<List<ScoreEntity>> = _scores
+//    private val _scores = MutableLiveData<List<ScoreEntity>>(scoreRepository.getAllScores2().value)
+//    val scores: LiveData<List<ScoreEntity>> = _scores
 
     fun setScore(score: ScoreEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            val asd = ScoreEntity(0,"a",1,"a","vs")
-
-            scoreRepository.setScore(asd)
-
-            _scores.value?.forEach{
-                Log.d("titi",it.id.toString())
-            }
+            scoreRepository.setScore(score)
         }
     }
 

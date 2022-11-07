@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.practice.gameapp.ui.fragments.scores.DashBoardScreen
+import com.practice.gameapp.ui.fragments.scores.DialogScore
+import com.practice.gameapp.ui.fragments.scores.Scores
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -35,7 +36,8 @@ class DashboardFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
-            DashBoardScreen()
+            //Scores()
+            DialogScore()
         }
     }
 }

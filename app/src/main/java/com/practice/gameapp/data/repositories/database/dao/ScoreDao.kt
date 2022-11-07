@@ -12,10 +12,10 @@ import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 interface ScoreDao {
 
     @Query("select * from score_table where game = :game order by score desc")
-    fun getAllScores(game : String):LiveData<List<ScoreEntity>>
+    fun getScores(game : String):LiveData<List<ScoreEntity>>
 
     @Query("select * from score_table")
-    fun getAllScores2():LiveData<List<ScoreEntity>>
+    fun getAllScores():LiveData<List<ScoreEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setScore(score : ScoreEntity)

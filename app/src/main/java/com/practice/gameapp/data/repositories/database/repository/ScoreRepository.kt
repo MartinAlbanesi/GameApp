@@ -5,8 +5,8 @@ import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 
 interface ScoreRepository {
 
-    fun getAllScores(game : String):LiveData<List<ScoreEntity>>
-    fun getAllScores2():LiveData<List<ScoreEntity>>
+    fun getScores(game : String):LiveData<List<ScoreEntity>>
+    fun getAllScores():LiveData<List<ScoreEntity>>
 
     suspend fun setScore(score : ScoreEntity)
 
