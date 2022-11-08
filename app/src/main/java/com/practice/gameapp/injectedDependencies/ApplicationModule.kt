@@ -41,9 +41,6 @@ class ApplicationModule {
     }
 
 
-
-
-
 //    single <GameAPIProvider> { GameAPIMainProvider() }
 //    single <GameClient> { GameAPIClient(get()) }
 //    single <GameRepository> { GameAPIRepository(get()) }
