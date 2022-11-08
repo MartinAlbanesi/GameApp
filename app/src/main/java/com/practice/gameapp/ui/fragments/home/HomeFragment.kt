@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -47,7 +48,8 @@ class HomeFragment@Inject constructor(
 
     private val recommendedObserver = Observer<GameModel> { newGame ->
         binding.tvRecommendedGameTitle.text = newGame.title
-        Picasso.get().load(newGame.thumbnail).fit().centerInside().into(binding.ivRecommendedGameImage)
+        Picasso.get().load(newGame.thumbnail).fit().centerInside()
+            .into(binding.ivRecommendedGameImage)
     }
 
 
@@ -113,9 +115,8 @@ class HomeFragment@Inject constructor(
             }
         })
          */
-
-
         return binding.root
+
     }
 
     private fun buildRecyclerView() {

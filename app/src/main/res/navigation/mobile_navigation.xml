@@ -12,14 +12,33 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.practice.gameapp.ui.fragments.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_quizMenu"
+        android:name="com.practice.gameapp.ui.fragments.quiz.QuizMenuFragment"
+        android:label="@string/title_quiz"
+        tools:layout="@layout/fragment_quiz_menu" >
+        <action
+            android:id="@+id/action_navigation_quizMenu_to_quizGameFragment"
+            app:destination="@id/quizGameFragment" />
+    </fragment>
+
+
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.practice.gameapp.ui.fragments.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_menugameversus"
+        android:name="com.practice.gameapp.ui.fragments.versusGame.MenuGameVersus"
+        android:label="@string/title_gameMenuGame"
+        tools:layout="@layout/fragment_menugameversus">
+        <action
+            android:id="@+id/action_navigation_menugameversus_to_versusFragment"
+            app:destination="@id/versusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/versusFragment"
+        android:name="com.practice.gameapp.ui.fragments.versusGame.VersusFragment"
+        android:label="fragment_versus"
+        tools:layout="@layout/fragment_versus" />
+    <fragment
+        android:id="@+id/quizGameFragment"
+        android:name="com.practice.gameapp.ui.fragments.quiz.QuizGameFragment"
+        android:label="QuizGameFragment" />
 </navigation>

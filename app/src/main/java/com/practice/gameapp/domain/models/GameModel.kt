@@ -1,7 +1,5 @@
 package com.practice.gameapp.domain.models
 
-import android.net.Uri
-
 data class GameModel(
     val title: String,
     val platform: String,

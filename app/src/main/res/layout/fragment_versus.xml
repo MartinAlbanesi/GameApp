@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Activity.Background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.versusGame.VersusFragment">
+    <ImageView
+        android:id="@+id/imageGame1"
+        android:layout_width="395dp"
+        android:layout_height="292dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageGame2"
+        android:layout_width="398dp"
+        android:layout_height="297dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageGame1"
+        tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/buttonGame2"
+        android:layout_width="94dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="56dp"
+        android:background="#9AFFFFFF"
+        android:text="⬇"
+        app:backgroundTint="#B5221F1F"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageGame2" />
+
+    <Button
+        android:id="@+id/buttonGame1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="88dp"
+        android:background="#9AFFFFFF"
+        android:text="⬆"
+        app:backgroundTint="#B5221F1F"
+        app:layout_constraintBottom_toBottomOf="@+id/imageGame1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

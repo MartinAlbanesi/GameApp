@@ -2,8 +2,11 @@ package com.practice.gameapp.injectedDependencies
 
 import android.content.Context
 import androidx.room.Room
-import com.practice.gameapp.data.repositories.database.ScoreDataBase
+import com.practice.gameapp.data.repositories.database.GameAppDataBase
+import com.practice.gameapp.data.repositories.database.dao.GameDao
 import com.practice.gameapp.data.repositories.database.dao.ScoreDao
+import com.practice.gameapp.data.repositories.database.repository.GameDBRepository
+import com.practice.gameapp.data.repositories.database.repository.GameDBRepositoryImpl
 import com.practice.gameapp.data.repositories.database.repository.ScoreRepository
 import com.practice.gameapp.data.repositories.database.repository.ScoreRepositoryImpl
 import dagger.Module
@@ -17,18 +20,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RoomModule {
 
-    private const val SCORE_DATABASE_NAME = "score_database"
+    private const val GAME_APP_DATABASE_NAME = "game_app_database"
 
     @Singleton
     @Provides
     fun provideRoom(@ApplicationContext context: Context) =
         Room.databaseBuilder(
             context,
-            ScoreDataBase::class.java,
-            SCORE_DATABASE_NAME
-        )
-        .fallbackToDestructiveMigration()
-        .build()
+            GameAppDataBase::class.java,
+            GAME_APP_DATABASE_NAME
+        ).build()
+
+    @Singleton
+    @Provides
+    fun provideScoreDao(db: GameAppDataBase) = db.getScoreDao()
 
     @Singleton
     @Provides
@@ -38,6 +43,11 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideScoreDao(db: ScoreDataBase) = db.getScoreDao()
+    fun provideGameDao(db: GameAppDataBase) = db.getGameDao()
 
+    @Singleton
+    @Provides
+    fun provideGameDBRepository(gameDao: GameDao): GameDBRepository {
+        return GameDBRepositoryImpl(gameDao)
+    }
 }
