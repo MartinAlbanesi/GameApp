@@ -29,7 +29,9 @@ object RoomModule {
             context,
             GameAppDataBase::class.java,
             GAME_APP_DATABASE_NAME
-        ).build()
+        )
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides

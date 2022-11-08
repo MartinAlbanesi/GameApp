@@ -10,7 +10,7 @@ import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 @Database(entities = [
     ScoreEntity::class,GameEntity::class
 ],
-    version = 1
+    version = 2
 )
 abstract class GameAppDataBase : RoomDatabase() {
 
