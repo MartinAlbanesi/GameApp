@@ -46,7 +46,7 @@ class MenuGameVersus : Fragment() {
             }
         }
 
-        versusViewModel.game.observe(viewLifecycleOwner,gameEntityObserver)
+        //versusViewModel.game.observe(viewLifecycleOwner,gameEntityObserver)
 
         return binding.root
     }
