@@ -37,9 +37,6 @@ class MenuGameVersus : Fragment() {
         Navigation.findNavController(requireView()).navigate(R.id.action_navigation_menugameversus_to_versusFragment)
         }
 
-
-
-
         binding.button.setOnClickListener {
             lifecycleScope.launch {
                 versusViewModel.fillName()
