@@ -18,7 +18,7 @@ class VersusViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    var game: LiveData<List<GameEntity>> = gameDBRepository.getAllGames()
+    //var game: LiveData<List<GameEntity>> = gameDBRepository.getAllGames()
         //MutableLiveData(listOf(GameEntity(0, "fill", "fill", "fill", "fill", "fill")))
 
     init {
@@ -29,10 +29,10 @@ class VersusViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val cualquierCosa = GameEntity(0, "fill", "fill", "fill", "fill", "fill")
             gameDBRepository.setGame(cualquierCosa)
-            game.value?.forEach{
-
-            Log.d("titi", it.id.toString())
-            }
+//            game.value?.forEach{
+//
+//            Log.d("titi", it.id.toString())
+//            }
         }
         //game.postValue(gameDBRepository.getAllGames("vs", 1).value)
     }
