@@ -9,7 +9,7 @@ import javax.inject.Inject
 class ScoreRepositoryImpl @Inject constructor(
     private val scoreDao: ScoreDao
 ) : ScoreRepository {
-    override suspend fun getAllScores(game: String): LiveData<List<ScoreEntity>> {
+    override fun getAllScores(game: String): LiveData<List<ScoreEntity>> {
         return scoreDao.getAllScores(game)
     }
 

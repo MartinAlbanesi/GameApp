@@ -1,20 +1,24 @@
-package com.practice.gameapp.ui.fragments.dashboard
+package com.practice.gameapp.ui.fragments.quiz
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import com.practice.gameapp.databinding.FragmentDashboardBinding
-import com.practice.gameapp.ui.viewmodels.DashboardViewModel
+import com.practice.gameapp.databinding.FragmentQuizGameBinding
+import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class DashboardFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+@AndroidEntryPoint
+class QuizGameFragment : Fragment() {
+    //ViewModel
+    private val quizGameViewModel: QuizViewModel by activityViewModels()
+
+    //ViewBinding
+    private var _binding: FragmentQuizGameBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,10 +29,15 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this)[DashboardViewModel::class.java]
+        val quizViewModel =
+            ViewModelProvider(this)[QuizViewModel::class.java]
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
+
+
+
+
+
         return binding.root
     }
 
@@ -36,5 +45,4 @@ class DashboardFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

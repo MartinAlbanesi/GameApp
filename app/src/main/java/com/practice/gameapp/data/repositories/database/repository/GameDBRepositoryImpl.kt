@@ -8,8 +8,13 @@ import javax.inject.Inject
 class GameDBRepositoryImpl @Inject constructor(
     private val gameDao: GameDao
 ) : GameDBRepository {
-    override suspend fun getAllGames(game: String, limit: Int): LiveData<List<GameEntity>> {
-        return gameDao.getGames(game, limit)
+
+    override fun getAllGames(): LiveData<List<GameEntity>> {
+        return gameDao.getAllGames()
+    }
+
+    override fun getGamesWithLimit( limit: Int): LiveData<List<GameEntity>> {
+        return gameDao.getGames(limit)
     }
 
     override suspend fun setGame(game: GameEntity) {

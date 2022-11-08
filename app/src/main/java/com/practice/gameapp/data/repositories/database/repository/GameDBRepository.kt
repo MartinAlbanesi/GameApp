@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import com.practice.gameapp.data.repositories.database.entities.GameEntity
 
 interface GameDBRepository {
-    suspend fun getAllGames(game: String,limit:Int): LiveData<List<GameEntity>>
+
+    fun getAllGames():LiveData<List<GameEntity>>
+
+    fun getGamesWithLimit(limit:Int): LiveData<List<GameEntity>>
 
     suspend fun setGame(game: GameEntity)
 

@@ -44,7 +44,7 @@ class GameAdapter @Inject constructor(list: MutableLiveData<List<GameModel>>) :
         var thumbnail: ImageView
 
         init {
-            title = itemView.findViewById(R.id.tv_title)
+            title = itemView.findViewById(R.id.tv_question)
             platform = itemView.findViewById(R.id.tv_platform)
             genre = itemView.findViewById(R.id.tv_genre)
             shortDescription = itemView.findViewById(R.id.tv_description)
