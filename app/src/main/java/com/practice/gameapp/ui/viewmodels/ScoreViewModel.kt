@@ -19,8 +19,6 @@ class ScoreViewModel @Inject constructor(
 
     private val _scores : LiveData<List<ScoreEntity>> = scoreRepository.getAllScores()
     val scores : LiveData<List<ScoreEntity>> = _scores
-//    private val _scores = MutableLiveData<List<ScoreEntity>>(scoreRepository.getAllScores2().value)
-//    val scores: LiveData<List<ScoreEntity>> = _scores
 
     fun setScore(score: ScoreEntity) {
         viewModelScope.launch(Dispatchers.IO) {
