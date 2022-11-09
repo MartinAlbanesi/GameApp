@@ -1,4 +1,4 @@
-package com.practice.gameapp.ui.viewmodels
+package com.practice.gameapp.ui.viewmodels.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
