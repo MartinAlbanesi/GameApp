@@ -5,7 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -15,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
+import com.practice.gameapp.ui.fragments.scores.Scores
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +34,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment@Inject constructor(
+class HomeFragment @Inject constructor(
 ) : Fragment() {
 
     //RecyclerView and Adapter
@@ -31,6 +43,8 @@ class HomeFragment@Inject constructor(
 
     //ViewModel
     private val homeViewModel: HomeViewModel by activityViewModels()
+
+    private lateinit var composeView: ComposeView
 
     //ViewBinding
     private var _binding: FragmentHomeBinding? = null
@@ -85,7 +99,42 @@ class HomeFragment@Inject constructor(
         //Building the recycler view
         buildRecyclerView()
 
+        binding.svSearchbar.setContent {
 
+            var text by rememberSaveable {
+                mutableStateOf("")
+            }
+
+            if (text.isNotEmpty()) {
+                binding.tvRecommendedGameTitle.visibility = View.GONE
+                binding.ivRecommendedGameImage.visibility = View.GONE
+                binding.rvGameList.visibility = View.GONE
+                binding.tvRecommendedGameText.visibility = View.GONE
+            } else {
+                binding.tvRecommendedGameTitle.visibility = View.VISIBLE
+                binding.ivRecommendedGameImage.visibility = View.VISIBLE
+                binding.rvGameList.visibility = View.VISIBLE
+                binding.tvRecommendedGameText.visibility = View.VISIBLE
+            }
+
+                TextField(
+                    value = text,
+                    onValueChange = { text = it }
+                )
+
+                binding.caja.setContent {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 48.dp)
+                            .background(Color.Black)
+                    ){
+
+                    }
+                    //Scores()
+                }
+
+        }
         //Listeners
         /*
         binding.svSearchbar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

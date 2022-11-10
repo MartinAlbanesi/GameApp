@@ -34,10 +34,6 @@ class QuizGameFragment : Fragment() {
 
         _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
 
-
-
-
-
         return binding.root
     }
 
