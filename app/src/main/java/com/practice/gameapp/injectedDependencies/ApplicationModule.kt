@@ -39,14 +39,4 @@ class ApplicationModule {
     fun provideGameClient(gameAPI: GameAPI): GameClient {
         return GameAPIClient(gameAPI)
     }
-
-
-//    single <GameAPIProvider> { GameAPIMainProvider() }
-//    single <GameClient> { GameAPIClient(get()) }
-//    single <GameRepository> { GameAPIRepository(get()) }
-//    fragment { HomeFragment() }
-//
-//    //ViewModel
-//    viewModel { HomeViewModel(get()) }
-//    viewModel { MainViewModel() }
 }

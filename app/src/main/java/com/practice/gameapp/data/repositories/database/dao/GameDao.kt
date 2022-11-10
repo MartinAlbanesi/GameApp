@@ -11,7 +11,7 @@ import com.practice.gameapp.data.repositories.database.entities.GameEntity
 @Dao
 interface GameDao {
 
-    @Query("SELECT * FROM games_table LIMIT :limit ")
+    @Query("SELECT * FROM games_table ORDER BY RANDOM() LIMIT :limit ")
     fun getGames(limit:Int):LiveData<List<GameEntity>>
 
     @Query("select * from games_table")

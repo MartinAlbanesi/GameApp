@@ -20,7 +20,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
-import com.practice.gameapp.ui.viewmodels.ScoreViewModel
+import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
 
 @Composable
 fun DialogScore(
