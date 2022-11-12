@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.practice.gameapp.R
 import com.practice.gameapp.databinding.ActivityMainBinding
-import com.practice.gameapp.ui.viewmodels.HomeViewModel
+import com.practice.gameapp.ui.viewmodels.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
