@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,8 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
-import com.practice.gameapp.ui.fragments.scores.Scores
-import com.practice.gameapp.ui.viewmodels.HomeViewModel
+import com.practice.gameapp.ui.viewmodels.home.HomeViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -101,6 +98,8 @@ class HomeFragment @Inject constructor(
 
         binding.svSearchbar.setContent {
 
+            val gameList by homeViewModel.allGamesList.observeAsState()
+
             var text by rememberSaveable {
                 mutableStateOf("")
             }
@@ -123,14 +122,17 @@ class HomeFragment @Inject constructor(
                 )
 
                 binding.caja.setContent {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(top = 48.dp)
-                            .background(Color.Black)
-                    ){
-
+                    if (text.isNotEmpty()){
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(top = 48.dp)
+                                .background(Color.Black)
+                        ){
+                            gameList?.let { HomeSearchGame(gameList = it,text) }
+                        }
                     }
+
                     //Scores()
                 }
 
