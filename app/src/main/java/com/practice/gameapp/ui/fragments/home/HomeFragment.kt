@@ -127,7 +127,7 @@ class HomeFragment @Inject constructor(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(top = 48.dp)
-                                .background(Color.Black)
+                                .background(Color(0xFF03308a))
                         ){
                             gameList?.let { HomeSearchGame(gameList = it,text) }
                         }
