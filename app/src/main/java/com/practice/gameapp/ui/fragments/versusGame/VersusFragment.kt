@@ -13,8 +13,8 @@ import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.databinding.FragmentVersusBinding
-import com.practice.gameapp.ui.viewmodels.HomeViewModel
-import com.practice.gameapp.ui.viewmodels.VersusViewModel
+import com.practice.gameapp.ui.viewmodels.home.HomeViewModel
+import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
 import com.squareup.picasso.Picasso
 import kotlin.random.Random
 
