@@ -21,8 +21,16 @@ class VersusViewModel @Inject constructor(
     val CountDown_Timer = 60000L //Un minuto
     val ONE_SECOND = 1000L
     val DONE = 0L
-    lateinit var  timer:CountDownTimer
+    lateinit var timer: CountDownTimer
     val currenTime = MutableLiveData<Long>()
+
+    var imageRandom = MutableLiveData<Int>()
+    var imageRandom2 = MutableLiveData<Int>()
+
+    fun setImage(){
+        imageRandom.value  = (0..399).random()
+        imageRandom2.value = (0..399).random()
+    }
 
 
     init {
