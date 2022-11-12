@@ -8,6 +8,21 @@
     tools:context=".ui.fragments.versusGame.MenuGameVersus">
 
     <Button
+        android:id="@+id/buttonPlay2"
+        android:layout_width="374dp"
+        android:layout_height="61dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/btn_selector_bg"
+        android:padding="8dp"
+        android:text="SCORE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <Button
         android:id="@+id/buttonPlay"
         android:layout_width="374dp"
         android:layout_height="61dp"
@@ -35,33 +50,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="76dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/buttonPlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textGameApp2" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="99dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="312dp"
-        android:layout_marginBottom="23dp"
-        android:text="TextView"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/buttonPlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textGameApp2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

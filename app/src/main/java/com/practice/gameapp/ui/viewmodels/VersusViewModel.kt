@@ -1,5 +1,6 @@
 package com.practice.gameapp.ui.viewmodels
 
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,14 +18,40 @@ class VersusViewModel @Inject constructor(
     private val gameDBRepository: GameDBRepositoryImpl
 ) : ViewModel() {
 
+    val CountDown_Timer = 60000L //Un minuto
+    val ONE_SECOND = 1000L
+    val DONE = 0L
+    lateinit var  timer:CountDownTimer
+    val currenTime = MutableLiveData<Long>()
 
-    //var game: LiveData<List<GameEntity>> = gameDBRepository.getAllGames()
-        //MutableLiveData(listOf(GameEntity(0, "fill", "fill", "fill", "fill", "fill")))
 
     init {
-        //game.postValue(gameDBRepository.allGames)
+        timer = object:CountDownTimer(CountDown_Timer,ONE_SECOND){
+            override fun onTick(millisUntilFinished: Long) {
+                currenTime.value = millisUntilFinished / ONE_SECOND
+            }
+
+            override fun onFinish() {
+                currenTime.value = DONE
+            }
+        }
+        timer.start()
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        timer.cancel()
+    }
+
+
+
+
+
+
+
+
+
+/*
     suspend fun fillName() {
         viewModelScope.launch(Dispatchers.IO) {
             val cualquierCosa = GameEntity(0, "fill", "fill", "fill", "fill", "fill")
@@ -35,5 +62,5 @@ class VersusViewModel @Inject constructor(
 //            }
         }
         //game.postValue(gameDBRepository.getAllGames("vs", 1).value)
-    }
+    }*/
 }

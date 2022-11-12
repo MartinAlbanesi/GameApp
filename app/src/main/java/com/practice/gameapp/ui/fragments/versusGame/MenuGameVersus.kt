@@ -22,9 +22,6 @@ class MenuGameVersus : Fragment() {
 
     private val versusViewModel: VersusViewModel by activityViewModels()
 
-    private val gameEntityObserver = Observer<List<GameEntity>> { newGame ->
-        binding.textView.text = newGame.random().title
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +34,7 @@ class MenuGameVersus : Fragment() {
         Navigation.findNavController(requireView()).navigate(R.id.action_navigation_menugameversus_to_versusFragment)
         }
 
-        binding.button.setOnClickListener {
-            lifecycleScope.launch {
-                versusViewModel.fillName()
-            }
-        }
+
 
         //versusViewModel.game.observe(viewLifecycleOwner,gameEntityObserver)
 
