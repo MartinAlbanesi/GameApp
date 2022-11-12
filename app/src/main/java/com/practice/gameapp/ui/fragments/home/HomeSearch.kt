@@ -1,5 +1,7 @@
 package com.practice.gameapp.ui.fragments.home
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -47,8 +49,8 @@ fun GameView(
         mutableStateOf(false)
     }
 
-    val size = if (isSize) 200.dp else 56.dp
-    val sizeImage = if (isSize) 175.dp else 100.dp
+    val size by animateDpAsState(targetValue = if (isSize) 200.dp else 56.dp, animationSpec = tween(300))
+    val sizeImage by animateDpAsState(if (isSize) 175.dp else 100.dp, animationSpec = tween(300))
 
     Row(
         modifier = modifier
@@ -86,7 +88,9 @@ fun GameView(
             if (isSize){
                 Divider(thickness = 1.dp, color = Color.Black)
                 Text(
-                    modifier = Modifier.height(125.dp).padding(horizontal = 8.dp, vertical = 12.dp),
+                    modifier = Modifier
+                        .height(125.dp)
+                        .padding(horizontal = 8.dp, vertical = 12.dp),
                     text = gameModel.short_description,
                     textAlign = TextAlign.Left,
                     color = Color.White
