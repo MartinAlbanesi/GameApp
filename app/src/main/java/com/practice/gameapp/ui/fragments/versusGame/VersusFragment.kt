@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.databinding.FragmentVersusBinding
+import com.practice.gameapp.ui.fragments.scores.DialogScore
 import com.practice.gameapp.ui.viewmodels.home.HomeViewModel
 import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
 import com.squareup.picasso.Picasso
@@ -32,8 +34,8 @@ class VersusFragment : Fragment() {
     private var imageRandomOne = 0
     private var imageRandomTwo = 1
 
-    // private var dateStringGameOne = homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
-    //private var dateStringGameTwo = homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
+    private lateinit var composeView: ComposeView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -85,8 +87,13 @@ class VersusFragment : Fragment() {
 
                 versusViewModel.cancelTime()
 
-                Navigation.findNavController(requireView())
-                    .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
+                binding.dialogCompose.setContent {
+                    DialogScore(score = 1) {
+                    }
+                }
+
+//                Navigation.findNavController(requireView())
+//                    .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
 
             }
         }
@@ -112,8 +119,13 @@ class VersusFragment : Fragment() {
 
                 versusViewModel.cancelTime()
 
-                Navigation.findNavController(requireView())
-                    .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
+                binding.dialogCompose.setContent {
+                    DialogScore(score = 1) {
+
+                    }
+                }
+
+//                Navigation.findNavController(requireView()).navigate(R.id.action_versusFragment_to_navigation_menugameversus)
             }
         }
         return binding.root
