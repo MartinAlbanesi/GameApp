@@ -36,7 +36,7 @@ class VersusFragment: Fragment() {
         _binding = FragmentVersusBinding.inflate(inflater,container,false)
 
         versusViewModel.imageRandom.observe(viewLifecycleOwner, Observer {
-            imageRandomOne = it
+            imageRandomOne = it!!
         })
 
         versusViewModel.imageRandom2.observe(viewLifecycleOwner, Observer {
