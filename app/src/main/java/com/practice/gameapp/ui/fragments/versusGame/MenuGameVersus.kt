@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 class MenuGameVersus : Fragment() {
     private var _binding: FragmentMenugameversusBinding? = null
     private val binding get() = _binding!!
-
     private val versusViewModel: VersusViewModel by activityViewModels()
 
 
@@ -27,15 +26,15 @@ class MenuGameVersus : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
-        _binding = FragmentMenugameversusBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FragmentMenugameversusBinding.inflate(inflater, container, false)
 
         binding.buttonPlay.setOnClickListener {
-        Navigation.findNavController(requireView()).navigate(R.id.action_navigation_menugameversus_to_versusFragment)
-        versusViewModel.setImage()
+            versusViewModel.setImage()
+            versusViewModel.startGame()
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_menugameversus_to_versusFragment)
         }
-
-
 
 
         //versusViewModel.game.observe(viewLifecycleOwner,gameEntityObserver)

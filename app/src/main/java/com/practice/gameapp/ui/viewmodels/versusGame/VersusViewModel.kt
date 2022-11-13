@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class VersusViewModel @Inject constructor(
     private val gameDBRepository: GameDBRepositoryImpl
-    ) : ViewModel() {
+) : ViewModel() {
 
 
     val CountDown_Timer = 60000L //Un minuto
@@ -26,48 +26,58 @@ class VersusViewModel @Inject constructor(
     val currenTime = MutableLiveData<Long>()
     var imageRandom = MutableLiveData<Int?>()
     var imageRandom2 = MutableLiveData<Int>()
-    var gameFinished :Boolean = false
+    var gameFinished: Boolean = false
 
     fun random(): Int {
-       return (0..399).random()
+        return (0..370).random()
     }
 
-    fun setImage(){
-        imageRandom.value  = random()
+    fun setImage() {
+        imageRandom.value = random()
         imageRandom2.value = random() //ver bien dsp
     }
 
-    fun gameStarts(){
-        if(gameFinished){
-        setImage()
-
-       }
-    }
-            init {
-        timer = object:CountDownTimer(CountDown_Timer,ONE_SECOND){
-            override fun onTick(millisUntilFinished: Long) {
-                currenTime.value = millisUntilFinished / ONE_SECOND
-            }
-
-            override fun onFinish() {
-                currenTime.value = DONE
-                gameFinished = true
-            }
+    fun gameStarts() {
+        if (gameFinished) {
+            timer.cancel()
         }
-        timer.start()
     }
 
+    fun setGameImageLose(lose: Int) {
+        if (imageRandom.value == lose) {
+            imageRandom.value = random()
+        }
+
+        if (imageRandom2.value == lose) {
+            imageRandom2.value = random()
+        }
+    }
+
+        fun startGame(){
+
+            timer = object : CountDownTimer(CountDown_Timer, ONE_SECOND) {
+                override fun onTick(millisUntilFinished: Long) {
+                    currenTime.value = millisUntilFinished / ONE_SECOND
+                }
+
+                override fun onFinish() {
+                    currenTime.value = DONE
+                    gameFinished = true
+                }
+            }
+            timer.start()
+        }
+
+     fun cancelTime(){
+         timer.cancel()
+     }
+
+   /*
     override fun onCleared() {
         super.onCleared()
         timer.cancel()
     }
-
-
-
-
-
-
-
+*/
 
 /*
     suspend fun fillName() {
