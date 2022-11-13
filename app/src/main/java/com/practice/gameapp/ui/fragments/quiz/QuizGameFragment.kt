@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.practice.gameapp.databinding.FragmentQuizGameBinding
-import com.practice.gameapp.ui.viewmodels.QuizViewModel
+import com.practice.gameapp.ui.viewmodels.quiz.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -33,10 +33,6 @@ class QuizGameFragment : Fragment() {
             ViewModelProvider(this)[QuizViewModel::class.java]
 
         _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
-
-
-
-
 
         return binding.root
     }

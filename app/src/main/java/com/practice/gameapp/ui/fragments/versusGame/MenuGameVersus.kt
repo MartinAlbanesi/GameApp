@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import com.practice.gameapp.databinding.FragmentMenugameversusBinding
-import com.practice.gameapp.ui.viewmodels.VersusViewModel
+import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
 import kotlinx.coroutines.launch
 
 

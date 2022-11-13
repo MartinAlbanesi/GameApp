@@ -1,4 +1,4 @@
-package com.practice.gameapp.ui.viewmodels
+package com.practice.gameapp.ui.viewmodels.score
 
 import android.util.Log
 import androidx.lifecycle.LiveData
