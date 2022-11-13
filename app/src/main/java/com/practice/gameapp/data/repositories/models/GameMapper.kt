@@ -8,5 +8,6 @@ fun APIGameModel.toGame() = GameModel(
     platform = platform,
     genre = genre,
     short_description = ShortDescription,
-    thumbnail = thumbnail
+    thumbnail = thumbnail,
+    releaseDate = releaseDate
 )

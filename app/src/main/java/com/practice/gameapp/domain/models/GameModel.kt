@@ -6,5 +6,6 @@ data class GameModel(
     val genre: String,
     val short_description: String,
     val thumbnail: String,
-    val id: Int
+    val id: Int,
+    val releaseDate : String
 )
