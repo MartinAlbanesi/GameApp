@@ -38,9 +38,10 @@ class QuizMenuFragment : Fragment() {
 
         _binding = FragmentQuizMenuBinding.inflate(inflater, container, false)
 
-
         //Listeners
         binding.btnStart.setOnClickListener {
+            quizViewModel.startTimer()
+            quizViewModel.setQuestion()
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)
         }
