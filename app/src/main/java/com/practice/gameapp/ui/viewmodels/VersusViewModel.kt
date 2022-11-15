@@ -1,16 +1,10 @@
-package com.practice.gameapp.ui.viewmodels.versusGame
+package com.practice.gameapp.ui.viewmodels
 
 import android.os.CountDownTimer
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import com.practice.gameapp.data.repositories.database.repository.GameDBRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

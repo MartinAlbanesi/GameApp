@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
-import com.practice.gameapp.ui.viewmodels.home.HomeViewModel
+import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

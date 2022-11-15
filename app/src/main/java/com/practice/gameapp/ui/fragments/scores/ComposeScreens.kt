@@ -7,9 +7,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -25,7 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
+import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
 @Composable
 fun DialogScore(
@@ -124,7 +126,8 @@ fun DialogScore(
 
 @Composable
 fun Scores(
-    scoreViewModel: ScoreViewModel = hiltViewModel()
+    scoreViewModel: ScoreViewModel = hiltViewModel(),
+    onClick : (ScoreEntity) -> Unit
 ) {
     val scores by scoreViewModel.scores.observeAsState(arrayListOf())
 
@@ -147,11 +150,11 @@ fun Scores(
                 Message(text = "Name", Modifier.weight(2f))
                 Message(text = "Score", Modifier.weight(1f))
                 Message(text = "Date", Modifier.weight(2f))
+                Message(text = "", Modifier.weight(0.5f))
             }
         }
 
         items(count) {
-            //Positions(scoreEntity = scores[it], position = it)
             Row(
                 Modifier
                     .fillMaxWidth()
@@ -161,6 +164,18 @@ fun Scores(
                 Message(text = "${scores[it].name}", Modifier.weight(2f))
                 Message(text = "${scores[it].score}", Modifier.weight(1f))
                 Message(text = "${scores[it].date}", Modifier.weight(2f))
+                IconButton(
+                    onClick = { onClick(scores[it]) },
+                    Modifier
+                        .border(1.dp, Color.White, shape = RoundedCornerShape(5.dp))
+                        .size(26.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.Delete,
+                        contentDescription = null,
+                        Modifier.size(20.dp),
+                        tint = Color.Red
+                    )
+                }
             }
         }
 
@@ -177,7 +192,7 @@ fun Message(
         modifier = modifier
             .border(1.dp, Color.White, shape = RoundedCornerShape(5.dp)),
         color = Color.White,
-        fontSize = 24.sp,
+        fontSize = 20.sp,
         textAlign = TextAlign.Center
     )
 }

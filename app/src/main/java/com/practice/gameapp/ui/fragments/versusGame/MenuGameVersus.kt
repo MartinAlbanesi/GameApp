@@ -6,15 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
-import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import com.practice.gameapp.databinding.FragmentMenugameversusBinding
-import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
-import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
-import kotlinx.coroutines.launch
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
+import com.practice.gameapp.ui.viewmodels.VersusViewModel
 
 
 class MenuGameVersus : Fragment() {

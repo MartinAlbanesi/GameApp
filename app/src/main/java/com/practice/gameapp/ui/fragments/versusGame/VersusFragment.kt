@@ -14,9 +14,9 @@ import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.databinding.FragmentVersusBinding
 import com.practice.gameapp.ui.fragments.scores.DialogScore
-import com.practice.gameapp.ui.viewmodels.home.HomeViewModel
-import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
-import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
+import com.practice.gameapp.ui.viewmodels.HomeViewModel
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
+import com.practice.gameapp.ui.viewmodels.VersusViewModel
 import com.squareup.picasso.Picasso
 import java.time.LocalDate
 
