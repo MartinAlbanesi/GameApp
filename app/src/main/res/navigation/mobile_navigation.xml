@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_quizMenu_to_quizGameFragment"
             app:destination="@id/quizGameFragment" />
+        <action
+            android:id="@+id/action_navigation_quizMenu_to_scoreFragment"
+            app:destination="@id/scoreFragment" />
     </fragment>
 
 
@@ -31,6 +34,9 @@
         <action
             android:id="@+id/action_navigation_menugameversus_to_versusFragment"
             app:destination="@id/versusFragment" />
+        <action
+            android:id="@+id/action_navigation_menugameversus_to_scoreFragment"
+            app:destination="@id/scoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/versusFragment"
@@ -45,4 +51,16 @@
         android:id="@+id/quizGameFragment"
         android:name="com.practice.gameapp.ui.fragments.quiz.QuizGameFragment"
         android:label="QuizGameFragment" />
+    <fragment
+        android:id="@+id/scoreFragment"
+        android:name="com.practice.gameapp.ui.fragments.scores.ScoreFragment"
+        android:label="fragment_score"
+        tools:layout="@layout/fragment_score" >
+        <action
+            android:id="@+id/action_scoreFragment_to_navigation_menugameversus"
+            app:destination="@id/navigation_menugameversus" />
+        <action
+            android:id="@+id/action_scoreFragment_to_navigation_quizMenu"
+            app:destination="@id/navigation_quizMenu" />
+    </fragment>
 </navigation>

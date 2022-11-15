@@ -43,6 +43,9 @@ class QuizMenuFragment : Fragment() {
                 .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)
         }
 
+        binding.btnScoreboard.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.scoreFragment)
+        }
 
         return binding.root
     }

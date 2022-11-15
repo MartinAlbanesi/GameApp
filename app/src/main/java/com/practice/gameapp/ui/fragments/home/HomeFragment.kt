@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.TextField
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -116,9 +118,25 @@ class HomeFragment @Inject constructor(
                 binding.tvRecommendedGameText.visibility = View.VISIBLE
             }
 
-                TextField(
+                OutlinedTextField(
                     value = text,
-                    onValueChange = { text = it }
+                    onValueChange = { text = it },
+                    singleLine = true,
+                    placeholder = {
+                        Text(text = "Search Game")
+                    },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        placeholderColor = Color(0x48000000)
+                    ),
+
+                    trailingIcon = {
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = null
+                            )
+                        }
+                    },
                 )
 
                 binding.caja.setContent {
@@ -132,8 +150,6 @@ class HomeFragment @Inject constructor(
                             gameList?.let { HomeSearchGame(gameList = it,text) }
                         }
                     }
-
-                    //Scores()
                 }
 
         }

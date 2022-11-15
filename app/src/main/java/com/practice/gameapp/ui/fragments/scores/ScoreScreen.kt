@@ -1,10 +1,14 @@
 package com.practice.gameapp.ui.fragments.scores
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +25,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
 
 @Composable
@@ -59,7 +62,9 @@ fun DialogScore(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
                     text = state,
                     color = Color.White,
                     fontSize = 32.sp,
@@ -123,39 +128,56 @@ fun Scores(
 ) {
     val scores by scoreViewModel.scores.observeAsState(arrayListOf())
 
-    val scorex = ScoreEntity(0, "a", 1, "a", "vs")
-
     val count = scores.size
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .padding(6.dp)
     ) {
-        item {
 
-            Button(onClick = {
-                scoreViewModel.setScore(scorex)
-            }) {
-                Text(text = "Set")
+        item {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 2.dp)
+                    .background(Color(0x28FFFFFF))
+            ) {
+                Message(text = "", Modifier.weight(0.5f))
+                Message(text = "Name", Modifier.weight(2f))
+                Message(text = "Score", Modifier.weight(1f))
+                Message(text = "Date", Modifier.weight(2f))
             }
         }
 
         items(count) {
-            Row(Modifier.fillMaxWidth()) {
-                Text(
-                    text = "${scores[it].id}",
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.size(6.dp))
-                Text(
-                    text = "${scores[it].date}",
-                    color = Color.White
-                )
-                Divider()
+            //Positions(scoreEntity = scores[it], position = it)
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 2.dp)
+            ) {
+                Message(text = (it+1).toString(), Modifier.weight(0.5f))
+                Message(text = "${scores[it].name}", Modifier.weight(2f))
+                Message(text = "${scores[it].score}", Modifier.weight(1f))
+                Message(text = "${scores[it].date}", Modifier.weight(2f))
             }
         }
 
     }
+}
 
-
+@Composable
+fun Message(
+    text : String,
+    modifier : Modifier = Modifier
+) {
+    Text(
+        text = text,
+        modifier = modifier
+            .border(1.dp, Color.White, shape = RoundedCornerShape(5.dp)),
+        color = Color.White,
+        fontSize = 24.sp,
+        textAlign = TextAlign.Center
+    )
 }

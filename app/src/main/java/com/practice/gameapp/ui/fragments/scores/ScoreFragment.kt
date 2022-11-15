@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

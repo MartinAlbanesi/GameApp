@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import com.practice.gameapp.databinding.FragmentMenugameversusBinding
+import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
 import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,7 @@ class MenuGameVersus : Fragment() {
     private var _binding: FragmentMenugameversusBinding? = null
     private val binding get() = _binding!!
     private val versusViewModel: VersusViewModel by activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -34,6 +36,14 @@ class MenuGameVersus : Fragment() {
             versusViewModel.startGame()
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_menugameversus_to_versusFragment)
+        }
+
+        binding.buttonScore.setOnClickListener {
+
+            scoreViewModel.searchGame("vs")
+
+            Navigation.findNavController(requireView())
+                .navigate(R.id.scoreFragment)
         }
 
 
