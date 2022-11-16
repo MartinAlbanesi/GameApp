@@ -37,19 +37,16 @@ class ScoreFragment @Inject constructor(
 
         composeView.setContent {
 
-            lateinit var score : ScoreEntity
+            lateinit var score: ScoreEntity
 
             Column() {
-                Scores(){
+                Scores() {
                     score = it
                     scoreViewModel.deleteScore(score)
                 }
             }
         }
     }
-
-
-
 
 
 }
