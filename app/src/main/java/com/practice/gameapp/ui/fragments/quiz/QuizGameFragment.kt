@@ -66,7 +66,7 @@ class QuizGameFragment : Fragment() {
 
         quizGameViewModel.currenTime.observe(viewLifecycleOwner, Observer {
             Log.d("Entro al OBSERVER","cualquier cosa")
-            binding.tvTimer.text = DateUtils.formatElapsedTime(it)
+            binding.tvTimer.text = it.toString()
         })
 
         binding.cvEndgame.setContent {
