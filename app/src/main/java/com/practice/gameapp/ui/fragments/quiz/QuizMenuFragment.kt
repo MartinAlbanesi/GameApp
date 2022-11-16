@@ -31,9 +31,6 @@ class QuizMenuFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val quizViewModel =
-            ViewModelProvider(this)[QuizViewModel::class.java]
-
         _binding = FragmentQuizMenuBinding.inflate(inflater, container, false)
 
         //Listeners
