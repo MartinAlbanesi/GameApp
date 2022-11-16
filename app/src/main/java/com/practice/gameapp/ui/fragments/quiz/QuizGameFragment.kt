@@ -48,18 +48,21 @@ class QuizGameFragment : Fragment() {
     private val timerObserver = Observer<Long> { newTime ->
         binding.tvTimer.text = DateUtils.formatElapsedTime(newTime)
     }
-
+    */
     private val questionObserver = Observer<Question> { newQuestion ->
         Log.d("Entro al OBSERVER",newQuestion.getText(gameEntity))
         binding.tvQuestion.text = newQuestion.getText(gameEntity)
     }
 
-     */
 
-    private var flag = false
 
     private val endGameObserver = Observer<Boolean> {
-        flag = it
+        if (it) {
+            binding.cvEndgame.setContent {
+                DialogScore(score = 1, state = "Quiz", onClick = {})
+            }
+        }
+
     }
 
 
@@ -76,18 +79,14 @@ class QuizGameFragment : Fragment() {
             Log.d("Entro al OBSERVER", "cualquier cosa")
             binding.tvTimer.text = it.toString()
         })
+        quizGameViewModel.gameFinished.observe(viewLifecycleOwner, endGameObserver)
 
-        binding.cvEndgame.setContent {
-            Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAA", "WEEEEEEEEEEEEEEEEEEEEEEEE")
-            quizGameViewModel.gameFinished.observe(viewLifecycleOwner, endGameObserver)
-            if (flag) {
-                DialogScore(score = 1, state = "Quiz", onClick = {})
-            }
-        }
         /*
         quizGameViewModel.currenTime.observe(viewLifecycleOwner, timerObserver)
-        quizGameViewModel.question.observe(viewLifecycleOwner,questionObserver)
         */
+        quizGameViewModel.question.observe(viewLifecycleOwner,questionObserver)
+
+
         return binding.root
     }
 

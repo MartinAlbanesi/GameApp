@@ -21,7 +21,7 @@ class QuizViewModel @Inject constructor() : ViewModel() {
     var gameFinished: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     val question: MutableLiveData<Question> = MutableLiveData<Question>()
 
-    fun setQuestion(){
+    fun setQuestion() {
         question.value = Questions.getRandomQuestion()
     }
 
@@ -30,11 +30,12 @@ class QuizViewModel @Inject constructor() : ViewModel() {
         timer = object : CountDownTimer(couuntDown_TimerHard, ONE_SECOND) {
             override fun onTick(millisUntilFinished: Long) {
                 currenTime.value = millisUntilFinished / ONE_SECOND
-                Log.d("test",currenTime.value.toString())
+                Log.d("test", currenTime.value.toString())
             }
+
             override fun onFinish() {
                 currenTime.value = DONE
-                gameFinished.value=true
+                gameFinished.value = true
             }
         }
         timer.start()

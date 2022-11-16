@@ -38,9 +38,7 @@ class ScoreFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
-
             val scoreGame by scoreViewModel.game.observeAsState()
-
             lateinit var score: ScoreEntity
 
             Column() {
