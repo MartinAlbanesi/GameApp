@@ -26,7 +26,16 @@ class QuizGameFragment : Fragment() {
     //ViewModel
     private val quizGameViewModel: QuizViewModel by activityViewModels()
 
-    private val gameEntity: GameEntity = GameEntity(2,"Overwatch 2","PC","Shooter","Mamasei mamasai mamakusa", "AA", "2022-25-13","Tu mama")
+    private val gameEntity: GameEntity = GameEntity(
+        2,
+        "Overwatch 2",
+        "PC",
+        "Shooter",
+        "Mamasei mamasai mamakusa",
+        "AA",
+        "2022-25-13",
+        "Tu mama"
+    )
 
     //ViewBinding
     private var _binding: FragmentQuizGameBinding? = null
@@ -63,16 +72,15 @@ class QuizGameFragment : Fragment() {
 
         _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
 
-
         quizGameViewModel.currenTime.observe(viewLifecycleOwner, Observer {
-            Log.d("Entro al OBSERVER","cualquier cosa")
+            Log.d("Entro al OBSERVER", "cualquier cosa")
             binding.tvTimer.text = it.toString()
         })
 
         binding.cvEndgame.setContent {
-            Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAA","WEEEEEEEEEEEEEEEEEEEEEEEE")
-            quizGameViewModel.gameFinished.observe(viewLifecycleOwner,endGameObserver)
-            if(flag){
+            Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAA", "WEEEEEEEEEEEEEEEEEEEEEEEE")
+            quizGameViewModel.gameFinished.observe(viewLifecycleOwner, endGameObserver)
+            if (flag) {
                 DialogScore(score = 1, state = "Quiz", onClick = {})
             }
         }
