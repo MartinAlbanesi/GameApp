@@ -26,6 +26,10 @@ class QuizMenuFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val difficulty: List<String> = listOf("Easy","Normal","Hard")
+    private var time: Long = 20000 //20s
+    private var count: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,9 +37,22 @@ class QuizMenuFragment : Fragment() {
     ): View {
         _binding = FragmentQuizMenuBinding.inflate(inflater, container, false)
 
+        binding.btnDifficulty.setOnClickListener {
+            binding.btnDifficulty.text = difficulty[count]
+            when(count) {
+                0 -> time = 30000
+                1 -> time = 20000
+                2 -> time = 10000
+            }
+            if(count >= 2)
+                count = 0
+            else
+                count ++
+        }
+
         //Listeners
         binding.btnStart.setOnClickListener {
-            quizViewModel.startTimer()
+            quizViewModel.startTimer(time)
             quizViewModel.setQuestion()
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)

@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor() : ViewModel() {
-    val couuntDown_TimerHard = 10000L //10 seg
+    //val couuntDown_TimerHard = 10000L //10 seg
     val ONE_SECOND = 1000L
     val DONE = 0L
     val currenTime = MutableLiveData<Long>()
@@ -26,7 +26,7 @@ class QuizViewModel @Inject constructor() : ViewModel() {
     }
 
 
-    fun startTimer() {
+    fun startTimer(couuntDown_TimerHard: Long) {
         timer = object : CountDownTimer(couuntDown_TimerHard, ONE_SECOND) {
             override fun onTick(millisUntilFinished: Long) {
                 currenTime.value = millisUntilFinished / ONE_SECOND

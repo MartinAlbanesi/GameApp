@@ -10,21 +10,27 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.GameEntity
+import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.databinding.FragmentQuizGameBinding
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.domain.quiz.Question
 import com.practice.gameapp.ui.fragments.scores.DialogScore
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.practice.gameapp.ui.viewmodels.QuizViewModel
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
 
 
 @AndroidEntryPoint
 class QuizGameFragment : Fragment() {
     //ViewModel
     private val quizGameViewModel: QuizViewModel by activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
 
     private val gameEntity: GameEntity = GameEntity(
         2,
@@ -54,12 +60,12 @@ class QuizGameFragment : Fragment() {
         binding.tvQuestion.text = newQuestion.getText(gameEntity)
     }
 
-
-
-    private val endGameObserver = Observer<Boolean> {
-        if (it) {
+    private val endGameObserver = Observer<Boolean> { endgameFlag ->
+        if (endgameFlag) {
             binding.cvEndgame.setContent {
-                DialogScore(score = 1, state = "Quiz", onClick = {})
+                DialogScore(score = 1, "You lose") {
+                    gameOver(it, 1)
+                }
             }
         }
 
@@ -88,6 +94,17 @@ class QuizGameFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun gameOver(name : String, score : Int){
+
+        val scoreGame = ScoreEntity(0, name,score, LocalDate.now().toString(), "quiz")
+
+        scoreViewModel.setScore(scoreGame)
+
+        Navigation
+            .findNavController(requireView())
+            .navigate(R.id.navigation_quizMenu)
     }
 
     override fun onDestroyView() {
