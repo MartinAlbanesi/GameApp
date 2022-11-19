@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practice.gameapp.data.repositories.GameRepository
 import com.practice.gameapp.domain.models.GameModel
-import com.practice.gameapp.domain.quiz.Question
-import com.practice.gameapp.domain.quiz.QuestionGenre
-import com.practice.gameapp.domain.quiz.Questions
+import com.practice.gameapp.domain.quiz.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,13 +27,16 @@ class QuizViewModel @Inject constructor(
     var gameFinished: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     //Games
     private var allQuizGamesList = mutableListOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "",""))
-    private var fourGames = mutableListOf<GameModel>()
-    var mutableFourGames = MutableLiveData<MutableList<GameModel>>()
+    var fourGames = mutableListOf<GameModel>()
+    //var fourGameAnswers = MutableLiveData<List<GameModel>>()
+
     var selectedGame = GameModel("","","","","",0,"","")
-    //Questions and answers
+
     val selectedQuestion: MutableLiveData<Question> = MutableLiveData<Question>()
-    val allFourQuestions: MutableLiveData<MutableList<Question>> = MutableLiveData<MutableList<Question>>()
-    val otherThreeQuestions: MutableLiveData<Question> = MutableLiveData<Question>()
+
+    var gamesIds = mutableListOf<Int>()
+    var fourGameAnswers = mutableMapOf<Int,String>()
+
 
     //Fills a list with all the games from the API
     suspend fun fillGamesList() {
@@ -44,7 +45,7 @@ class QuizViewModel @Inject constructor(
                 .collect { gamesList ->
                     allQuizGamesList.addAll(gamesList)
                     allQuizGamesList.forEach{
-                        Log.d("AAAAAAAAAAAAAA",it.title)
+                        //Log.d("AAAAAAAAAAAAAA",it.title)
                     }
                 }
         }
@@ -54,13 +55,40 @@ class QuizViewModel @Inject constructor(
     fun fillFourGames () {
         repeat(4){
             fourGames.add(allQuizGamesList.shuffled()[0])
-            Log.d("Cuatro juegos",fourGames[it].toString())
+            //Log.d("Cuatro juegos",fourGames[it].toString())
+            gamesIds.add(fourGames[it].id)
         }
+        fourGames.shuffled()
     }
 
     fun fillMutableFourGames() {
-        mutableFourGames.value?.addAll(fourGames)
-        mutableFourGames.value?.shuffle()
+
+        when(selectedQuestion.value){
+            is QuestionGenre -> {
+                fourGames.forEach {
+                    fourGameAnswers.put(it.id,it.genre)
+                }
+                Log.d("titi","1")
+            }
+            is QuestionPlatform -> {
+                fourGames.forEach {
+                    fourGameAnswers.put(it.id,it.platform)
+                }
+                Log.d("titi","2")
+            }
+            is QuestionDeveloper -> {
+                fourGames.forEach {
+                    fourGameAnswers.put(it.id,it.developer)
+                }
+                Log.d("titi","3")
+            }
+            is QuestionReleaseDate -> {
+                fourGames.forEach {
+                    fourGameAnswers.put(it.id,it.releaseDate)
+                }
+                Log.d("titi","4")
+            }
+        }
     }
 
     //Chooses a random GameModel from the list of 4 randoms
@@ -72,11 +100,16 @@ class QuizViewModel @Inject constructor(
         selectedQuestion.value = Questions.getRandomQuestion()
     }
 
-    /*
-    fun setOtherThreeQuestions() {
-        selectedQuestion.value
+    fun game(gameModelId: Int){
+        if(gameModelId == selectedGame.id){
+            fillFourGames()
+            fillSelectedGame()
+            setSelectedQuestion()
+            fillMutableFourGames()
+        }else{
+            Log.d("asdasd","incorrecto")
+        }
     }
-     */
 
     //Timer
     fun startTimer(couuntDown_TimerHard: Long) {

@@ -30,6 +30,13 @@ import androidx.lifecycle.MutableLiveData
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
+/**
+ * Dialog que se muestra para ingresar tu score cuando terminas un juego
+ * @param score El puntaje de tu juego
+ * @param state Mensaje si se perdio en el juego o termino el tiempo
+ * @param onClick Funcion que se ejecuta cuando presionas save
+ */
+
 @Composable
 fun DialogScore(
     score: Int,
