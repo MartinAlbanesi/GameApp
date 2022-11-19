@@ -1,29 +1,23 @@
 package com.practice.gameapp.ui.fragments.quiz
 
 import android.os.Bundle
-import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
-import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.databinding.FragmentQuizGameBinding
-import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.domain.quiz.Question
 import com.practice.gameapp.ui.fragments.scores.DialogScore
-import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -84,7 +78,6 @@ class QuizGameFragment : Fragment() {
         _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
 
         quizGameViewModel.currenTime.observe(viewLifecycleOwner, Observer {
-            //Log.d("Entro al OBSERVER", "cualquier cosa")
             binding.tvTimer.text = it.toString()
         })
 
@@ -98,6 +91,10 @@ class QuizGameFragment : Fragment() {
         quizGameViewModel.currenTime.observe(viewLifecycleOwner, timerObserver)
         */
 
+        binding.btnOption1.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[0])
+        binding.btnOption2.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[1])
+        binding.btnOption3.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[2])
+        binding.btnOption4.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[3])
 
         //When user clicks back button to exit the game
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -107,6 +104,23 @@ class QuizGameFragment : Fragment() {
                 }
             }
         )
+
+        binding.btnOption1.setOnClickListener {
+            quizGameViewModel.game(quizGameViewModel.fourGames[0].id)
+        }
+
+        binding.btnOption2.setOnClickListener {
+            quizGameViewModel.game(quizGameViewModel.fourGames[1].id)
+        }
+
+        binding.btnOption3.setOnClickListener {
+            quizGameViewModel.game(quizGameViewModel.fourGames[2].id)
+        }
+
+        binding.btnOption4.setOnClickListener {
+            quizGameViewModel.game(quizGameViewModel.fourGames[3].id)
+        }
+
 
         return binding.root
     }
@@ -126,4 +140,6 @@ class QuizGameFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

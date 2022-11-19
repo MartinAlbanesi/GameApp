@@ -2,7 +2,7 @@ package com.practice.gameapp.domain.quiz
 
 import com.practice.gameapp.domain.models.GameModel
 
-class QuestionReleaseDate: Question() {
+class QuestionReleaseDate: Question {
 
     override fun getText(gameModel: GameModel): String {
         return "En que año fue lanzado ${gameModel.title}?"
@@ -14,7 +14,7 @@ class QuestionReleaseDate: Question() {
 
 }
 
-class QuestionPlatform: Question() {
+class QuestionPlatform: Question {
 
     override fun getText(gameModel: GameModel): String {
         return "En qué plataforma se puede jugar ${gameModel.title}?"
@@ -26,7 +26,7 @@ class QuestionPlatform: Question() {
 
 }
 
-class QuestionGenre: Question() {
+class QuestionGenre: Question {
 
     override fun getText(gameModel: GameModel): String {
         return "Cual es el género de ${gameModel.title}?"
@@ -38,7 +38,7 @@ class QuestionGenre: Question() {
 
 }
 
-class QuestionDeveloper: Question() {
+class QuestionDeveloper: Question {
 
     override fun getText(gameModel: GameModel): String {
         return "Which developer made ${gameModel.title}?"
