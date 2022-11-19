@@ -7,17 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentQuizMenuBinding
 import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class QuizMenuFragment : Fragment() {
 
     //ViewModel
-    private val quizViewModel: QuizViewModel by activityViewModels()
+    private val quizGameViewModel: QuizViewModel by activityViewModels()
 
     //ViewBinding
     private var _binding: FragmentQuizMenuBinding? = null
@@ -50,10 +52,14 @@ class QuizMenuFragment : Fragment() {
                 count ++
         }
 
+        lifecycleScope.launch{
+            quizGameViewModel.fillGamesList()
+        }
+
         //Listeners
         binding.btnStart.setOnClickListener {
-            quizViewModel.startTimer(time)
-            quizViewModel.setQuestion()
+            quizGameViewModel.startTimer(time)
+            quizGameViewModel.setSelectedQuestion()
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)
         }
