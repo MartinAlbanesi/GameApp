@@ -29,7 +29,7 @@ class MenuGameVersus : Fragment() {
 
         binding.buttonPlay.setOnClickListener {
             versusViewModel.setImage()
-            versusViewModel.startGame()
+            versusViewModel.startTimer()
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_menugameversus_to_versusFragment)
         }
