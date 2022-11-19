@@ -23,7 +23,4 @@ interface ScoreDao {
     @Delete
     suspend fun deleteScore(score : ScoreEntity)
 
-
-
-
 }

@@ -14,30 +14,31 @@
 
     <ImageView
         android:id="@+id/imageGame1"
-        android:layout_width="395dp"
-        android:layout_height="292dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="390dp"
+        android:layout_height="306dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/imageGame2"
-        android:layout_width="398dp"
-        android:layout_height="297dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="390dp"
+        android:layout_height="343dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageGame1"
+        app:layout_constraintTop_toBottomOf="@+id/vs_timer"
         tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/vs_timer"
-        android:layout_width="141dp"
-        android:layout_height="106dp"
+        android:layout_width="118dp"
+        android:layout_height="93dp"
         android:background="@drawable/timer_bg_shape"
         android:gravity="center"
         android:maxLines="1"
@@ -46,9 +47,8 @@
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.416" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

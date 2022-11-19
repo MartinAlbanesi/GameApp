@@ -2,45 +2,44 @@ package com.practice.gameapp.ui.fragments.versusGame
 
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
-import com.practice.gameapp.databinding.FragmentHomeBinding
+import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.databinding.FragmentVersusBinding
+import com.practice.gameapp.domain.models.VersusGame
 import com.practice.gameapp.ui.fragments.scores.DialogScore
-import com.practice.gameapp.ui.viewmodels.home.HomeViewModel
-import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
+import com.practice.gameapp.ui.viewmodels.HomeViewModel
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
+import com.practice.gameapp.ui.viewmodels.VersusViewModel
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import kotlin.math.log
-import kotlin.random.Random
 
 class VersusFragment : Fragment() {
 
     private val versusViewModel: VersusViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private val scoreViewModel : ScoreViewModel by activityViewModels()
     private var _binding: FragmentVersusBinding? = null
     private val binding get() = _binding!!
     private var imageRandomOne = 0
     private var imageRandomTwo = 1
-
+//    private val dateStringGameOne =homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
+ //   private val dateStringGameTwo =homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
     private lateinit var composeView: ComposeView
+    private lateinit var prueba:VersusGame
+    private var counter = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
 
         _binding = FragmentVersusBinding.inflate(inflater, container, false)
 
@@ -66,85 +65,67 @@ class VersusFragment : Fragment() {
         })
 
         binding.imageGame1.setOnClickListener {
+            val dateStringGameOne =homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
+            val dateStringGameTwo =homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
 
-            val dateStringGameOne =
-                homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
-            val dateStringGameTwo =
-                homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
 
             if (playGame(dateStringGameOne.toString(), dateStringGameTwo.toString())) {
-                Log.d("d", "gano !")
-                Log.d("d", dateStringGameOne.toString())
-                Log.d("d", dateStringGameTwo.toString())
                 versusViewModel.setGameImageLose(imageRandomTwo)
                 Picasso.get().load(homeViewModel.allGamesList.value?.get(imageRandomTwo)?.thumbnail)
                     .fit().centerInside()
                     .into(binding.imageGame2)
             } else {
-                Log.d("d", "perdio !")
-                Log.d("d", dateStringGameOne.toString())
-                Log.d("d", dateStringGameTwo.toString())
 
                 versusViewModel.cancelTime()
-
                 binding.dialogCompose.setContent {
-                    DialogScore(score = 1) {
+                    DialogScore(score = counter, "You lose") {
+                        gameOver(it, counter)
                     }
                 }
-
-//                Navigation.findNavController(requireView())
-//                    .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
-
             }
         }
-        binding.imageGame2.setOnClickListener {
 
-            val dateStringGameOne =
-                homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
-            val dateStringGameTwo =
-                homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
+        binding.imageGame2.setOnClickListener {
+            val dateStringGameOne =homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
+            val dateStringGameTwo =homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
 
             if (playGame(dateStringGameTwo.toString(), dateStringGameOne.toString())) {
-                Log.d("d", "funciono !")
-                Log.d("d", dateStringGameOne.toString())
-                Log.d("d", dateStringGameTwo.toString())
+
                 versusViewModel.setGameImageLose(imageRandomOne)
                 Picasso.get().load(homeViewModel.allGamesList.value?.get(imageRandomOne)?.thumbnail)
                     .fit().centerInside()
                     .into(binding.imageGame1)
             } else {
-                Log.d("d", "NO funciono !")
-                Log.d("d", dateStringGameOne.toString())
-                Log.d("d", dateStringGameTwo.toString())
-
                 versusViewModel.cancelTime()
-
                 binding.dialogCompose.setContent {
-                    DialogScore(score = 1) {
-
+                    DialogScore(score = counter, "You lose") {
+                        gameOver(it, counter)
                     }
                 }
-
-//                Navigation.findNavController(requireView()).navigate(R.id.action_versusFragment_to_navigation_menugameversus)
             }
         }
         return binding.root
     }
 
-    private fun playGame(uno: String, dos: String): Boolean {
-
-        //   val dateStringGameOne = homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
-        val gameDateOne = LocalDate.parse(uno)
-
-        //   val dateStringGameTwo = homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
-        val gameDateTwo = LocalDate.parse(dos)
-
+    private fun playGame(screenOne: String, screenTwo: String): Boolean {
+        var assistant:Boolean = false
+        val gameDateOne = LocalDate.parse(screenOne)
+        val gameDateTwo = LocalDate.parse(screenTwo)
         if (gameDateOne <= gameDateTwo) {
-            return true
+           counter +=1
+            assistant = true
         }
-        return false
+        return assistant
     }
+    private fun gameOver(name : String, score : Int){
+        var scoreFinal = counter
+        val scoreGame = ScoreEntity(0, name,scoreFinal,LocalDate.now().toString(), "vs")
+        scoreViewModel.setScore(scoreGame)
 
+        Navigation
+            .findNavController(requireView())
+            .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentQuizMenuBinding
-import com.practice.gameapp.ui.viewmodels.quiz.QuizViewModel
+import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,6 +43,9 @@ class QuizMenuFragment : Fragment() {
                 .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)
         }
 
+        binding.btnScoreboard.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.scoreFragment)
+        }
 
         return binding.root
     }

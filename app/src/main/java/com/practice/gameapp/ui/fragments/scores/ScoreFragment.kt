@@ -8,7 +8,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.practice.gameapp.ui.viewmodels.score.ScoreViewModel
+import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,9 +36,14 @@ class ScoreFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         composeView.setContent {
+
+            lateinit var score : ScoreEntity
+
             Column() {
-                Scores()
-                //DialogScore(1, { algo() })
+                Scores(){
+                    score = it
+                    scoreViewModel.deleteScore(score)
+                }
             }
         }
     }
