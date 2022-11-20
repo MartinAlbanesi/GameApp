@@ -29,13 +29,12 @@ class QuizViewModel @Inject constructor(
     private var allQuizGamesList = mutableListOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "",""))
     var fourGames = mutableListOf<GameModel>()
     //var fourGameAnswers = MutableLiveData<List<GameModel>>()
-
     var selectedGame = GameModel("","","","","",0,"","")
-
     val selectedQuestion: MutableLiveData<Question> = MutableLiveData<Question>()
-
-    var gamesIds = mutableListOf<Int>()
+    private var gamesIds = mutableListOf<Int>()
     var fourGameAnswers = mutableMapOf<Int,String>()
+    var fourGameAnswers2 = MutableLiveData<MutableMap<Int,String>>()
+    val gamesIds2 = MutableLiveData<List<Int>>()
 
 
     //Fills a list with all the games from the API
@@ -44,9 +43,6 @@ class QuizViewModel @Inject constructor(
             gameRepository.getGames()
                 .collect { gamesList ->
                     allQuizGamesList.addAll(gamesList)
-                    allQuizGamesList.forEach{
-                        //Log.d("AAAAAAAAAAAAAA",it.title)
-                    }
                 }
         }
     }
@@ -58,37 +54,34 @@ class QuizViewModel @Inject constructor(
             //Log.d("Cuatro juegos",fourGames[it].toString())
             gamesIds.add(fourGames[it].id)
         }
+        gamesIds2.value = gamesIds
         fourGames.shuffled()
     }
 
     fun fillMutableFourGames() {
-
         when(selectedQuestion.value){
             is QuestionGenre -> {
                 fourGames.forEach {
                     fourGameAnswers.put(it.id,it.genre)
                 }
-                Log.d("titi","1")
             }
             is QuestionPlatform -> {
                 fourGames.forEach {
                     fourGameAnswers.put(it.id,it.platform)
                 }
-                Log.d("titi","2")
             }
             is QuestionDeveloper -> {
                 fourGames.forEach {
                     fourGameAnswers.put(it.id,it.developer)
                 }
-                Log.d("titi","3")
             }
             is QuestionReleaseDate -> {
                 fourGames.forEach {
                     fourGameAnswers.put(it.id,it.releaseDate)
                 }
-                Log.d("titi","4")
             }
         }
+        fourGameAnswers2.value = fourGameAnswers
     }
 
     //Chooses a random GameModel from the list of 4 randoms
@@ -102,12 +95,22 @@ class QuizViewModel @Inject constructor(
 
     fun game(gameModelId: Int){
         if(gameModelId == selectedGame.id){
+            Log.d("respuesta","correcto")
+            Log.d("fourGames",fourGames.size.toString())
+            Log.d("fourGameAnswers",fourGameAnswers.size.toString())
+            Log.d("gameIds",gamesIds.size.toString())
+            fourGames.clear()
+            gamesIds.clear()
+            fourGameAnswers.clear()
             fillFourGames()
+            Log.d("1",fourGames.toString())
             fillSelectedGame()
+            Log.d("2",selectedGame.toString())
             setSelectedQuestion()
+            Log.d("3",selectedQuestion.value.toString())
             fillMutableFourGames()
         }else{
-            Log.d("asdasd","incorrecto")
+            Log.d("respuesta","incorrecto")
         }
     }
 
