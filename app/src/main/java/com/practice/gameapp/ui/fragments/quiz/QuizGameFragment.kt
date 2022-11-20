@@ -56,13 +56,13 @@ class QuizGameFragment : Fragment() {
     }
 
     private val gameIdsObserver = Observer<List<Int>> { ids ->
+        idList.clear()
         for (item in ids) {
             idList.add(item)
         }
     }
 
     private val answersObserver = Observer<MutableMap<Int,String>> { answers ->
-        Log.d("WAZAP",answers.toString())
         binding.btnOption1.text = answers.getValue(idList[0])
         binding.btnOption2.text = answers.getValue(idList[1])
         binding.btnOption3.text = answers.getValue(idList[2])

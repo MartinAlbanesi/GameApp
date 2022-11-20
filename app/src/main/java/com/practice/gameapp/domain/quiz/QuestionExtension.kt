@@ -14,14 +14,13 @@ class QuestionReleaseDate: Question {
 
 }
 
-class QuestionPlatform: Question {
-
+class QuestionTitleReleaseDate: Question {
     override fun getText(gameModel: GameModel): String {
-        return "En qué plataforma se puede jugar ${gameModel.title}?"
+        return "Que juego salio en esta fecha ${gameModel.releaseDate}"
     }
 
     override fun getField(gameModel: GameModel): String {
-        return gameModel.platform
+        return gameModel.title
     }
 
 }
