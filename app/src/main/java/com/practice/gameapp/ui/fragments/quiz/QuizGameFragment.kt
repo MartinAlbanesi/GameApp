@@ -1,10 +1,10 @@
 package com.practice.gameapp.ui.fragments.quiz
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -30,7 +30,6 @@ class QuizGameFragment : Fragment() {
     private val quizGameViewModel: QuizViewModel by activityViewModels()
     private val scoreViewModel: ScoreViewModel by activityViewModels()
 
-
     //ViewBinding
     private var _binding: FragmentQuizGameBinding? = null
 
@@ -38,18 +37,12 @@ class QuizGameFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private var idList: MutableList<Int> = mutableListOf()
 
     //Observers
     private val questionObserver = Observer<Question> { newQuestion ->
         binding.tvQuestion.text = newQuestion.getText(quizGameViewModel.selectedGame)
     }
-
-    /*
-    private val answersObserver = Observer<List<Question>> { newAnswer ->
-        binding.btnOption1.text = newAnswer[0]
-    }
-
-     */
 
     //End game timer
     private val endGameObserver = Observer<Boolean> { endgameFlag ->
@@ -62,6 +55,20 @@ class QuizGameFragment : Fragment() {
         }
     }
 
+    private val gameIdsObserver = Observer<List<Int>> { ids ->
+        for (item in ids) {
+            idList.add(item)
+        }
+    }
+
+    private val answersObserver = Observer<MutableMap<Int,String>> { answers ->
+        Log.d("WAZAP",answers.toString())
+        binding.btnOption1.text = answers.getValue(idList[0])
+        binding.btnOption2.text = answers.getValue(idList[1])
+        binding.btnOption3.text = answers.getValue(idList[2])
+        binding.btnOption4.text = answers.getValue(idList[3])
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +76,7 @@ class QuizGameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // val quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             quizGameViewModel.fillFourGames()
             quizGameViewModel.fillMutableFourGames()
             quizGameViewModel.fillSelectedGame()
@@ -83,22 +90,23 @@ class QuizGameFragment : Fragment() {
 
         quizGameViewModel.gameFinished.observe(viewLifecycleOwner, endGameObserver)
 
-        quizGameViewModel.selectedQuestion.observe(viewLifecycleOwner,questionObserver)
+        quizGameViewModel.selectedQuestion.observe(viewLifecycleOwner, questionObserver)
 
-        //quizGameViewModel.mutableFourGames.observe(viewLifecycleOwner,answersObserver)
+        quizGameViewModel.gamesIds2.observe(viewLifecycleOwner, gameIdsObserver)
 
-        /*
-        quizGameViewModel.currenTime.observe(viewLifecycleOwner, timerObserver)
-        */
+        quizGameViewModel.fourGameAnswers2.observe(viewLifecycleOwner, answersObserver)
 
-        binding.btnOption1.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[0])
-        binding.btnOption2.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[1])
-        binding.btnOption3.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[2])
-        binding.btnOption4.text = quizGameViewModel.fourGameAnswers.getValue(quizGameViewModel.gamesIds[3])
+
+
+
+
+
+
+
 
         //When user clicks back button to exit the game
         requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,object: OnBackPressedCallback(true){
+            viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
 
                 }
@@ -125,9 +133,9 @@ class QuizGameFragment : Fragment() {
         return binding.root
     }
 
-    private fun gameOver(name : String, score : Int){
+    private fun gameOver(name: String, score: Int) {
 
-        val scoreGame = ScoreEntity(0, name,score, LocalDate.now().toString(), "quiz")
+        val scoreGame = ScoreEntity(0, name, score, LocalDate.now().toString(), "quiz")
 
         scoreViewModel.setScore(scoreGame)
 
