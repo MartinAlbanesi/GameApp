@@ -32,7 +32,7 @@ class QuizViewModel @Inject constructor(
     var selectedGame = GameModel("","","","","",0,"","")
     val selectedQuestion: MutableLiveData<Question> = MutableLiveData<Question>()
     private var gamesIds = mutableListOf<Int>()
-    var fourGameAnswers = mutableMapOf<Int,String>()
+    private var fourGameAnswers = mutableMapOf<Int,String>()
     var fourGameAnswers2 = MutableLiveData<MutableMap<Int,String>>()
     val gamesIds2 = MutableLiveData<List<Int>>()
 
@@ -62,25 +62,27 @@ class QuizViewModel @Inject constructor(
         when(selectedQuestion.value){
             is QuestionGenre -> {
                 fourGames.forEach {
-                    fourGameAnswers.put(it.id,it.genre)
+                    fourGameAnswers[it.id] = it.genre
                 }
             }
-            is QuestionPlatform -> {
+            is QuestionTitleReleaseDate -> {
                 fourGames.forEach {
-                    fourGameAnswers.put(it.id,it.platform)
+                    fourGameAnswers[it.id] = it.title
                 }
             }
             is QuestionDeveloper -> {
                 fourGames.forEach {
-                    fourGameAnswers.put(it.id,it.developer)
+                    fourGameAnswers[it.id] = it.developer
                 }
             }
             is QuestionReleaseDate -> {
                 fourGames.forEach {
-                    fourGameAnswers.put(it.id,it.releaseDate)
+                    fourGameAnswers[it.id] = it.releaseDate
                 }
             }
         }
+        Log.d("Wachipampa",fourGameAnswers2.value.toString())
+        Log.d("Wachipampa2",fourGameAnswers.toString())
         fourGameAnswers2.value = fourGameAnswers
     }
 
@@ -95,10 +97,6 @@ class QuizViewModel @Inject constructor(
 
     fun game(gameModelId: Int){
         if(gameModelId == selectedGame.id){
-            Log.d("respuesta","correcto")
-            Log.d("fourGames",fourGames.size.toString())
-            Log.d("fourGameAnswers",fourGameAnswers.size.toString())
-            Log.d("gameIds",gamesIds.size.toString())
             fourGames.clear()
             gamesIds.clear()
             fourGameAnswers.clear()

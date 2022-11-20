@@ -2,7 +2,7 @@ package com.practice.gameapp.domain.quiz
 
 object Questions {
 
-    private val questionsList = listOf(QuestionPlatform(),QuestionGenre(),QuestionDeveloper(),QuestionReleaseDate())
+    private val questionsList = listOf(QuestionGenre(),QuestionDeveloper(),QuestionReleaseDate(),QuestionTitleReleaseDate())
 
     fun getRandomQuestion(): Question{
 
