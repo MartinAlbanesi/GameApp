@@ -1,9 +1,11 @@
 package com.practice.gameapp.ui.viewmodels
 
 import android.os.CountDownTimer
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.practice.gameapp.data.repositories.database.repository.GameDBRepositoryImpl
+import com.practice.gameapp.ui.fragments.versusGame.VersusFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,16 +19,18 @@ class VersusViewModel @Inject constructor(
     val currenTime = MutableLiveData<Long>()
     var imageRandom = MutableLiveData<Int?>()
     var imageRandom2 = MutableLiveData<Int>()
+    var counterScore = MutableLiveData<Int>(0)
     var gameFinished: Boolean = false
-    val counter = MutableLiveData<Int>()
-
-
-    fun setCounter(sum:Int){
-        counter.value = sum
-    }
-
     fun random(): Int {
         return (0..370).random()
+    }
+
+    fun setCounter(){
+     counterScore.value = counterScore.value?.plus(1)
+    }
+
+    fun resetCounter(){
+        counterScore.value = 0
     }
 
     fun setImage() {
@@ -39,7 +43,6 @@ class VersusViewModel @Inject constructor(
         if (imageRandom.value == loserImage) {
             imageRandom.value = random()
         }
-
         if (imageRandom2.value == loserImage) {
             imageRandom2.value = random()
         }
