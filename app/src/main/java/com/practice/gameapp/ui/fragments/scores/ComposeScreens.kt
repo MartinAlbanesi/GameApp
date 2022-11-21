@@ -25,16 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
-/**
- * Dialog que se muestra al terminar una partida. Te pide que le ingreses un nombre para guardarlo.
- * @param score El puntaje del juego
- * @param state El estado de que si perdio o se termino el tiempo
- * @param onClick Funcion que se ejecuta cuando clickeas 'SAVE'
- */
 @Composable
 fun DialogScore(
     score: Int,
@@ -90,7 +85,7 @@ fun DialogScore(
                     visible = showError,
                     enter = expandVertically(animationSpec = tween(1500), expandFrom = Alignment.Bottom ),
                 ) {
-                    Text(text = "No empty field pls :c", color = Color.Red)
+                    Text(text = "the field must have 3 or more characters", color = Color.Red)
                 }
                 OutlinedTextField(
                     value = name,
@@ -105,7 +100,8 @@ fun DialogScore(
                         backgroundColor = Color(0xff7395d9)
                     ),
                     isError = showError,
-                    maxLines = 1
+                    maxLines = 1,
+                    singleLine = true,
                 )
                 Button(
                     onClick = {
@@ -130,17 +126,14 @@ fun DialogScore(
     }
 }
 
-/**
- * Pantalla que muestra todos los puntajes del juego seleccionado
- * @param scoreViewModel 
- * @param onClickErased funcion que borra el score cuando clickeas al icono rojo
- */
 @Composable
 fun Scores(
-    scoreViewModel: ScoreViewModel = hiltViewModel(),
+    //scoreViewModel: ScoreViewModel = hiltViewModel(),
+    scoresGame: LiveData<List<ScoreEntity>>,
     onClickErased : (ScoreEntity) -> Unit
+    //onClick: (ScoreEntity) -> Unit,
 ) {
-    val scores by scoreViewModel.scores.observeAsState(arrayListOf())
+    val scores by scoresGame.observeAsState(arrayListOf())
 
     val count = scores.size
 

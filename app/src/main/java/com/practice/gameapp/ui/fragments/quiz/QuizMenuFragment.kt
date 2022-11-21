@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentQuizMenuBinding
 import com.practice.gameapp.ui.viewmodels.QuizViewModel
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +19,7 @@ class QuizMenuFragment : Fragment() {
 
     //ViewModel
     private val quizViewModel: QuizViewModel by activityViewModels()
+    private val scoreViewModel : ScoreViewModel by activityViewModels()
 
     //ViewBinding
     private var _binding: FragmentQuizMenuBinding? = null
@@ -43,6 +45,7 @@ class QuizMenuFragment : Fragment() {
         }
 
         binding.btnScoreboard.setOnClickListener {
+            scoreViewModel.searchGame("quiz")
             Navigation.findNavController(requireView()).navigate(R.id.scoreFragment)
         }
 

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -37,19 +39,24 @@ class ScoreFragment @Inject constructor(
 
         composeView.setContent {
 
-            lateinit var score : ScoreEntity
+            val scoreGame by scoreViewModel.game.observeAsState()
+
+            lateinit var score: ScoreEntity
 
             Column() {
-                Scores(){
+                Scores(
+                    if (scoreGame == "quiz") {
+                        scoreViewModel.scoresQuiz
+                    } else {
+                        scoreViewModel.scoresVS
+                    }
+                ) {
                     score = it
                     scoreViewModel.deleteScore(score)
                 }
             }
         }
     }
-
-
-
 
 
 }

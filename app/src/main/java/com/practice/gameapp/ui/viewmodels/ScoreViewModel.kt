@@ -1,6 +1,7 @@
 package com.practice.gameapp.ui.viewmodels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
@@ -18,8 +19,15 @@ class ScoreViewModel @Inject constructor(
 //    private val _scores = MutableLiveData<List<ScoreEntity>>()
 //    val scores : MutableLiveData<List<ScoreEntity>> = _scores
 
-    private val _scores: LiveData<List<ScoreEntity>> = scoreRepository.getAllScores()
-    val scores: LiveData<List<ScoreEntity>> = _scores
+    private val _scoresVS: LiveData<List<ScoreEntity>> = scoreRepository.getScores("vs")
+    val scoresVS: LiveData<List<ScoreEntity>> = _scoresVS
+
+    private val _scoresQuiz: LiveData<List<ScoreEntity>> = scoreRepository.getScores("quiz")
+    val scoresQuiz: LiveData<List<ScoreEntity>> = _scoresQuiz
+
+    private val _game = MutableLiveData<String>("vs")
+    val game : LiveData<String> = _game
+
 
     fun setScore(score: ScoreEntity) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -28,7 +36,7 @@ class ScoreViewModel @Inject constructor(
     }
 
     fun searchGame(gameName: String) {
-        //_scores.value = scoreRepository.getScores(gameName)
+        _game.value = gameName
     }
 
     fun deleteScore(scoreEntity: ScoreEntity) {
