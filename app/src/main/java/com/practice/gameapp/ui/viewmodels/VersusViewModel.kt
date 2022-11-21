@@ -3,8 +3,6 @@ package com.practice.gameapp.ui.viewmodels
 import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation
-import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate

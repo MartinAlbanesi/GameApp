@@ -26,9 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
-import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
 @Composable
 fun DialogScore(
@@ -128,7 +126,6 @@ fun DialogScore(
 
 @Composable
 fun Scores(
-    //scoreViewModel: ScoreViewModel = hiltViewModel(),
     scoresGame: LiveData<List<ScoreEntity>>,
     onClickErased : (ScoreEntity) -> Unit
 ) {
