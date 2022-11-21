@@ -55,54 +55,31 @@ class QuizViewModel @Inject constructor(
         /*
         repeat(4){
             fourGames.add(allQuizGamesList.shuffled()[0])
-            //Log.d("Cuatro juegos",fourGames[it].toString())
             gamesIds.add(fourGames[it].id)
         }
          */
 
         var gameCount = 0
+        lateinit var gameModel: GameModel
+
+        val genreList = mutableListOf<String>()
 
         do {
+            gameModel = allQuizGamesList.shuffled()[0]
             if(fourGames.isEmpty()){
-                fourGames.add(allQuizGamesList.shuffled()[0])
+                fourGames.add(gameModel)
                 gamesIds.add(fourGames[gameCount].id)
                 gameCount++
-                Log.d("wachin",gameCount.toString())
-                Log.d("wachinFourGames",fourGames.toString())
+                genreList.add(gameModel.genre)
             }else{
-                fourGames.forEach {
-                    if(fourGames[gameCount-1].genre != it.genre){
-                        fourGames.add(allQuizGamesList.shuffled()[0])
-                        gamesIds.add(fourGames[gameCount].id)
-                        gameCount++
-
-                    }
-                }
-                Log.d("wachin2",gameCount.toString())
-                Log.d("wachin2FourGames",fourGames.toString())
-            }
-        }while (gameCount != 4)
-
-
-/*
-        allQuizGamesList.forEach breaking@{
-            if(fourGames.isEmpty()){
-                fourGames.add(allQuizGamesList.shuffled()[0])
-                gamesIds.add(fourGames[gameCount].id)
-                gameCount++
-            }else{
-                if(fourGames[gameCount].genre != it.genre){
-                    fourGames.add(allQuizGamesList.shuffled()[0])
+                if (!genreList.contains(gameModel.genre)){
+                    fourGames.add(gameModel)
                     gamesIds.add(fourGames[gameCount].id)
                     gameCount++
+                    genreList.add(gameModel.genre)
                 }
             }
-            if(gameCount == 3){
-                return@breaking
-            }
-        }
-
- */
+        }while (gameCount != 4)
 
         gamesIds2.value = gamesIds
         fourGames.shuffled()
