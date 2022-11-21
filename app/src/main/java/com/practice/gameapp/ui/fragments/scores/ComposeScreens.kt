@@ -25,7 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
@@ -84,7 +85,7 @@ fun DialogScore(
                     visible = showError,
                     enter = expandVertically(animationSpec = tween(1500), expandFrom = Alignment.Bottom ),
                 ) {
-                    Text(text = "No empty field pls :c", color = Color.Red)
+                    Text(text = "the field must have 3 or more characters", color = Color.Red)
                 }
                 OutlinedTextField(
                     value = name,
@@ -99,7 +100,8 @@ fun DialogScore(
                         backgroundColor = Color(0xff7395d9)
                     ),
                     isError = showError,
-                    maxLines = 1
+                    maxLines = 1,
+                    singleLine = true,
                 )
                 Button(
                     onClick = {
@@ -126,10 +128,10 @@ fun DialogScore(
 
 @Composable
 fun Scores(
-    scoreViewModel: ScoreViewModel = hiltViewModel(),
-    onClick : (ScoreEntity) -> Unit
+    scoresGame: LiveData<List<ScoreEntity>>,
+    onClick: (ScoreEntity) -> Unit,
 ) {
-    val scores by scoreViewModel.scores.observeAsState(arrayListOf())
+    val scores by scoresGame.observeAsState(arrayListOf())
 
     val count = scores.size
 
