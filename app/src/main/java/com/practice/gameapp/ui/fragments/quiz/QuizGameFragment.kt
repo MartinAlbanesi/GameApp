@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.GameEntity
@@ -23,25 +25,17 @@ import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 
 @AndroidEntryPoint
 class QuizGameFragment : Fragment() {
-    //ViewModel
+
+    //ViewModels
     private val quizGameViewModel: QuizViewModel by activityViewModels()
     private val scoreViewModel: ScoreViewModel by activityViewModels()
 
-    private val gameEntity: GameEntity = GameEntity(
-        2,
-        "Overwatch 2",
-        "PC",
-        "Shooter",
-        "Mamasei mamasai mamakusa",
-        "AA",
-        "2022-25-13",
-        "Tu mama"
-    )
 
     //ViewBinding
     private var _binding: FragmentQuizGameBinding? = null
@@ -50,16 +44,20 @@ class QuizGameFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    /*
-    private val timerObserver = Observer<Long> { newTime ->
-        binding.tvTimer.text = DateUtils.formatElapsedTime(newTime)
-    }
-    */
+
+    //Observers
     private val questionObserver = Observer<Question> { newQuestion ->
-        Log.d("Entro al OBSERVER",newQuestion.getText(gameEntity))
-        binding.tvQuestion.text = newQuestion.getText(gameEntity)
+        binding.tvQuestion.text = newQuestion.getText(quizGameViewModel.selectedGame)
     }
 
+    /*
+    private val answersObserver = Observer<List<Question>> { newAnswer ->
+        binding.btnOption1.text = newAnswer[0]
+    }
+
+     */
+
+    //End game timer
     private val endGameObserver = Observer<Boolean> { endgameFlag ->
         if (endgameFlag) {
             binding.cvEndgame.setContent {
@@ -68,7 +66,6 @@ class QuizGameFragment : Fragment() {
                 }
             }
         }
-
     }
 
 
@@ -78,20 +75,38 @@ class QuizGameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // val quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
+        lifecycleScope.launch{
+            quizGameViewModel.fillFourGames()
+            quizGameViewModel.fillMutableFourGames()
+            quizGameViewModel.fillSelectedGame()
+        }
 
         _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
 
         quizGameViewModel.currenTime.observe(viewLifecycleOwner, Observer {
-            Log.d("Entro al OBSERVER", "cualquier cosa")
+            //Log.d("Entro al OBSERVER", "cualquier cosa")
             binding.tvTimer.text = it.toString()
         })
+
         quizGameViewModel.gameFinished.observe(viewLifecycleOwner, endGameObserver)
+
+        quizGameViewModel.selectedQuestion.observe(viewLifecycleOwner,questionObserver)
+
+        //quizGameViewModel.mutableFourGames.observe(viewLifecycleOwner,answersObserver)
 
         /*
         quizGameViewModel.currenTime.observe(viewLifecycleOwner, timerObserver)
         */
-        quizGameViewModel.question.observe(viewLifecycleOwner,questionObserver)
 
+
+        //When user clicks back button to exit the game
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,object: OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+
+                }
+            }
+        )
 
         return binding.root
     }

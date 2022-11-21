@@ -1,51 +1,51 @@
 package com.practice.gameapp.domain.quiz
 
-import com.practice.gameapp.data.repositories.database.entities.GameEntity
+import com.practice.gameapp.domain.models.GameModel
 
 class QuestionReleaseDate: Question() {
 
-    override fun getText(gameEntity: GameEntity): String {
-        return "En que año fue lanzado ${gameEntity.title}?"
+    override fun getText(gameModel: GameModel): String {
+        return "En que año fue lanzado ${gameModel.title}?"
     }
 
-    override fun getField(gameEntity: GameEntity): String {
-        return gameEntity.release_date
+    override fun getField(gameModel: GameModel): String {
+        return gameModel.releaseDate
     }
 
 }
 
 class QuestionPlatform: Question() {
 
-    override fun getText(gameEntity: GameEntity): String {
-        return "En qué plataforma se puede jugar ${gameEntity.title}?"
+    override fun getText(gameModel: GameModel): String {
+        return "En qué plataforma se puede jugar ${gameModel.title}?"
     }
 
-    override fun getField(gameEntity: GameEntity): String {
-        return gameEntity.platform
+    override fun getField(gameModel: GameModel): String {
+        return gameModel.platform
     }
 
 }
 
 class QuestionGenre: Question() {
 
-    override fun getText(gameEntity: GameEntity): String {
-        return "Cual es el género de ${gameEntity.title}?"
+    override fun getText(gameModel: GameModel): String {
+        return "Cual es el género de ${gameModel.title}?"
     }
 
-    override fun getField(gameEntity: GameEntity): String {
-        return gameEntity.genre
+    override fun getField(gameModel: GameModel): String {
+        return gameModel.genre
     }
 
 }
 
 class QuestionDeveloper: Question() {
 
-    override fun getText(gameEntity: GameEntity): String {
-        return "Which developer made ${gameEntity.title}?"
+    override fun getText(gameModel: GameModel): String {
+        return "Which developer made ${gameModel.title}?"
     }
 
-    override fun getField(gameEntity: GameEntity): String {
-        return gameEntity.developer
+    override fun getField(gameModel: GameModel): String {
+        return gameModel.developer
     }
 
 }
