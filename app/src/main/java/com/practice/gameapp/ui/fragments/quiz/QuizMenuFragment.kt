@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
@@ -20,12 +19,8 @@ import kotlinx.coroutines.launch
 class QuizMenuFragment : Fragment() {
 
     //ViewModel
-<<<<<<< HEAD
-    private val quizViewModel: QuizViewModel by activityViewModels()
     private val scoreViewModel : ScoreViewModel by activityViewModels()
-=======
     private val quizGameViewModel: QuizViewModel by activityViewModels()
->>>>>>> 26d2583 (implemented questions for quiz, some changes in models)
 
     //ViewBinding
     private var _binding: FragmentQuizMenuBinding? = null
@@ -36,7 +31,7 @@ class QuizMenuFragment : Fragment() {
 
     private val difficulty: List<String> = listOf("Easy","Normal","Hard")
     private var time: Long = 20000 //20s
-    private var count: Int = 0
+    private var difficultyCount: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,16 +41,16 @@ class QuizMenuFragment : Fragment() {
         _binding = FragmentQuizMenuBinding.inflate(inflater, container, false)
 
         binding.btnDifficulty.setOnClickListener {
-            binding.btnDifficulty.text = difficulty[count]
-            when(count) {
+            binding.btnDifficulty.text = difficulty[difficultyCount]
+            when(difficultyCount) {
                 0 -> time = 30000
                 1 -> time = 20000
                 2 -> time = 10000
             }
-            if(count >= 2)
-                count = 0
+            if(difficultyCount >= 2)
+                difficultyCount = 0
             else
-                count ++
+                difficultyCount ++
         }
 
         lifecycleScope.launch{
@@ -66,6 +61,7 @@ class QuizMenuFragment : Fragment() {
         binding.btnStart.setOnClickListener {
             quizGameViewModel.startTimer(time)
             quizGameViewModel.setSelectedQuestion()
+            quizGameViewModel.gameFinished.value = false
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)
         }

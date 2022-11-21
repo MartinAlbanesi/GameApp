@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -39,6 +40,8 @@ class QuizGameFragment : Fragment() {
 
     private var idList: MutableList<Int> = mutableListOf()
 
+    private var score: Int = 0
+
     //Observers
     private val questionObserver = Observer<Question> { newQuestion ->
         binding.tvQuestion.text = newQuestion.getText(quizGameViewModel.selectedGame)
@@ -69,6 +72,11 @@ class QuizGameFragment : Fragment() {
         binding.btnOption4.text = answers.getValue(idList[3])
     }
 
+    private val scoreObserver = Observer<Int> { actualScore ->
+        binding.tvScore.text = actualScore.toString()
+        score = actualScore
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -96,41 +104,54 @@ class QuizGameFragment : Fragment() {
 
         quizGameViewModel.fourGameAnswers2.observe(viewLifecycleOwner, answersObserver)
 
-
-
-
-
-
-
+        quizGameViewModel.score.observe(viewLifecycleOwner,scoreObserver)
 
 
         //When user clicks back button to exit the game
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-
+                    Toast.makeText(context,"Can't exit game",Toast.LENGTH_SHORT).show()
                 }
             }
         )
 
         binding.btnOption1.setOnClickListener {
-            quizGameViewModel.game(quizGameViewModel.fourGames[0].id)
+            quizGameViewModel.game(quizGameViewModel.fourGames[0].id) {
+                stateGame()
+            }
         }
 
         binding.btnOption2.setOnClickListener {
-            quizGameViewModel.game(quizGameViewModel.fourGames[1].id)
+            quizGameViewModel.game(quizGameViewModel.fourGames[1].id) {
+                stateGame()
+            }
         }
 
         binding.btnOption3.setOnClickListener {
-            quizGameViewModel.game(quizGameViewModel.fourGames[2].id)
+            quizGameViewModel.game(quizGameViewModel.fourGames[2].id) {
+                stateGame()
+            }
         }
 
         binding.btnOption4.setOnClickListener {
-            quizGameViewModel.game(quizGameViewModel.fourGames[3].id)
+            quizGameViewModel.game(quizGameViewModel.fourGames[3].id) {
+                stateGame()
+            }
         }
 
 
         return binding.root
+    }
+
+    private fun stateGame() {
+        quizGameViewModel.stopTimer()
+        binding.cvEndgame.setContent {
+            DialogScore(score, "You lose") {
+                gameOver(it, score)
+                quizGameViewModel.gameFinished.value = false
+            }
+        }
     }
 
     private fun gameOver(name: String, score: Int) {

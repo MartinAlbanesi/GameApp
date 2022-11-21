@@ -5,7 +5,7 @@ import com.practice.gameapp.domain.models.GameModel
 class QuestionReleaseDate: Question {
 
     override fun getText(gameModel: GameModel): String {
-        return "En que año fue lanzado ${gameModel.title}?"
+        return "Which year was ${gameModel.title} released?"
     }
 
     override fun getField(gameModel: GameModel): String {
@@ -16,7 +16,7 @@ class QuestionReleaseDate: Question {
 
 class QuestionTitleReleaseDate: Question {
     override fun getText(gameModel: GameModel): String {
-        return "Que juego salio en esta fecha ${gameModel.releaseDate}"
+        return "In which date did ${gameModel.releaseDate} released?"
     }
 
     override fun getField(gameModel: GameModel): String {
@@ -28,7 +28,7 @@ class QuestionTitleReleaseDate: Question {
 class QuestionGenre: Question {
 
     override fun getText(gameModel: GameModel): String {
-        return "Cual es el género de ${gameModel.title}?"
+        return "What is the genre of ${gameModel.title}?"
     }
 
     override fun getField(gameModel: GameModel): String {

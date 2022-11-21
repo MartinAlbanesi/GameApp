@@ -13,6 +13,7 @@ import com.practice.gameapp.domain.quiz.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.system.exitProcess
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
@@ -35,6 +36,7 @@ class QuizViewModel @Inject constructor(
     private var fourGameAnswers = mutableMapOf<Int,String>()
     var fourGameAnswers2 = MutableLiveData<MutableMap<Int,String>>()
     val gamesIds2 = MutableLiveData<List<Int>>()
+    var score = MutableLiveData(0)
 
 
     //Fills a list with all the games from the API
@@ -49,11 +51,59 @@ class QuizViewModel @Inject constructor(
 
     //Fills a list with 4 random games from allQuizGamesList
     fun fillFourGames () {
+
+        /*
         repeat(4){
             fourGames.add(allQuizGamesList.shuffled()[0])
             //Log.d("Cuatro juegos",fourGames[it].toString())
             gamesIds.add(fourGames[it].id)
         }
+         */
+
+        var gameCount = 0
+
+        do {
+            if(fourGames.isEmpty()){
+                fourGames.add(allQuizGamesList.shuffled()[0])
+                gamesIds.add(fourGames[gameCount].id)
+                gameCount++
+                Log.d("wachin",gameCount.toString())
+                Log.d("wachinFourGames",fourGames.toString())
+            }else{
+                fourGames.forEach {
+                    if(fourGames[gameCount-1].genre != it.genre){
+                        fourGames.add(allQuizGamesList.shuffled()[0])
+                        gamesIds.add(fourGames[gameCount].id)
+                        gameCount++
+
+                    }
+                }
+                Log.d("wachin2",gameCount.toString())
+                Log.d("wachin2FourGames",fourGames.toString())
+            }
+        }while (gameCount != 4)
+
+
+/*
+        allQuizGamesList.forEach breaking@{
+            if(fourGames.isEmpty()){
+                fourGames.add(allQuizGamesList.shuffled()[0])
+                gamesIds.add(fourGames[gameCount].id)
+                gameCount++
+            }else{
+                if(fourGames[gameCount].genre != it.genre){
+                    fourGames.add(allQuizGamesList.shuffled()[0])
+                    gamesIds.add(fourGames[gameCount].id)
+                    gameCount++
+                }
+            }
+            if(gameCount == 3){
+                return@breaking
+            }
+        }
+
+ */
+
         gamesIds2.value = gamesIds
         fourGames.shuffled()
     }
@@ -95,8 +145,9 @@ class QuizViewModel @Inject constructor(
         selectedQuestion.value = Questions.getRandomQuestion()
     }
 
-    fun game(gameModelId: Int){
+    fun game(gameModelId: Int, gameOver: () -> Unit){
         if(gameModelId == selectedGame.id){
+            setScore()
             fourGames.clear()
             gamesIds.clear()
             fourGameAnswers.clear()
@@ -109,15 +160,27 @@ class QuizViewModel @Inject constructor(
             fillMutableFourGames()
         }else{
             Log.d("respuesta","incorrecto")
+            gameOver()
+            gameFinished.value = true
+            score.value = 0
         }
     }
 
-    //Timer
+    /**
+     * Adds 1 point to score count
+     */
+    private fun setScore() {
+        score.value = score.value?.plus(1)
+    }
+
+    /**
+     * Controls timer during quiz game
+     * @param couuntDown_TimerHard sets time based on difficulty
+     */
     fun startTimer(couuntDown_TimerHard: Long) {
         timer = object : CountDownTimer(couuntDown_TimerHard, ONE_SECOND) {
             override fun onTick(millisUntilFinished: Long) {
                 currenTime.value = millisUntilFinished / ONE_SECOND
-                //Log.d("test", currenTime.value.toString())
             }
 
             override fun onFinish() {
