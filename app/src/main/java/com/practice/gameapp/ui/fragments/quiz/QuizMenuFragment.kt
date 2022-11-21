@@ -60,7 +60,8 @@ class QuizMenuFragment : Fragment() {
         //Listeners
         binding.btnStart.setOnClickListener {
             quizGameViewModel.startTimer(time)
-            quizGameViewModel.setSelectedQuestion()
+            quizGameViewModel.fillFourGames()
+            quizGameViewModel.fillMutableFourGames()
             quizGameViewModel.gameFinished.value = false
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_quizMenu_to_quizGameFragment)

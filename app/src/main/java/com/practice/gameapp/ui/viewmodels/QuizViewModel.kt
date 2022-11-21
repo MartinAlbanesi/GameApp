@@ -31,12 +31,12 @@ class QuizViewModel @Inject constructor(
     var fourGames = mutableListOf<GameModel>()
     //var fourGameAnswers = MutableLiveData<List<GameModel>>()
     var selectedGame = GameModel("","","","","",0,"","")
-    val selectedQuestion: MutableLiveData<Question> = MutableLiveData<Question>()
+    val selectedQuestion = MutableLiveData<Question>(Questions.getRandomQuestion())
     private var gamesIds = mutableListOf<Int>()
     private var fourGameAnswers = mutableMapOf<Int,String>()
     var fourGameAnswers2 = MutableLiveData<MutableMap<Int,String>>()
     val gamesIds2 = MutableLiveData<List<Int>>()
-    var score = MutableLiveData(0)
+    var score = MutableLiveData<Int>(0)
 
 
     //Fills a list with all the games from the API
@@ -51,8 +51,8 @@ class QuizViewModel @Inject constructor(
 
     //Fills a list with 4 random games from allQuizGamesList
     fun fillFourGames () {
-
-        if(selectedQuestion.value == QuestionGenre()){
+        //selectedQuestion.value = Questions.getRandomQuestion()
+        if(selectedQuestion.value is QuestionGenre){
             var gameCount = 0
             lateinit var gameModel: GameModel
 
@@ -74,17 +74,17 @@ class QuizViewModel @Inject constructor(
                     }
                 }
             }while (gameCount != 4)
-        }else if (selectedQuestion.value != QuestionGenre()){
+        }else{
             repeat(4){
                 fourGames.add(allQuizGamesList.shuffled()[0])
                 gamesIds.add(fourGames[it].id)
             }
         }
-
         gamesIds2.value = gamesIds
+
+        selectedGame = fourGames[(0..3).random()]
+
         fourGames.shuffled()
-
-
     }
 
     fun fillMutableFourGames() {
@@ -110,17 +110,10 @@ class QuizViewModel @Inject constructor(
                 }
             }
         }
-        Log.d("Wachipampa",fourGameAnswers2.value.toString())
-        Log.d("Wachipampa2",fourGameAnswers.toString())
         fourGameAnswers2.value = fourGameAnswers
     }
 
-    //Chooses a random GameModel from the list of 4 randoms
-    fun fillSelectedGame() {
-        selectedGame = fourGames.random()
-    }
-
-    fun setSelectedQuestion() {
+    private fun setSelectedQuestion() {
         selectedQuestion.value = Questions.getRandomQuestion()
     }
 
@@ -131,17 +124,11 @@ class QuizViewModel @Inject constructor(
             gamesIds.clear()
             fourGameAnswers.clear()
             fillFourGames()
-            Log.d("1",fourGames.toString())
-            fillSelectedGame()
-            Log.d("2",selectedGame.toString())
             setSelectedQuestion()
-            Log.d("3",selectedQuestion.value.toString())
             fillMutableFourGames()
         }else{
-            Log.d("respuesta","incorrecto")
             gameOver()
             gameFinished.value = true
-            score.value = 0
         }
     }
 

@@ -83,12 +83,6 @@ class QuizGameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // val quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
-        lifecycleScope.launch {
-            quizGameViewModel.fillFourGames()
-            quizGameViewModel.fillMutableFourGames()
-            quizGameViewModel.fillSelectedGame()
-        }
 
         _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
 
@@ -159,6 +153,8 @@ class QuizGameFragment : Fragment() {
         val scoreGame = ScoreEntity(0, name, score, LocalDate.now().toString(), "quiz")
 
         scoreViewModel.setScore(scoreGame)
+
+        quizGameViewModel.score.value = 0
 
         Navigation
             .findNavController(requireView())
