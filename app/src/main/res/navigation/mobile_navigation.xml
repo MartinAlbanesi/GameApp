@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/versusFragment"
         android:name="com.practice.gameapp.ui.fragments.versusGame.VersusFragment"
-        android:label="fragment_versus"
+        android:label="@string/title_gameMenuGame"
         tools:layout="@layout/fragment_versus" >
         <action
             android:id="@+id/action_versusFragment_to_navigation_menugameversus"

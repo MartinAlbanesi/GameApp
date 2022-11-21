@@ -26,9 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
-import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
 /**
  * Dialog que se muestra para ingresar tu score cuando terminas un juego
@@ -136,7 +134,7 @@ fun DialogScore(
 @Composable
 fun Scores(
     scoresGame: LiveData<List<ScoreEntity>>,
-    onClick: (ScoreEntity) -> Unit,
+    onClickErased : (ScoreEntity) -> Unit
 ) {
     val scores by scoresGame.observeAsState(arrayListOf())
 
@@ -174,7 +172,7 @@ fun Scores(
                 Message(text = "${scores[it].score}", Modifier.weight(1f))
                 Message(text = "${scores[it].date}", Modifier.weight(2f))
                 IconButton(
-                    onClick = { onClick(scores[it]) },
+                    onClick = { onClickErased(scores[it]) },
                     Modifier
                         .border(1.dp, Color.White, shape = RoundedCornerShape(5.dp))
                         .size(26.dp)
@@ -192,7 +190,7 @@ fun Scores(
 }
 
 @Composable
-fun Message(
+private fun Message(
     text : String,
     modifier : Modifier = Modifier
 ) {

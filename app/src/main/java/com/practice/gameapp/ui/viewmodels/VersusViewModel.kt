@@ -3,27 +3,34 @@ package com.practice.gameapp.ui.viewmodels
 import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.practice.gameapp.data.repositories.database.repository.GameDBRepositoryImpl
+import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
 class VersusViewModel @Inject constructor(
-    private val gameDBRepository: GameDBRepositoryImpl
 ) : ViewModel() {
-
-
     val CountDown_Timer = 60000L //Un minuto
     val ONE_SECOND = 1000L
     val DONE = 0L
     lateinit var timer: CountDownTimer
-    val currenTime = MutableLiveData<Long>()
-    var imageRandom = MutableLiveData<Int?>()
+    val currentTime = MutableLiveData<Long>()
+    var imageRandom = MutableLiveData<Int>()
     var imageRandom2 = MutableLiveData<Int>()
+    var counterScore = MutableLiveData(0)
     var gameFinished: Boolean = false
 
-    fun random(): Int {
+    private fun random(): Int {
         return (0..370).random()
+    }
+
+    private fun setCounter() {
+        counterScore.value = counterScore.value?.plus(1)
+    }
+
+    private fun resetCounter() {
+        counterScore.value = 0
     }
 
     fun setImage() {
@@ -31,58 +38,49 @@ class VersusViewModel @Inject constructor(
         imageRandom2.value = random() //ver bien dsp
     }
 
-    fun gameStarts() {
-        if (gameFinished) {
-            timer.cancel()
-        }
-    }
 
-    fun setGameImageLose(lose: Int) {
-        if (imageRandom.value == lose) {
+    fun setGameImageLose(loserImage: Int) {
+        if (imageRandom.value == loserImage) {
             imageRandom.value = random()
         }
-
-        if (imageRandom2.value == lose) {
+        if (imageRandom2.value == loserImage) {
             imageRandom2.value = random()
         }
     }
 
-        fun startGame(){
+    fun gameOver(name : String, score : Int, onChange : (ScoreEntity) -> Unit ){
+        val scoreGame = ScoreEntity(0, name,score, LocalDate.now().toString(), "vs")
+        resetCounter()
+        onChange(scoreGame)
+    }
 
-            timer = object : CountDownTimer(CountDown_Timer, ONE_SECOND) {
-                override fun onTick(millisUntilFinished: Long) {
-                    currenTime.value = millisUntilFinished / ONE_SECOND
-                }
-
-                override fun onFinish() {
-                    currenTime.value = DONE
-                    gameFinished = true
-                }
-            }
-            timer.start()
+    fun playGame(screenOne: String, screenTwo: String): Boolean {
+        var assistant:Boolean = false
+        val gameDateOne = LocalDate.parse(screenOne)
+        val gameDateTwo = LocalDate.parse(screenTwo)
+        if (gameDateOne <= gameDateTwo) {
+            setCounter()
+            assistant = true
         }
+        return assistant
+    }
 
-     fun cancelTime(){
-         timer.cancel()
-     }
+    fun startTimer() {
+        timer = object : CountDownTimer(CountDown_Timer, ONE_SECOND) {
+            override fun onTick(millisUntilFinished: Long) {
+                currentTime.value = millisUntilFinished / ONE_SECOND
+            }
 
-   /*
-    override fun onCleared() {
-        super.onCleared()
+            override fun onFinish() {
+                currentTime.value = DONE
+                gameFinished = true
+            }
+        }
+        timer.start()
+    }
+
+
+    fun cancelTime() {
         timer.cancel()
     }
-*/
-
-/*
-    suspend fun fillName() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val cualquierCosa = GameEntity(0, "fill", "fill", "fill", "fill", "fill")
-            gameDBRepository.setGame(cualquierCosa)
-//            game.value?.forEach{
-//
-//            Log.d("titi", it.id.toString())
-//            }
-        }
-        //game.postValue(gameDBRepository.getAllGames("vs", 1).value)
-    }*/
 }

@@ -16,9 +16,6 @@ class ScoreViewModel @Inject constructor(
     private val scoreRepository: ScoreRepository
 ) : ViewModel() {
 
-//    private val _scores = MutableLiveData<List<ScoreEntity>>()
-//    val scores : MutableLiveData<List<ScoreEntity>> = _scores
-
     private val _scoresVS: LiveData<List<ScoreEntity>> = scoreRepository.getScores("vs")
     val scoresVS: LiveData<List<ScoreEntity>> = _scoresVS
 

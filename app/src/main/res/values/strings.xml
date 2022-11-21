@@ -2,7 +2,7 @@
     <string name="app_name">GameApp</string>
     <string name="title_home">Home</string>
     <string name="title_quizNav">Quiz</string>
-    <string name="title_gameMenuGame">Notifications</string>
+    <string name="title_gameMenuGame">Who came first ?</string>
     <string name="iv_gameImageDescription">Recommended game image for showcase</string>
     <string name="search_hint">Search...</string>
     <string name="title_gameRecomendation">Try this one out!</string>

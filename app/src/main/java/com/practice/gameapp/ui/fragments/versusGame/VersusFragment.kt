@@ -5,142 +5,137 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.platform.ComposeView
+import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
-import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.databinding.FragmentVersusBinding
 import com.practice.gameapp.ui.fragments.scores.DialogScore
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import com.practice.gameapp.ui.viewmodels.VersusViewModel
 import com.squareup.picasso.Picasso
-import java.time.LocalDate
+
 
 class VersusFragment : Fragment() {
-
     private val versusViewModel: VersusViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private val scoreViewModel : ScoreViewModel by activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
     private var _binding: FragmentVersusBinding? = null
     private val binding get() = _binding!!
     private var imageRandomOne = 0
     private var imageRandomTwo = 1
-
-    private lateinit var composeView: ComposeView
+    private var counter = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         _binding = FragmentVersusBinding.inflate(inflater, container, false)
 
-        versusViewModel.imageRandom.observe(viewLifecycleOwner, Observer {
+        versusViewModel.imageRandom.observe(viewLifecycleOwner) {
             imageRandomOne = it!!
-        })
+        }
 
-        versusViewModel.imageRandom2.observe(viewLifecycleOwner, Observer {
-            imageRandomTwo = it
-        })
+        versusViewModel.imageRandom2.observe(viewLifecycleOwner) {
+            imageRandomTwo = it!!
+        }
 
-        versusViewModel.currenTime.observe(viewLifecycleOwner, Observer {
+        versusViewModel.currentTime.observe(viewLifecycleOwner) {
             binding.vsTimer.text = DateUtils.formatElapsedTime(it)
-        })
+            binding.counteeer.text = counter.toString()
+        }
 
-        homeViewModel.allGamesList.observe(viewLifecycleOwner, Observer {
-            Picasso.get().load(it[imageRandomOne].thumbnail).fit().centerInside()
-                .into(binding.imageGame1)
+        versusViewModel.counterScore.observe(viewLifecycleOwner) {
+            counter = it
+            binding.counteeer.text = it.toString()
+        }
 
-            Picasso.get().load(it[imageRandomTwo].thumbnail).fit().centerInside()
-                .into(binding.imageGame2)
-
-        })
+        homeViewModel.allGamesList.observe(viewLifecycleOwner) {
+            setImage(it[imageRandomOne].thumbnail,binding.imageGame1)
+            setImage(it[imageRandomTwo].thumbnail,binding.imageGame2)
+        }
 
         binding.imageGame1.setOnClickListener {
-
-            val dateStringGameOne =
-                homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
-            val dateStringGameTwo =
-                homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
-
-            if (playGame(dateStringGameOne.toString(), dateStringGameTwo.toString())) {
+            if (versusViewModel.playGame(getImageReleaseDate(imageRandomOne), getImageReleaseDate(imageRandomTwo))) {
                 versusViewModel.setGameImageLose(imageRandomTwo)
-                Picasso.get().load(homeViewModel.allGamesList.value?.get(imageRandomTwo)?.thumbnail)
-                    .fit().centerInside()
-                    .into(binding.imageGame2)
+                setImage(getImageThumbnail(imageRandomTwo),binding.imageGame2)
             } else {
-
                 versusViewModel.cancelTime()
-
-                binding.dialogCompose.setContent {
-
-                    DialogScore(score = 1, "You lose") {
-                        gameOver(it, 1)
-                    }
-                }
+                gameOver("You lose...")
             }
         }
+
         binding.imageGame2.setOnClickListener {
-
-            val dateStringGameOne =
-                homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
-            val dateStringGameTwo =
-                homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
-
-            if (playGame(dateStringGameTwo.toString(), dateStringGameOne.toString())) {
-
+            if (versusViewModel.playGame(getImageReleaseDate(imageRandomOne), getImageReleaseDate(imageRandomTwo))) {
                 versusViewModel.setGameImageLose(imageRandomOne)
-                Picasso.get().load(homeViewModel.allGamesList.value?.get(imageRandomOne)?.thumbnail)
-                    .fit().centerInside()
-                    .into(binding.imageGame1)
+                setImage(getImageThumbnail(imageRandomOne),binding.imageGame1)
             } else {
-
                 versusViewModel.cancelTime()
-
-                binding.dialogCompose.setContent {
-
-                    DialogScore(score = 1, "You lose") {
-                        gameOver(it, 1)
-                    }
-                }
+                gameOver("You lose...")
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    //cancela volver atras durante la partida
+                }
+            }
+        )
         return binding.root
     }
-
-    private fun playGame(uno: String, dos: String): Boolean {
-
-        //   val dateStringGameOne = homeViewModel.allGamesList.value?.get(imageRandomOne)?.releaseDate
-        val gameDateOne = LocalDate.parse(uno)
-
-        //   val dateStringGameTwo = homeViewModel.allGamesList.value?.get(imageRandomTwo)?.releaseDate
-        val gameDateTwo = LocalDate.parse(dos)
-
-        if (gameDateOne <= gameDateTwo) {
-            return true
-        }
-        return false
-    }
-
-    private fun gameOver(name : String, score : Int){
-
-        val scoreGame = ScoreEntity(0, name,score,LocalDate.now().toString(), "vs")
-
-        scoreViewModel.setScore(scoreGame)
-
-        Navigation
-            .findNavController(requireView())
-            .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Setea una imagen con Picasso a una ImageView pasando una url
+     * @param urlImage Url requerida para setear la imagen
+     * @param imageView La ImagenView que deseas setear la imagen
+     */
+    private fun setImage(urlImage : String?, imageView: ImageView){
+        Picasso.get().load(urlImage)
+            .fit()
+            .centerInside()
+            .into(imageView)
+    }
+
+    /**
+     * Funcion que se ejecuta cuando pierdes o el tiempo se termina
+     * @param gameState El titulo que se pondra cuando pierdes o se termina el tiempo
+     */
+    private fun gameOver(gameState : String){
+        binding.dialogCompose.setContent {
+            DialogScore(score = counter, gameState) { nameUser ->
+                versusViewModel.gameOver(nameUser, counter) {
+                    scoreViewModel.setScore(it)
+                    Navigation
+                        .findNavController(requireView())
+                        .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
+                }
+            }
+        }
+    }
+
+    /**
+     * Devuelve la fecha de la imagen solicitada
+     * @param imageRandom Posicion de la lista de los juegos que deseas saber la fecha
+     * @return String
+     */
+    private fun getImageReleaseDate(imageRandom : Int): String {
+        return homeViewModel.allGamesList.value?.get(imageRandom)?.releaseDate.toString()
+    }
+
+    /**
+     * Devuelve la url de la imagen solicitada
+     * @param imageRandom Posicion de la lista de los juegos que deseas saber la fecha
+     * @return String
+     */
+    private fun getImageThumbnail(imageRandom : Int): String {
+        return homeViewModel.allGamesList.value?.get(imageRandom)?.thumbnail.toString()
     }
 }
