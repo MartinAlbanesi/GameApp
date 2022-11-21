@@ -131,7 +131,6 @@ fun Scores(
     //scoreViewModel: ScoreViewModel = hiltViewModel(),
     scoresGame: LiveData<List<ScoreEntity>>,
     onClickErased : (ScoreEntity) -> Unit
-    //onClick: (ScoreEntity) -> Unit,
 ) {
     val scores by scoresGame.observeAsState(arrayListOf())
 
