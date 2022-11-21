@@ -14,7 +14,7 @@ interface ScoreDao {
     @Query("select * from score_table where game = :game order by score desc")
     fun getScores(game : String):LiveData<List<ScoreEntity>>
 
-    @Query("select * from score_table order by id desc")
+    @Query("select * from score_table order by score desc")
     fun getAllScores():LiveData<List<ScoreEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

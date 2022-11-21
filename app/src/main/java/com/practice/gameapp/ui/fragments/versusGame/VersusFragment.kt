@@ -63,7 +63,6 @@ class VersusFragment : Fragment() {
         })
 
 
-
         homeViewModel.allGamesList.observe(viewLifecycleOwner, Observer {
             Picasso.get().load(it[imageRandomOne].thumbnail)
                 .fit()
@@ -119,11 +118,10 @@ class VersusFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,object: OnBackPressedCallback(true){
                 override fun handleOnBackPressed() {
-
+                    //cancela volver atras durante la partida
                 }
             }
         )
-
         return binding.root
     }
 
@@ -144,7 +142,6 @@ class VersusFragment : Fragment() {
         scoreViewModel.setScore(scoreGame)
 
         versusViewModel.resetCounter()
-
         Navigation
             .findNavController(requireView())
             .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
