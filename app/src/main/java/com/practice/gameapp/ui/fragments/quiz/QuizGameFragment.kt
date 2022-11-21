@@ -51,8 +51,8 @@ class QuizGameFragment : Fragment() {
     private val endGameObserver = Observer<Boolean> { endgameFlag ->
         if (endgameFlag) {
             binding.cvEndgame.setContent {
-                DialogScore(score = 1, "You lose") {
-                    gameOver(it, 1)
+                DialogScore(score, "You lose") {
+                    gameOver(it, score)
                 }
             }
         }

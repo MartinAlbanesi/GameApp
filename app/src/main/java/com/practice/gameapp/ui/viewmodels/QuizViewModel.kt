@@ -52,37 +52,39 @@ class QuizViewModel @Inject constructor(
     //Fills a list with 4 random games from allQuizGamesList
     fun fillFourGames () {
 
-        /*
-        repeat(4){
-            fourGames.add(allQuizGamesList.shuffled()[0])
-            gamesIds.add(fourGames[it].id)
-        }
-         */
+        if(selectedQuestion.value == QuestionGenre()){
+            var gameCount = 0
+            lateinit var gameModel: GameModel
 
-        var gameCount = 0
-        lateinit var gameModel: GameModel
+            val genreList = mutableListOf<String>()
 
-        val genreList = mutableListOf<String>()
-
-        do {
-            gameModel = allQuizGamesList.shuffled()[0]
-            if(fourGames.isEmpty()){
-                fourGames.add(gameModel)
-                gamesIds.add(fourGames[gameCount].id)
-                gameCount++
-                genreList.add(gameModel.genre)
-            }else{
-                if (!genreList.contains(gameModel.genre)){
+            do {
+                gameModel = allQuizGamesList.shuffled()[0]
+                if(fourGames.isEmpty()){
                     fourGames.add(gameModel)
                     gamesIds.add(fourGames[gameCount].id)
                     gameCount++
                     genreList.add(gameModel.genre)
+                }else{
+                    if (!genreList.contains(gameModel.genre)){
+                        fourGames.add(gameModel)
+                        gamesIds.add(fourGames[gameCount].id)
+                        gameCount++
+                        genreList.add(gameModel.genre)
+                    }
                 }
+            }while (gameCount != 4)
+        }else if (selectedQuestion.value != QuestionGenre()){
+            repeat(4){
+                fourGames.add(allQuizGamesList.shuffled()[0])
+                gamesIds.add(fourGames[it].id)
             }
-        }while (gameCount != 4)
+        }
 
         gamesIds2.value = gamesIds
         fourGames.shuffled()
+
+
     }
 
     fun fillMutableFourGames() {
