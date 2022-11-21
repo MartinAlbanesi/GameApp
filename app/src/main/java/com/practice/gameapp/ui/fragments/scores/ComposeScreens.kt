@@ -29,6 +29,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 
+/**
+ * Dialog que se muestra al terminar una partida. Te pide que le ingreses un nombre para guardarlo.
+ * @param score El puntaje del juego
+ * @param state El estado de que si perdio o se termino el tiempo
+ * @param onClick Funcion que se ejecuta cuando clickeas 'SAVE'
+ */
 @Composable
 fun DialogScore(
     score: Int,
@@ -124,10 +130,15 @@ fun DialogScore(
     }
 }
 
+/**
+ * Pantalla que muestra todos los puntajes del juego seleccionado
+ * @param scoreViewModel 
+ * @param onClickErased funcion que borra el score cuando clickeas al icono rojo
+ */
 @Composable
 fun Scores(
     scoreViewModel: ScoreViewModel = hiltViewModel(),
-    onClick : (ScoreEntity) -> Unit
+    onClickErased : (ScoreEntity) -> Unit
 ) {
     val scores by scoreViewModel.scores.observeAsState(arrayListOf())
 
@@ -165,7 +176,7 @@ fun Scores(
                 Message(text = "${scores[it].score}", Modifier.weight(1f))
                 Message(text = "${scores[it].date}", Modifier.weight(2f))
                 IconButton(
-                    onClick = { onClick(scores[it]) },
+                    onClick = { onClickErased(scores[it]) },
                     Modifier
                         .border(1.dp, Color.White, shape = RoundedCornerShape(5.dp))
                         .size(26.dp)
@@ -183,7 +194,7 @@ fun Scores(
 }
 
 @Composable
-fun Message(
+private fun Message(
     text : String,
     modifier : Modifier = Modifier
 ) {

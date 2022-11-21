@@ -36,7 +36,6 @@ class QuizMenuFragment : Fragment() {
 
         _binding = FragmentQuizMenuBinding.inflate(inflater, container, false)
 
-
         //Listeners
         binding.btnStart.setOnClickListener {
             Navigation.findNavController(requireView())
