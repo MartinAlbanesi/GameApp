@@ -14,7 +14,7 @@ App that showcases games from all platforms and includes two minigames.
 * [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=es-419)
 * [Koin](https://insert-koin.io/)
 * [Retrofit](https://square.github.io/retrofit/)
-* [Android compose](https://developer.android.com/jetpack/compose?hl=es-419)
+* [Android Compose](https://developer.android.com/jetpack/compose?hl=es-419)
 * [Picasso](https://square.github.io/picasso/)
 * [Coil](https://coil-kt.github.io/coil/compose/)
 
