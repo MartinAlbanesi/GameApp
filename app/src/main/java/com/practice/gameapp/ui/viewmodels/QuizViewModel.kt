@@ -1,40 +1,34 @@
 package com.practice.gameapp.ui.viewmodels
 
 import android.os.CountDownTimer
-import android.util.Log
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practice.gameapp.data.repositories.GameRepository
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.domain.quiz.*
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlin.system.exitProcess
 
-//@HiltViewModel
-class QuizViewModel /*@Inject constructor*/(
+
+class QuizViewModel(
     private val gameRepository: GameRepository
 ) : ViewModel() {
-    //val couuntDown_TimerHard = 10000L //10 seg
     //Timer
     val ONE_SECOND = 1000L
     val DONE = 0L
     val currenTime = MutableLiveData<Long>()
     private lateinit var timer: CountDownTimer
     var gameFinished: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
-    //Games
-    private var allQuizGamesList = mutableListOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "",""))
+
+    //Games, questions and answers
+    private var allQuizGamesList =
+        mutableListOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "", ""))
     var fourGames = mutableListOf<GameModel>()
-    //var fourGameAnswers = MutableLiveData<List<GameModel>>()
-    var selectedGame = GameModel("","","","","",0,"","")
+    var selectedGame = GameModel("", "", "", "", "", 0, "", "")
     val selectedQuestion = MutableLiveData<Question>(Questions.getRandomQuestion())
     private var gamesIds = mutableListOf<Int>()
-    private var fourGameAnswers = mutableMapOf<Int,String>()
-    var fourGameAnswers2 = MutableLiveData<MutableMap<Int,String>>()
+    private var fourGameAnswers = mutableMapOf<Int, String>()
+    var fourGameAnswers2 = MutableLiveData<MutableMap<Int, String>>()
     val gamesIds2 = MutableLiveData<List<Int>>()
     var score = MutableLiveData<Int>(0)
 
@@ -50,9 +44,8 @@ class QuizViewModel /*@Inject constructor*/(
     }
 
     //Fills a list with 4 random games from allQuizGamesList
-    fun fillFourGames () {
-        //selectedQuestion.value = Questions.getRandomQuestion()
-        if(selectedQuestion.value is QuestionGenre){
+    fun fillFourGames() {
+        if (selectedQuestion.value is QuestionGenre) {
             var gameCount = 0
             lateinit var gameModel: GameModel
 
@@ -60,22 +53,22 @@ class QuizViewModel /*@Inject constructor*/(
 
             do {
                 gameModel = allQuizGamesList.shuffled()[0]
-                if(fourGames.isEmpty()){
+                if (fourGames.isEmpty()) {
                     fourGames.add(gameModel)
                     gamesIds.add(fourGames[gameCount].id)
                     gameCount++
                     genreList.add(gameModel.genre)
-                }else{
-                    if (!genreList.contains(gameModel.genre)){
+                } else {
+                    if (!genreList.contains(gameModel.genre)) {
                         fourGames.add(gameModel)
                         gamesIds.add(fourGames[gameCount].id)
                         gameCount++
                         genreList.add(gameModel.genre)
                     }
                 }
-            }while (gameCount != 4)
-        }else{
-            repeat(4){
+            } while (gameCount != 4)
+        } else {
+            repeat(4) {
                 fourGames.add(allQuizGamesList.shuffled()[0])
                 gamesIds.add(fourGames[it].id)
             }
@@ -88,7 +81,7 @@ class QuizViewModel /*@Inject constructor*/(
     }
 
     fun fillMutableFourGames() {
-        when(selectedQuestion.value){
+        when (selectedQuestion.value) {
             is QuestionGenre -> {
                 fourGames.forEach {
                     fourGameAnswers[it.id] = it.genre
@@ -117,8 +110,8 @@ class QuizViewModel /*@Inject constructor*/(
         selectedQuestion.value = Questions.getRandomQuestion()
     }
 
-    fun game(gameModelId: Int, gameOver: () -> Unit){
-        if(gameModelId == selectedGame.id){
+    fun game(gameModelId: Int, gameOver: () -> Unit) {
+        if (gameModelId == selectedGame.id) {
             setScore()
             fourGames.clear()
             gamesIds.clear()
@@ -126,7 +119,7 @@ class QuizViewModel /*@Inject constructor*/(
             fillFourGames()
             setSelectedQuestion()
             fillMutableFourGames()
-        }else{
+        } else {
             gameOver()
             gameFinished.value = true
         }

@@ -13,7 +13,7 @@ class GameDBRepositoryImpl @Inject constructor(
         return gameDao.getAllGames()
     }
 
-    override fun getGamesWithLimit( limit: Int): LiveData<List<GameEntity>> {
+    override fun getGamesWithLimit(limit: Int): LiveData<List<GameEntity>> {
         return gameDao.getGames(limit)
     }
 

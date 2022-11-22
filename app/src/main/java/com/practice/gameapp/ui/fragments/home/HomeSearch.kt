@@ -3,7 +3,6 @@ package com.practice.gameapp.ui.fragments.home
 import android.R
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -20,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import com.practice.gameapp.domain.models.GameModel
 
 @Composable
@@ -52,7 +50,10 @@ fun GameView(
         mutableStateOf(false)
     }
 
-    val size by animateDpAsState(targetValue = if (isSize) 200.dp else 56.dp, animationSpec = tween(300))
+    val size by animateDpAsState(
+        targetValue = if (isSize) 200.dp else 56.dp,
+        animationSpec = tween(300)
+    )
     val sizeImage by animateDpAsState(if (isSize) 175.dp else 100.dp, animationSpec = tween(300))
 
     Row(
@@ -63,7 +64,7 @@ fun GameView(
     ) {
 
         Column() {
-            
+
             AsyncImage(
                 model = gameModel.thumbnail,
                 contentDescription = null,
@@ -88,7 +89,7 @@ fun GameView(
                 color = Color.White,
                 textAlign = TextAlign.Left
             )
-            if (isSize){
+            if (isSize) {
                 Divider(thickness = 1.dp, color = Color.Black)
                 Text(
                     modifier = Modifier

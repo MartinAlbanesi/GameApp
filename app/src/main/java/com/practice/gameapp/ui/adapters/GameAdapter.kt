@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.practice.gameapp.R
 import com.practice.gameapp.domain.models.GameModel
 import com.squareup.picasso.Picasso
-import javax.inject.Inject
 
-class GameAdapter /*@Inject constructor*/(list: MutableLiveData<List<GameModel>>) :
+class GameAdapter(list: MutableLiveData<List<GameModel>>) :
     RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
     private var gameList = list

@@ -18,14 +18,14 @@ import com.practice.gameapp.ui.fragments.scores.DialogScore
 import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.LocalDate
 
 @AndroidEntryPoint
 class QuizGameFragment : Fragment() {
 
     //ViewModels
-    private val quizGameViewModel: QuizViewModel by viewModel()//activityViewModels()
+    private val quizGameViewModel: QuizViewModel by viewModel()
     private val scoreViewModel: ScoreViewModel by activityViewModels()
 
     //ViewBinding
@@ -62,7 +62,7 @@ class QuizGameFragment : Fragment() {
         }
     }
 
-    private val answersObserver = Observer<MutableMap<Int,String>> { answers ->
+    private val answersObserver = Observer<MutableMap<Int, String>> { answers ->
         binding.btnOption1.text = answers.getValue(idList[0])
         binding.btnOption2.text = answers.getValue(idList[1])
         binding.btnOption3.text = answers.getValue(idList[2])
@@ -95,14 +95,14 @@ class QuizGameFragment : Fragment() {
 
         quizGameViewModel.fourGameAnswers2.observe(viewLifecycleOwner, answersObserver)
 
-        quizGameViewModel.score.observe(viewLifecycleOwner,scoreObserver)
+        quizGameViewModel.score.observe(viewLifecycleOwner, scoreObserver)
 
 
         //When user clicks back button to exit the game
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    Toast.makeText(context,"Can't exit game",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Can't exit game", Toast.LENGTH_SHORT).show()
                 }
             }
         )

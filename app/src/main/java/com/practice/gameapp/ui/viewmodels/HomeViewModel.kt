@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practice.gameapp.data.repositories.GameRepository
 import com.practice.gameapp.domain.models.GameModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 //@HiltViewModel
 class HomeViewModel /*@Inject constructor*/(
@@ -15,8 +13,9 @@ class HomeViewModel /*@Inject constructor*/(
 ) : ViewModel() {
 
     var randomGame: MutableLiveData<GameModel> =
-        MutableLiveData(GameModel("fillRandom", "fillRandom", "fillRandom", "fill", "fill", 0,"",""))
-    var allGamesList = MutableLiveData(listOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "","")))
+        MutableLiveData()
+    var allGamesList: MutableLiveData<List<GameModel>> =
+        MutableLiveData(listOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "", "")))
 
     ////Fills the MutableLiveData value with the game list from repository
     suspend fun fillGamesList() {

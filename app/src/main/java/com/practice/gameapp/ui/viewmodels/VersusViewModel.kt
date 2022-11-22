@@ -4,14 +4,12 @@ import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
-import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
-import javax.inject.Inject
 
-//@HiltViewModel
-class VersusViewModel /*@Inject constructor*/(
+
+class VersusViewModel(
 ) : ViewModel() {
-    val CountDown_Timer = 60000L //Un minuto
+    val CountDown_Timer = 60000L //One minute
     val ONE_SECOND = 1000L
     val DONE = 0L
     lateinit var timer: CountDownTimer
@@ -48,14 +46,14 @@ class VersusViewModel /*@Inject constructor*/(
         }
     }
 
-    fun gameOver(name : String, score : Int, onChange : (ScoreEntity) -> Unit ){
-        val scoreGame = ScoreEntity(0, name,score, LocalDate.now().toString(), "vs")
+    fun gameOver(name: String, score: Int, onChange: (ScoreEntity) -> Unit) {
+        val scoreGame = ScoreEntity(0, name, score, LocalDate.now().toString(), "vs")
         resetCounter()
         onChange(scoreGame)
     }
 
     fun playGame(screenOne: String, screenTwo: String): Boolean {
-        var assistant:Boolean = false
+        var assistant: Boolean = false
         val gameDateOne = LocalDate.parse(screenOne)
         val gameDateTwo = LocalDate.parse(screenTwo)
         if (gameDateOne <= gameDateTwo) {

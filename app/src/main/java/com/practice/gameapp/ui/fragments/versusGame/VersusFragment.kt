@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,8 +23,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @AndroidEntryPoint
 class VersusFragment : Fragment() {
-    private val versusViewModel: VersusViewModel by viewModel()//activityViewModels()
-    private val homeViewModel: HomeViewModel by viewModel()//activityViewModels()
+    private val versusViewModel: VersusViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by viewModel()
     private val scoreViewModel: ScoreViewModel by activityViewModels()
     private var _binding: FragmentVersusBinding? = null
     private val binding get() = _binding!!
@@ -56,14 +57,18 @@ class VersusFragment : Fragment() {
         }
 
         homeViewModel.allGamesList.observe(viewLifecycleOwner) {
-            setImage(it[imageRandomOne].thumbnail,binding.imageGame1)
-            setImage(it[imageRandomTwo].thumbnail,binding.imageGame2)
+            setImage(it[imageRandomOne].thumbnail, binding.imageGame1)
+            setImage(it[imageRandomTwo].thumbnail, binding.imageGame2)
         }
 
         binding.imageGame1.setOnClickListener {
-            if (versusViewModel.playGame(getImageReleaseDate(imageRandomOne), getImageReleaseDate(imageRandomTwo))) {
+            if (versusViewModel.playGame(
+                    getImageReleaseDate(imageRandomOne),
+                    getImageReleaseDate(imageRandomTwo)
+                )
+            ) {
                 versusViewModel.setGameImageLose(imageRandomTwo)
-                setImage(getImageThumbnail(imageRandomTwo),binding.imageGame2)
+                setImage(getImageThumbnail(imageRandomTwo), binding.imageGame2)
             } else {
                 versusViewModel.cancelTime()
                 gameOver("You lose...")
@@ -71,9 +76,13 @@ class VersusFragment : Fragment() {
         }
 
         binding.imageGame2.setOnClickListener {
-            if (versusViewModel.playGame(getImageReleaseDate(imageRandomOne), getImageReleaseDate(imageRandomTwo))) {
+            if (versusViewModel.playGame(
+                    getImageReleaseDate(imageRandomOne),
+                    getImageReleaseDate(imageRandomTwo)
+                )
+            ) {
                 versusViewModel.setGameImageLose(imageRandomOne)
-                setImage(getImageThumbnail(imageRandomOne),binding.imageGame1)
+                setImage(getImageThumbnail(imageRandomOne), binding.imageGame1)
             } else {
                 versusViewModel.cancelTime()
                 gameOver("You lose...")
@@ -82,7 +91,7 @@ class VersusFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    //cancela volver atras durante la partida
+                    Toast.makeText(context, "Can't exit game", Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -95,11 +104,11 @@ class VersusFragment : Fragment() {
     }
 
     /**
-     * Setea una imagen con Picasso a una ImageView pasando una url
-     * @param urlImage Url requerida para setear la imagen
-     * @param imageView La ImagenView que deseas setear la imagen
+     * Sets a Picasso image to an ImageView
+     * @param urlImage Required URL to set in the image
+     * @param imageView ImageView that you want to set the image in
      */
-    private fun setImage(urlImage : String?, imageView: ImageView){
+    private fun setImage(urlImage: String?, imageView: ImageView) {
         Picasso.get().load(urlImage)
             .fit()
             .centerInside()
@@ -107,10 +116,10 @@ class VersusFragment : Fragment() {
     }
 
     /**
-     * Funcion que se ejecuta cuando pierdes o el tiempo se termina
-     * @param gameState El titulo que se pondra cuando pierdes o se termina el tiempo
+     * Function that excecutes when the game is lost due wrong answer or time ended
+     * @param gameState The title that shows up when you lose or the time ends
      */
-    private fun gameOver(gameState : String){
+    private fun gameOver(gameState: String) {
         binding.dialogCompose.setContent {
             DialogScore(score = counter, gameState) { nameUser ->
                 versusViewModel.gameOver(nameUser, counter) {
@@ -124,20 +133,20 @@ class VersusFragment : Fragment() {
     }
 
     /**
-     * Devuelve la fecha de la imagen solicitada
-     * @param imageRandom Posicion de la lista de los juegos que deseas saber la fecha
+     * Returns date of the requested image
+     * @param imageRandom Position in the list of the game that you want to know the date of
      * @return String
      */
-    private fun getImageReleaseDate(imageRandom : Int): String {
+    private fun getImageReleaseDate(imageRandom: Int): String {
         return homeViewModel.allGamesList.value?.get(imageRandom)?.releaseDate.toString()
     }
 
     /**
-     * Devuelve la url de la imagen solicitada
-     * @param imageRandom Posicion de la lista de los juegos que deseas saber la fecha
+     * Returns the URL of the requested image
+     * @param imageRandom Position in the list of the game that you want to know the date of
      * @return String
      */
-    private fun getImageThumbnail(imageRandom : Int): String {
+    private fun getImageThumbnail(imageRandom: Int): String {
         return homeViewModel.allGamesList.value?.get(imageRandom)?.thumbnail.toString()
     }
 }

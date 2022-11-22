@@ -29,16 +29,16 @@ import androidx.lifecycle.LiveData
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 
 /**
- * Dialog que se muestra para ingresar tu score cuando terminas un juego
- * @param score El puntaje de tu juego
- * @param state Mensaje si se perdio en el juego o termino el tiempo
- * @param onClick Funcion que se ejecuta cuando presionas save
+ * Dialog that shows up to enter your score and name when the game finishes
+ * @param score The game score
+ * @param state Message if the game ended because time ended or because wrong answer
+ * @param onClick function that excecutes when save button is clicked
  */
 
 @Composable
 fun DialogScore(
     score: Int,
-    state : String,
+    state: String,
     onClick: (String) -> Unit,
 ) {
 
@@ -88,7 +88,10 @@ fun DialogScore(
                 )
                 AnimatedVisibility(
                     visible = showError,
-                    enter = expandVertically(animationSpec = tween(1500), expandFrom = Alignment.Bottom ),
+                    enter = expandVertically(
+                        animationSpec = tween(1500),
+                        expandFrom = Alignment.Bottom
+                    ),
                 ) {
                     Text(text = "the field must have 3 or more characters", color = Color.Red)
                 }
@@ -134,7 +137,7 @@ fun DialogScore(
 @Composable
 fun Scores(
     scoresGame: LiveData<List<ScoreEntity>>,
-    onClickErased : (ScoreEntity) -> Unit
+    onClickErased: (ScoreEntity) -> Unit
 ) {
     val scores by scoresGame.observeAsState(arrayListOf())
 
@@ -167,7 +170,7 @@ fun Scores(
                     .fillMaxWidth()
                     .padding(vertical = 2.dp)
             ) {
-                Message(text = (it+1).toString(), Modifier.weight(0.5f))
+                Message(text = (it + 1).toString(), Modifier.weight(0.5f))
                 Message(text = "${scores[it].name}", Modifier.weight(2f))
                 Message(text = "${scores[it].score}", Modifier.weight(1f))
                 Message(text = "${scores[it].date}", Modifier.weight(2f))
@@ -177,7 +180,8 @@ fun Scores(
                         .border(1.dp, Color.White, shape = RoundedCornerShape(5.dp))
                         .size(26.dp)
                 ) {
-                    Icon(imageVector = Icons.Default.Delete,
+                    Icon(
+                        imageVector = Icons.Default.Delete,
                         contentDescription = null,
                         Modifier.size(20.dp),
                         tint = Color.Red
@@ -191,8 +195,8 @@ fun Scores(
 
 @Composable
 private fun Message(
-    text : String,
-    modifier : Modifier = Modifier
+    text: String,
+    modifier: Modifier = Modifier
 ) {
     Text(
         text = text,

@@ -1,7 +1,6 @@
 package com.practice.gameapp.ui.fragments.quiz
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +20,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class QuizMenuFragment : Fragment() {
 
     //ViewModel
-    private val scoreViewModel : ScoreViewModel by activityViewModels()
-    private val quizGameViewModel: QuizViewModel by viewModel()//activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
+    private val quizGameViewModel: QuizViewModel by viewModel()
 
     //ViewBinding
     private var _binding: FragmentQuizMenuBinding? = null
@@ -31,7 +30,7 @@ class QuizMenuFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val difficulty: List<String> = listOf("Easy","Normal","Hard")
+    private val difficulty: List<String> = listOf("Easy", "Normal", "Hard")
     private var time: Long = 20000 //20s
     private var difficultyCount: Int = 0
 
@@ -44,18 +43,18 @@ class QuizMenuFragment : Fragment() {
 
         binding.btnDifficulty.setOnClickListener {
             binding.btnDifficulty.text = difficulty[difficultyCount]
-            when(difficultyCount) {
+            when (difficultyCount) {
                 0 -> time = 30000
                 1 -> time = 20000
                 2 -> time = 10000
             }
-            if(difficultyCount >= 2)
+            if (difficultyCount >= 2)
                 difficultyCount = 0
             else
-                difficultyCount ++
+                difficultyCount++
         }
 
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             quizGameViewModel.fillGamesList()
         }
 

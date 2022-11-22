@@ -1,6 +1,6 @@
-package com.practice.gameapp.domain.models
+package com.practice.gameapp.data.repositories.models
 
-import com.practice.gameapp.data.repositories.models.APIGameModel
+import com.practice.gameapp.domain.models.GameModel
 
 fun APIGameModel.toGame() = GameModel(
     id = id,

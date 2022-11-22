@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MenuGameVersus : Fragment() {
     private var _binding: FragmentMenugameversusBinding? = null
     private val binding get() = _binding!!
-    private val versusViewModel: VersusViewModel by viewModel()//activityViewModels()
+    private val versusViewModel: VersusViewModel by viewModel()
     private val scoreViewModel: ScoreViewModel by activityViewModels()
 
 
@@ -43,9 +43,6 @@ class MenuGameVersus : Fragment() {
             Navigation.findNavController(requireView())
                 .navigate(R.id.scoreFragment)
         }
-
-
-        //versusViewModel.game.observe(viewLifecycleOwner,gameEntityObserver)
 
         return binding.root
     }

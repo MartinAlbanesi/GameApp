@@ -15,10 +15,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,13 +26,11 @@ import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.squareup.picasso.Picasso
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//@AndroidEntryPoint
-class HomeFragment /*@Inject constructor*/(
+
+class HomeFragment(
 ) : Fragment() {
 
     //RecyclerView and Adapter
@@ -113,39 +109,39 @@ class HomeFragment /*@Inject constructor*/(
                 binding.tvRecommendedGameText.visibility = View.VISIBLE
             }
 
-                OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
-                    singleLine = true,
-                    placeholder = {
-                        Text(text = "Search Game")
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        placeholderColor = Color(0x48000000)
-                    ),
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it },
+                singleLine = true,
+                placeholder = {
+                    Text(text = "Search Game")
+                },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    placeholderColor = Color(0x48000000)
+                ),
 
-                    trailingIcon = {
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = null
-                            )
-                        }
-                    },
-                )
+                trailingIcon = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null
+                        )
+                    }
+                },
+            )
 
-                binding.caja.setContent {
-                    if (text.isNotEmpty()){
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(top = 48.dp)
-                                .background(Color(0xFF03308a))
-                        ){
-                            gameList?.let { HomeSearchGame(gameList = it,text) }
-                        }
+            binding.caja.setContent {
+                if (text.isNotEmpty()) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 48.dp)
+                            .background(Color(0xFF03308a))
+                    ) {
+                        gameList?.let { HomeSearchGame(gameList = it, text) }
                     }
                 }
+            }
 
         }
 

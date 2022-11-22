@@ -1,9 +1,8 @@
 package com.practice.gameapp.data.repositories.network.game
 
 import com.practice.gameapp.data.repositories.models.APIGameModel
-import javax.inject.Inject
 
-class GameAPIClient /*@Inject constructor*/(
+class GameAPIClient (
     private val gameAPI: GameAPI
 ) : GameClient {
 

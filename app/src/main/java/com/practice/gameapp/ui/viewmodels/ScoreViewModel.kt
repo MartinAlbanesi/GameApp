@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ScoreViewModel @Inject constructor(
-    val scoreRepository: ScoreRepository
+    private val scoreRepository: ScoreRepository
 ) : ViewModel() {
 
     private val _scoresVS: LiveData<List<ScoreEntity>> = scoreRepository.getScores("vs")
@@ -23,7 +23,7 @@ class ScoreViewModel @Inject constructor(
     val scoresQuiz: LiveData<List<ScoreEntity>> = _scoresQuiz
 
     private val _game = MutableLiveData<String>("vs")
-    val game : LiveData<String> = _game
+    val game: LiveData<String> = _game
 
 
     fun setScore(score: ScoreEntity) {

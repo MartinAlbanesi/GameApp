@@ -7,13 +7,14 @@ import com.practice.gameapp.data.repositories.database.dao.ScoreDao
 import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 
-@Database(entities = [
-    ScoreEntity::class,GameEntity::class
-],
+@Database(
+    entities = [
+        ScoreEntity::class, GameEntity::class
+    ],
     version = 3
 )
 abstract class GameAppDataBase : RoomDatabase() {
 
-    abstract fun getScoreDao():ScoreDao
+    abstract fun getScoreDao(): ScoreDao
     abstract fun getGameDao(): GameDao
 }

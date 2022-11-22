@@ -14,7 +14,6 @@ import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @AndroidEntryPoint
 class ScoreFragment @Inject constructor(
