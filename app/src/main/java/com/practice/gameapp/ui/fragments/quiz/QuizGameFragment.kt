@@ -102,7 +102,7 @@ class QuizGameFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    Toast.makeText(context, "Can't exit game", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.exist_game, Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -138,7 +138,7 @@ class QuizGameFragment : Fragment() {
     private fun stateGame() {
         quizGameViewModel.stopTimer()
         binding.cvEndgame.setContent {
-            DialogScore(score, "You lose") {
+            DialogScore(score, "") {
                 gameOver(it, score)
                 quizGameViewModel.gameFinished.value = false
             }

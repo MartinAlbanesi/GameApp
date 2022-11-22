@@ -29,4 +29,18 @@
     <string name="title_quizGame">QUIZ GAME</string>
     <string name="text_description">Description</string>
     <string name="text_gameTitle">Title</string>
+
+    <string name="you_lose">You lose</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+    <string name="score_text">Score</string>
+    <string name="save_text">Save</string>
+    <string name="exist_game">Can\'t exit game</string>
+    <string name="text_error_length">the field must have 3 or more characters</string>
+    <string name="insert_name">Insert name</string>
+    <string name="you_score">"You score: "</string>
+    <string name="search_game">Search Game</string>
+    <string name="error_unknown">Unknown Error</string>
+
+
 </resources>

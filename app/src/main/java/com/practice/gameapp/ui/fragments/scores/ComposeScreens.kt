@@ -20,12 +20,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.LiveData
+import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 
 /**
@@ -73,13 +75,13 @@ fun DialogScore(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp),
-                    text = state,
+                    text = stringResource(id = R.string.you_lose),
                     color = Color.White,
                     fontSize = 32.sp,
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = "You score: $score",
+                    text = stringResource(id = R.string.you_score) + score,
                     color = Color.White,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -93,14 +95,14 @@ fun DialogScore(
                         expandFrom = Alignment.Bottom
                     ),
                 ) {
-                    Text(text = "the field must have 3 or more characters", color = Color.Red)
+                    Text(text = stringResource(id = R.string.text_error_length), color = Color.Red)
                 }
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
                     label = {
                         Text(
-                            text = "Insert name",
+                            text = stringResource(id = R.string.insert_name),
                             color = Color(0xFFFFFFFF),
                         )
                     },
@@ -125,7 +127,7 @@ fun DialogScore(
                     modifier = Modifier.padding(vertical = 12.dp)
                 ) {
                     Text(
-                        text = "Save",
+                        text = stringResource(id = R.string.save_text),
                         color = Color.White,
                     )
                 }
@@ -157,9 +159,9 @@ fun Scores(
                     .background(Color(0x28FFFFFF))
             ) {
                 Message(text = "", Modifier.weight(0.5f))
-                Message(text = "Name", Modifier.weight(2f))
-                Message(text = "Score", Modifier.weight(1f))
-                Message(text = "Date", Modifier.weight(2f))
+                Message(text = stringResource(id = R.string.name), Modifier.weight(2f))
+                Message(text = stringResource(id = R.string.score_text), Modifier.weight(1f))
+                Message(text = stringResource(id = R.string.date), Modifier.weight(2f))
                 Message(text = "", Modifier.weight(0.5f))
             }
         }

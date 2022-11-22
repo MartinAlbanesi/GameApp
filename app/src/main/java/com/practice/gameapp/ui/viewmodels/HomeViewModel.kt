@@ -16,7 +16,7 @@ class HomeViewModel /*@Inject constructor*/(
     var randomGame: MutableLiveData<GameModel> =
         MutableLiveData()
     var allGamesList: MutableLiveData<List<GameModel>> =
-        MutableLiveData(listOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "", "")))
+        MutableLiveData(listOf(GameModel("...", "...", "...", "...", "...", 0, "...", "...")))
     var errorMessage = MutableLiveData(ErrorMessage(false, ""))
 
     ////Fills the MutableLiveData value with the game list from repository

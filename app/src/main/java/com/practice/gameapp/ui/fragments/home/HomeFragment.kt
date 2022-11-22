@@ -16,12 +16,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentHomeBinding
 import com.practice.gameapp.ui.components.ErrorMessage
 import com.practice.gameapp.domain.models.GameModel
@@ -96,7 +98,7 @@ class HomeFragment(
         //Observers
         homeViewModel.allGamesList.observe(viewLifecycleOwner, gameListObserver)
         homeViewModel.randomGame.observe(viewLifecycleOwner, recommendedObserver)
-        homeViewModel.errorMessage.observe(this, errorMessageObserver)
+        homeViewModel.errorMessage.observe(viewLifecycleOwner, errorMessageObserver)
 
         //Building the recycler view
         buildRecyclerView()
@@ -126,7 +128,7 @@ class HomeFragment(
                 onValueChange = { text = it },
                 singleLine = true,
                 placeholder = {
-                    Text(text = "Search Game")
+                    Text(text = stringResource(id = R.string.search_game))
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     placeholderColor = Color(0x48000000)

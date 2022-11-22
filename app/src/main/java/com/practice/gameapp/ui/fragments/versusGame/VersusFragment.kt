@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -59,7 +60,7 @@ class VersusFragment : Fragment() {
         versusViewModel.gameFinished.observe(viewLifecycleOwner){ timeFinish ->
             if (timeFinish ) {
                 versusViewModel.gameFinished.value = false
-                gameOver("you lose")
+                gameOver("")
 
             }
         }
@@ -79,7 +80,7 @@ class VersusFragment : Fragment() {
                 setImage(getImageThumbnail(imageRandomTwo), binding.imageGame2)
             } else {
                 versusViewModel.cancelTime()
-                gameOver("You lose...")
+                gameOver("")
             }
         }
 
@@ -93,13 +94,13 @@ class VersusFragment : Fragment() {
                 setImage(getImageThumbnail(imageRandomOne), binding.imageGame1)
             } else {
                 versusViewModel.cancelTime()
-                gameOver("You lose...")
+                gameOver("")
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    Toast.makeText(context, "Can't exit game", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.exist_game, Toast.LENGTH_SHORT).show()
                 }
             }
         )

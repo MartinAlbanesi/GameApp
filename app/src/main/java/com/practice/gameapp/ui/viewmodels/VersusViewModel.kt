@@ -9,9 +9,9 @@ import java.time.LocalDate
 
 class VersusViewModel(
 ) : ViewModel() {
-    val CountDown_Timer = 60000L //One minute
-    val ONE_SECOND = 1000L
-    val DONE = 0L
+    private val CountDown_Timer = 60000L //One minute
+    private val ONE_SECOND = 1000L
+    private val DONE = 0L
     lateinit var timer: CountDownTimer
     val currentTime = MutableLiveData<Long>()
     var imageRandom = MutableLiveData<Int>()

@@ -22,7 +22,7 @@ class QuizViewModel(
 
     //Games, questions and answers
     private var allQuizGamesList =
-        mutableListOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "", ""))
+        mutableListOf(GameModel("", "", "", "", "", 0, "", ""))
     var fourGames = mutableListOf<GameModel>()
     var selectedGame = GameModel("", "", "", "", "", 0, "", "")
     val selectedQuestion = MutableLiveData<Question>(Questions.getRandomQuestion())
