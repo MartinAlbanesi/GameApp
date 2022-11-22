@@ -10,7 +10,7 @@ App that showcases games from all platforms and includes two minigames.
 * [Room](https://developer.android.com/training/data-storage/room?hl=es-419&authuser=1)
 * [Corroutines](https://developer.android.com/kotlin/coroutines?hl=es-419)
 * [Live Data](https://developer.android.com/topic/libraries/architecture/livedata?hl=es-419)
-* [Flow]()
+* [StateFlow](https://kotlinlang.org/docs/flow.html)
 * [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=es-419)
 * [Koin](https://insert-koin.io/)
 * [Retrofit](https://square.github.io/retrofit/)
