@@ -1,4 +1,4 @@
-package com.practice.gameapp.ui.viewmodels.home
+package com.practice.gameapp.ui.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,8 +15,8 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     var randomGame: MutableLiveData<GameModel> =
-        MutableLiveData(GameModel("fillRandom", "fillRandom", "fillRandom", "fill", "fill", 0,""))
-    var allGamesList = MutableLiveData(listOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "")))
+        MutableLiveData(GameModel("fillRandom", "fillRandom", "fillRandom", "fill", "fill", 0,"",""))
+    var allGamesList = MutableLiveData(listOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "","")))
 
     ////Fills the MutableLiveData value with the game list from repository
     suspend fun fillGamesList() {

@@ -8,7 +8,7 @@
     tools:context=".ui.fragments.versusGame.MenuGameVersus">
 
     <Button
-        android:id="@+id/buttonPlay2"
+        android:id="@+id/buttonScore"
         android:layout_width="374dp"
         android:layout_height="61dp"
         android:layout_margin="8dp"

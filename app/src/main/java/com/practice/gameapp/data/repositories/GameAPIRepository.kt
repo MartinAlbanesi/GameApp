@@ -18,10 +18,19 @@ class GameAPIRepository @Inject constructor(
     private val games: Flow<List<GameModel>> = flow {
         emit(gameClient.fetchGames().map { it.toGame() })
     }
+
     private val randomGame: Flow<GameModel> = flow {
         emit(gameClient.fetchGames().shuffled()[0].toGame())
     }
-
+/*
+    override suspend fun getFourRandomGames(): Flow<MutableList<GameModel>> {
+        var listOfFour: MutableList<GameModel>
+        for(random in games){
+            listOfFour.add(random)
+        }
+        return games
+    }
+*/
     //Returns a flow emit with a list of games
     override suspend fun getGames(): Flow<List<GameModel>> {
         return games
@@ -31,6 +40,8 @@ class GameAPIRepository @Inject constructor(
     override suspend fun getRandomGame(): Flow<GameModel> {
         return randomGame
     }
+
+
 }
 
 

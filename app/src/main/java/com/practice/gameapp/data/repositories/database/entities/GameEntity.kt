@@ -23,5 +23,11 @@ data class GameEntity (
     val short_description: String,
 
     @ColumnInfo(name = "thumbnail")
-    val thumbnail: String
+    val thumbnail: String,
+
+    @ColumnInfo(name = "release_date")
+    val release_date: String,
+
+    @ColumnInfo(name = "developer")
+    val developer: String
 )

@@ -6,20 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
-import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import com.practice.gameapp.databinding.FragmentMenugameversusBinding
-import com.practice.gameapp.ui.viewmodels.versusGame.VersusViewModel
-import kotlinx.coroutines.launch
+import com.practice.gameapp.ui.viewmodels.ScoreViewModel
+import com.practice.gameapp.ui.viewmodels.VersusViewModel
 
 
 class MenuGameVersus : Fragment() {
     private var _binding: FragmentMenugameversusBinding? = null
     private val binding get() = _binding!!
     private val versusViewModel: VersusViewModel by activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -31,9 +29,17 @@ class MenuGameVersus : Fragment() {
 
         binding.buttonPlay.setOnClickListener {
             versusViewModel.setImage()
-            versusViewModel.startGame()
+            versusViewModel.startTimer()
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_menugameversus_to_versusFragment)
+        }
+
+        binding.buttonScore.setOnClickListener {
+
+            scoreViewModel.searchGame("vs")
+
+            Navigation.findNavController(requireView())
+                .navigate(R.id.scoreFragment)
         }
 
 
