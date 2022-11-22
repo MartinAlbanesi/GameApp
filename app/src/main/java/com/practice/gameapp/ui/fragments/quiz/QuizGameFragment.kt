@@ -1,5 +1,7 @@
 package com.practice.gameapp.ui.fragments.quiz
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,7 @@ import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
+
 
 @AndroidEntryPoint
 class QuizGameFragment : Fragment() {
@@ -80,6 +83,7 @@ class QuizGameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 
         _binding = FragmentQuizGameBinding.inflate(inflater, container, false)
 

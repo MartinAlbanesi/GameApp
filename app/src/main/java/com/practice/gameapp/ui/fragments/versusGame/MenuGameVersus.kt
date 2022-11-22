@@ -1,5 +1,6 @@
 package com.practice.gameapp.ui.fragments.versusGame
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,8 @@ class MenuGameVersus : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
         _binding = FragmentMenugameversusBinding.inflate(inflater, container, false)
 
         binding.buttonPlay.setOnClickListener {

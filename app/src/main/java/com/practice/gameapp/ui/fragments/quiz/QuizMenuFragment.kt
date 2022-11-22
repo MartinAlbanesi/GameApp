@@ -1,5 +1,6 @@
 package com.practice.gameapp.ui.fragments.quiz
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,8 @@ class QuizMenuFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
         _binding = FragmentQuizMenuBinding.inflate(inflater, container, false)
 
         binding.btnDifficulty.setOnClickListener {

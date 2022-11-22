@@ -1,5 +1,6 @@
 package com.practice.gameapp.ui.fragments.versusGame
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -37,6 +38,8 @@ class VersusFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
         _binding = FragmentVersusBinding.inflate(inflater, container, false)
 
         versusViewModel.imageRandom.observe(viewLifecycleOwner) { imageViewModel ->
