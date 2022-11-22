@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class GameAPIRepository @Inject constructor(
+//@Singleton
+class GameAPIRepository /*@Inject constructor*/(
     //private val gameClient: GameClient
     private val gameClient: GameAPIClient
 ) : GameRepository {

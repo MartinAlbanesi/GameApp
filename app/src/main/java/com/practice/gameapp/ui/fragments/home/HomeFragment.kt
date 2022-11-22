@@ -31,9 +31,10 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
-class HomeFragment @Inject constructor(
+//@AndroidEntryPoint
+class HomeFragment /*@Inject constructor*/(
 ) : Fragment() {
 
     //RecyclerView and Adapter
@@ -41,7 +42,7 @@ class HomeFragment @Inject constructor(
     private lateinit var gameAdapter: GameAdapter
 
     //ViewModel
-    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by viewModel()//activityViewModels()
 
     private lateinit var composeView: ComposeView
 

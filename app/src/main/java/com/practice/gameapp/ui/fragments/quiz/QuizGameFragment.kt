@@ -19,14 +19,15 @@ import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class QuizGameFragment : Fragment() {
 
     //ViewModels
-    private val quizGameViewModel: QuizViewModel by activityViewModels()
-    private val scoreViewModel: ScoreViewModel by activityViewModels()
+    private val quizGameViewModel: QuizViewModel by viewModel()//activityViewModels()
+    private val scoreViewModel: ScoreViewModel by viewModel()//activityViewModels()
 
     //ViewBinding
     private var _binding: FragmentQuizGameBinding? = null

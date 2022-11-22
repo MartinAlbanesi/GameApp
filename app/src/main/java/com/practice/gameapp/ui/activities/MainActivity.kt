@@ -13,7 +13,7 @@ import com.practice.gameapp.databinding.ActivityMainBinding
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

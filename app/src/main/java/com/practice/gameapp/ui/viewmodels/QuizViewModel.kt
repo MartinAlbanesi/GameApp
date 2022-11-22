@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
-@HiltViewModel
-class QuizViewModel @Inject constructor(
+//@HiltViewModel
+class QuizViewModel /*@Inject constructor*/(
     private val gameRepository: GameRepository
 ) : ViewModel() {
     //val couuntDown_TimerHard = 10000L //10 seg

@@ -5,7 +5,7 @@ import com.practice.gameapp.data.repositories.database.dao.GameDao
 import com.practice.gameapp.data.repositories.database.entities.GameEntity
 import javax.inject.Inject
 
-class GameDBRepositoryImpl @Inject constructor(
+class GameDBRepositoryImpl /*@Inject constructor*/(
     private val gameDao: GameDao
 ) : GameDBRepository {
 

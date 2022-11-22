@@ -5,7 +5,7 @@ import com.practice.gameapp.data.repositories.database.dao.ScoreDao
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
 import javax.inject.Inject
 
-class ScoreRepositoryImpl @Inject constructor(
+class ScoreRepositoryImpl /*@Inject constructor*/(
     private val scoreDao: ScoreDao
 ) : ScoreRepository {
     override fun getScores(game: String): LiveData<List<ScoreEntity>> {

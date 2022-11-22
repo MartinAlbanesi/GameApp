@@ -8,8 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
 import javax.inject.Inject
 
-@HiltViewModel
-class VersusViewModel @Inject constructor(
+//@HiltViewModel
+class VersusViewModel /*@Inject constructor*/(
 ) : ViewModel() {
     val CountDown_Timer = 60000L //Un minuto
     val ONE_SECOND = 1000L
