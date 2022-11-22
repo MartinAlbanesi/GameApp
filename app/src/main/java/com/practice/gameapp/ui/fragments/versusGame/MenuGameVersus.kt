@@ -11,14 +11,15 @@ import com.practice.gameapp.R
 import com.practice.gameapp.databinding.FragmentMenugameversusBinding
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import com.practice.gameapp.ui.viewmodels.VersusViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class MenuGameVersus : Fragment() {
     private var _binding: FragmentMenugameversusBinding? = null
     private val binding get() = _binding!!
     private val versusViewModel: VersusViewModel by viewModel()//activityViewModels()
-    private val scoreViewModel: ScoreViewModel by viewModel()//activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
 
 
     override fun onCreateView(

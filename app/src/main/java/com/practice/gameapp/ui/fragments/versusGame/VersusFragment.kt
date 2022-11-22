@@ -17,13 +17,14 @@ import com.practice.gameapp.ui.viewmodels.HomeViewModel
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import com.practice.gameapp.ui.viewmodels.VersusViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class VersusFragment : Fragment() {
     private val versusViewModel: VersusViewModel by viewModel()//activityViewModels()
     private val homeViewModel: HomeViewModel by viewModel()//activityViewModels()
-    private val scoreViewModel: ScoreViewModel by viewModel()//activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
     private var _binding: FragmentVersusBinding? = null
     private val binding get() = _binding!!
     private var imageRandomOne = 0

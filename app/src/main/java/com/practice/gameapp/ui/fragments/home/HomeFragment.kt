@@ -44,8 +44,6 @@ class HomeFragment /*@Inject constructor*/(
     //ViewModel
     private val homeViewModel: HomeViewModel by viewModel()//activityViewModels()
 
-    private lateinit var composeView: ComposeView
-
     //ViewBinding
     private var _binding: FragmentHomeBinding? = null
 
@@ -72,10 +70,6 @@ class HomeFragment /*@Inject constructor*/(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        /*
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
-         */
 
         //ViewBinding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -154,35 +148,7 @@ class HomeFragment /*@Inject constructor*/(
                 }
 
         }
-        //Listeners
-        /*
-        binding.svSearchbar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // on below line we are checking
-                // if query exist or not.
-                if (homeViewModel.allGamesList.value.contains(query)) {
-                    // if query exist within list we
-                    // are filtering our list adapter.
-                    listAdapter.filter.filter(query)
-                } else {
-                    // if query is not present we are displaying
-                    // a toast message as no  data found..
-                    Toast.makeText(this@MainActivity, "No Language found..", Toast.LENGTH_LONG)
-                        .show()
-                }
 
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // if query text is change in that case we
-                // are filtering our adapter with
-                // new text on below line.
-                listAdapter.filter.filter(newText)
-                return false
-            }
-        })
-         */
         return binding.root
 
     }

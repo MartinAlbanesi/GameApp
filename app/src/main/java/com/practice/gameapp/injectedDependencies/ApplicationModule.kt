@@ -31,6 +31,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -69,7 +70,7 @@ class ApplicationModule {
 
 val remoteRepositoryModule = module {
     //API
-/*
+
     fun provideApi(): GameAPI {
         return Retrofit.Builder()
             .baseUrl("https://www.freetogame.com/api/")
@@ -77,66 +78,54 @@ val remoteRepositoryModule = module {
             .build()
             .create(GameAPI::class.java)
     }
- */
-    single{
-        Retrofit.Builder()
-            .baseUrl("https://www.freetogame.com/api/")
-            .addConverterFactory(GsonConverterFactory.create(Gson()))
-            .build()
-            .create(GameAPI::class.java)
-    }
-
+/*
     fun provideGameClient(gameAPI: GameAPI): GameClient {
         return GameAPIClient(gameAPI)
     }
-
     fun provideGameRepository(gameClient: GameAPIClient): GameRepository {
         return GameAPIRepository(gameClient)
     }
+ */
 
-    //single { provideApi() }
-    single { provideGameClient(get()) }
-    single { provideGameRepository(get()) }
+    single { provideApi() }
+    single <GameClient> { GameAPIClient(get()) }
+    single <GameRepository> { GameAPIRepository(get()) }
+
 
     //DATABASE
-
-    fun provideRoomKoin(@ApplicationContext context: Context) =
-        Room.databaseBuilder(
+/*
+    fun provideRoom(context: Context): GameAppDataBase {
+        return Room.databaseBuilder(
             context,
             GameAppDataBase::class.java,
             "game_app_database"
         )
             .fallbackToDestructiveMigration()
             .build()
+    }
 
-    fun provideScoreDaoKoin(db: GameAppDataBase) = db.getScoreDao()
+    fun provideScoreDao(db: GameAppDataBase) = db.getScoreDao()
 
-    fun provideScoreRepositoryKoin(scoreDao: ScoreDao): ScoreRepository {
+    fun provideScoreRepository(scoreDao: ScoreDao): ScoreRepository {
         return ScoreRepositoryImpl(scoreDao)
     }
 
-    fun provideGameDaoKoin(db: GameAppDataBase) = db.getGameDao()
+    fun provideGameDao(db: GameAppDataBase) = db.getGameDao()
 
-    fun provideGameDBRepositoryKoin(gameDao: GameDao): GameDBRepository {
+    fun provideGameDBRepository(gameDao: GameDao): GameDBRepository {
         return GameDBRepositoryImpl(gameDao)
     }
 
-    fragment { HomeFragment() }
-    fragment { QuizGameFragment() }
-    fragment { QuizMenuFragment() }
-    fragment { ScoreFragment() }
-    fragment { MenuGameVersus() }
-    fragment { VersusFragment() }
+    single { provideRoom(this.androidApplication()) }
+    single { provideScoreDao(get()) }
+    single { provideScoreRepository(get()) }
+    single { provideGameDao(get()) }
+    single { provideGameDBRepository(get()) }
+*/
 
-    single { provideRoomKoin(MainApplication()) }
-    single { provideScoreDaoKoin(get()) }
-    single { provideScoreRepositoryKoin(get()) }
-    single { provideGameDaoKoin(get()) }
-    single { provideGameDBRepositoryKoin(get()) }
-
-    //ViewModel
-    viewModel { HomeViewModel(get()) }
-    viewModel { QuizViewModel(get()) }
-    viewModel { ScoreViewModel(get()) }
-    viewModel { VersusViewModel() }
+    //ViewModels
+    single { HomeViewModel(get()) }
+    single { QuizViewModel(get()) }
+    //single { ScoreViewModel(get()) }
+    single { VersusViewModel() }
 }

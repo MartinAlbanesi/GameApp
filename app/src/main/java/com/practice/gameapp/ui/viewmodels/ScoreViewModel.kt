@@ -11,9 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//@HiltViewModel
-class ScoreViewModel /*@Inject constructor*/(
-    private val scoreRepository: ScoreRepository
+@HiltViewModel
+class ScoreViewModel @Inject constructor(
+    val scoreRepository: ScoreRepository
 ) : ViewModel() {
 
     private val _scoresVS: LiveData<List<ScoreEntity>> = scoreRepository.getScores("vs")

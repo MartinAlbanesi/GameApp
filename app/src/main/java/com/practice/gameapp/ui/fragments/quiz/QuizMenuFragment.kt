@@ -1,6 +1,7 @@
 package com.practice.gameapp.ui.fragments.quiz
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +17,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class QuizMenuFragment : Fragment() {
 
     //ViewModel
-    private val scoreViewModel : ScoreViewModel by viewModel()//activityViewModels()
+    private val scoreViewModel : ScoreViewModel by activityViewModels()
     private val quizGameViewModel: QuizViewModel by viewModel()//activityViewModels()
 
     //ViewBinding

@@ -16,12 +16,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//@AndroidEntryPoint
-class ScoreFragment /*@Inject constructor*/(
+@AndroidEntryPoint
+class ScoreFragment @Inject constructor(
 
 ) : Fragment() {
 
-    private val scoreViewModel: ScoreViewModel by viewModel()//activityViewModels()
+    private val scoreViewModel: ScoreViewModel by activityViewModels()
 
     private lateinit var composeView: ComposeView
 
