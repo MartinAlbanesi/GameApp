@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practice.gameapp.data.repositories.GameRepository
 import com.practice.gameapp.domain.models.GameModel
+import com.practice.gameapp.ui.components.ErrorMessage
 import kotlinx.coroutines.launch
 
 //@HiltViewModel
@@ -16,13 +17,19 @@ class HomeViewModel /*@Inject constructor*/(
         MutableLiveData()
     var allGamesList: MutableLiveData<List<GameModel>> =
         MutableLiveData(listOf(GameModel("fill", "fill", "fill", "fill", "fill", 0, "", "")))
+    var errorMessage = MutableLiveData(ErrorMessage(false, ""))
 
     ////Fills the MutableLiveData value with the game list from repository
     suspend fun fillGamesList() {
         viewModelScope.launch {
             gameRepository.getGames()
                 .collect { gamesList ->
-                    allGamesList.value = gamesList
+                    try{
+                        allGamesList.value = gamesList
+                    }catch (e: Exception) {
+                        errorMessage.value = ErrorMessage(true, e.message)
+                    }
+
                 }
         }
     }

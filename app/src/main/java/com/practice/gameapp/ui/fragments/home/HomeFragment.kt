@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -22,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.practice.gameapp.databinding.FragmentHomeBinding
+import com.practice.gameapp.ui.components.ErrorMessage
 import com.practice.gameapp.domain.models.GameModel
 import com.practice.gameapp.ui.adapters.GameAdapter
 import com.practice.gameapp.ui.viewmodels.HomeViewModel
@@ -47,6 +49,7 @@ class HomeFragment(
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var toast: Toast
 
     //Observers definitions
     @SuppressLint("NotifyDataSetChanged")
@@ -60,6 +63,13 @@ class HomeFragment(
             .into(binding.ivRecommendedGameImage)
     }
 
+    private val errorMessageObserver = Observer<ErrorMessage> { errorMessage ->
+        if (errorMessage.active) {
+            toast.setText(errorMessage.message)
+            toast.show()
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,6 +79,7 @@ class HomeFragment(
 
         //ViewBinding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        toast = Toast.makeText(this.context, "Error", Toast.LENGTH_SHORT)
 
         //Coroutines for bringing data from viewModel
         lifecycleScope.launch {
@@ -85,6 +96,7 @@ class HomeFragment(
         //Observers
         homeViewModel.allGamesList.observe(viewLifecycleOwner, gameListObserver)
         homeViewModel.randomGame.observe(viewLifecycleOwner, recommendedObserver)
+        homeViewModel.errorMessage.observe(this, errorMessageObserver)
 
         //Building the recycler view
         buildRecyclerView()
