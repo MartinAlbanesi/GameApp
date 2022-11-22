@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/navigation_quizMenu"
-        android:icon="@drawable/ic_quiz_black_24dp"
+        android:icon="@drawable/ic_baseline_question_mark_24"
         android:title="@string/title_quizNav" />
 
     <item
