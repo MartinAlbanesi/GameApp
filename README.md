@@ -17,6 +17,8 @@ App that showcases games from all platforms and includes two minigames.
 * [Android Compose](https://developer.android.com/jetpack/compose?hl=es-419)
 * [Picasso](https://square.github.io/picasso/)
 * [Coil](https://coil-kt.github.io/coil/compose/)
+* [MVVM](https://developer.android.com/topic/libraries/architecture/viewmodel?hl=es-419)
+* [Repository](https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern#3)
 
 ## Images:
 
