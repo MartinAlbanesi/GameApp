@@ -19,7 +19,7 @@ class VersusViewModel @Inject constructor(
     var imageRandom = MutableLiveData<Int>()
     var imageRandom2 = MutableLiveData<Int>()
     var counterScore = MutableLiveData(0)
-    var gameFinished: Boolean = false
+    var gameFinished = MutableLiveData<Boolean>(false)
 
     private fun random(): Int {
         return (0..370).random()
@@ -73,7 +73,7 @@ class VersusViewModel @Inject constructor(
 
             override fun onFinish() {
                 currentTime.value = DONE
-                gameFinished = true
+                gameFinished.value = true
             }
         }
         timer.start()

@@ -35,22 +35,30 @@ class VersusFragment : Fragment() {
     ): View {
         _binding = FragmentVersusBinding.inflate(inflater, container, false)
 
-        versusViewModel.imageRandom.observe(viewLifecycleOwner) {
-            imageRandomOne = it!!
+        versusViewModel.imageRandom.observe(viewLifecycleOwner) { imageViewModel ->
+            imageRandomOne = imageViewModel!!
         }
 
-        versusViewModel.imageRandom2.observe(viewLifecycleOwner) {
-            imageRandomTwo = it!!
+        versusViewModel.imageRandom2.observe(viewLifecycleOwner) { imageViewModel->
+            imageRandomTwo = imageViewModel!!
         }
 
         versusViewModel.currentTime.observe(viewLifecycleOwner) {
             binding.vsTimer.text = DateUtils.formatElapsedTime(it)
-            binding.counteeer.text = counter.toString()
+
         }
 
-        versusViewModel.counterScore.observe(viewLifecycleOwner) {
-            counter = it
-            binding.counteeer.text = it.toString()
+        versusViewModel.counterScore.observe(viewLifecycleOwner) { ScoreViewM ->
+            counter = ScoreViewM
+            binding.counteeer.text = ScoreViewM.toString()
+        }
+
+        versusViewModel.gameFinished.observe(viewLifecycleOwner){ timeFinish ->
+            if (timeFinish ) {
+                versusViewModel.gameFinished.value = false
+                gameOver("you lose")
+
+            }
         }
 
         homeViewModel.allGamesList.observe(viewLifecycleOwner) {
@@ -111,8 +119,8 @@ class VersusFragment : Fragment() {
     private fun gameOver(gameState : String){
         binding.dialogCompose.setContent {
             DialogScore(score = counter, gameState) { nameUser ->
-                versusViewModel.gameOver(nameUser, counter) {
-                    scoreViewModel.setScore(it)
+                versusViewModel.gameOver(nameUser, counter) { scoreEntity ->
+                    scoreViewModel.setScore(scoreEntity)
                     Navigation
                         .findNavController(requireView())
                         .navigate(R.id.action_versusFragment_to_navigation_menugameversus)
