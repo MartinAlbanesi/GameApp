@@ -4,7 +4,7 @@
     <string name="title_quizNav">Quiz</string>
     <string name="title_gameMenuGame">Who came first ?</string>
     <string name="iv_gameImageDescription">Recommended game image for showcase</string>
-    <string name="search_hint">Search...</string>
+    <string name="search_hint">Search…</string>
     <string name="title_gameRecomendation">Try this one out!</string>
     <string name="title_recommendedGameName">Game Name</string>
     <string name="row_genre">Genre</string>
@@ -16,4 +16,17 @@
     <string name="btn_start">START</string>
     <string name="btn_difficulty">DIFFICULTY</string>
     <string name="btn_scoreboard">SCOREBOARD</string>
+    <string name="title_versusGame">Versus Game</string>
+    <string name="timer">10</string>
+    <string name="text_score">Score: </string>
+    <string name="score">0</string>
+    <string name="text_question">Question</string>
+    <string name="option1" />
+    <string name="option2" />
+    <string name="button_start">Start</string>
+    <string name="button_difficulty">Difficulty</string>
+    <string name="button_scoreboard">Scoreboard</string>
+    <string name="title_quizGame">QUIZ GAME</string>
+    <string name="text_description">Description</string>
+    <string name="text_gameTitle">Title</string>
 </resources>

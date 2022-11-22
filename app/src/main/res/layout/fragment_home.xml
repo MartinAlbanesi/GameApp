@@ -51,7 +51,7 @@
                     app:iconifiedByDefault="false"
                     android:queryHint="Search..."
                     app:layout_constraintBottom_toTopOf="@id/guideline2"
-                    app:layout_constraintEnd_toStartOf="@id/btn_search"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/guideline3" />
@@ -131,19 +131,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll_recommendation" />
-
-                <Button
-                    android:id="@+id/btn_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/btn_selector_bg"
-                    android:padding="8dp"
-                    android:text="Go"
-                    app:layout_constraintBottom_toTopOf="@id/guideline2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/sv_searchbar"
-                    app:layout_constraintTop_toBottomOf="@id/guideline3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

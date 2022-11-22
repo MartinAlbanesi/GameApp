@@ -10,7 +10,8 @@
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/dialogCompose"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
 
 
     <ImageView
@@ -47,7 +48,7 @@
         android:background="@drawable/timer_bg_shape"
         android:gravity="center"
         android:maxLines="1"
-        android:text="10"
+        android:text="@string/timer"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +64,7 @@
         android:layout_height="51dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="18dp"
-        android:text="0"
+        android:text="@string/score"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/imageGame2"
