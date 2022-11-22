@@ -50,11 +50,11 @@
     <fragment
         android:id="@+id/quizGameFragment"
         android:name="com.practice.gameapp.ui.fragments.quiz.QuizGameFragment"
-        android:label="QuizGameFragment" />
+        android:label="@string/title_quizGame" />
     <fragment
         android:id="@+id/scoreFragment"
         android:name="com.practice.gameapp.ui.fragments.scores.ScoreFragment"
-        android:label="fragment_score"
+        android:label="@string/fragment_score"
         tools:layout="@layout/fragment_score" >
         <action
             android:id="@+id/action_scoreFragment_to_navigation_menugameversus"

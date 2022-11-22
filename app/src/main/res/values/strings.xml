@@ -5,6 +5,7 @@
     <string name="title_gameMenuGame">Who came first ?</string>
     <string name="iv_gameImageDescription">Recommended game image for showcase</string>
     <string name="search_hint">Search…</string>
+    <string name="fragment_score">Scoreboard</string>
     <string name="title_gameRecomendation">Try this one out!</string>
     <string name="title_recommendedGameName">Game Name</string>
     <string name="row_genre">Genre</string>
