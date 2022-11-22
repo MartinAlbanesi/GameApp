@@ -113,7 +113,7 @@ class QuizViewModel @Inject constructor(
         fourGameAnswers2.value = fourGameAnswers
     }
 
-    private fun setSelectedQuestion() {
+    fun setSelectedQuestion() {
         selectedQuestion.value = Questions.getRandomQuestion()
     }
 

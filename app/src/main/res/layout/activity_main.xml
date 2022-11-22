@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     style="@style/Activity.Background">
 
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         style="Activity.NavigationBar"

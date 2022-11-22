@@ -30,7 +30,7 @@ class QuizMenuFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val difficulty: List<String> = listOf("Easy","Normal","Hard")
-    private var time: Long = 200000 //20s
+    private var time: Long = 20000 //20s
     private var difficultyCount: Int = 0
 
     override fun onCreateView(
@@ -61,6 +61,7 @@ class QuizMenuFragment : Fragment() {
         binding.btnStart.setOnClickListener {
             quizGameViewModel.startTimer(time)
             quizGameViewModel.fillFourGames()
+            quizGameViewModel.setSelectedQuestion()
             quizGameViewModel.fillMutableFourGames()
             quizGameViewModel.gameFinished.value = false
             Navigation.findNavController(requireView())

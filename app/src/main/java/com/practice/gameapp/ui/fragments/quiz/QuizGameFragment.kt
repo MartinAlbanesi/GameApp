@@ -1,7 +1,6 @@
 package com.practice.gameapp.ui.fragments.quiz
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.practice.gameapp.R
 import com.practice.gameapp.data.repositories.database.entities.ScoreEntity
@@ -20,7 +18,6 @@ import com.practice.gameapp.ui.fragments.scores.DialogScore
 import com.practice.gameapp.ui.viewmodels.QuizViewModel
 import com.practice.gameapp.ui.viewmodels.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 
