@@ -33,7 +33,7 @@ fun HomeSearchGame(
     )
     {
         gameList.forEach {
-            if (it.title.startsWith(textGame[0].uppercaseChar())) {
+            if (it.title.uppercase().startsWith(textGame.uppercase())) {
                 GameView(it)
             }
         }
